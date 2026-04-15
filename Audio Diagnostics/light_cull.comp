@@ -1,0 +1,86 @@
+#version 450
+
+#define MAX_LIGHTS_PER_CAMERA 64
+
+layout(local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
+
+struct Light {
+    vec4 Position;
+    vec4 Color;
+    vec4 Direction;
+    vec4 Data;
+};
+
+struct LightIndices {
+    uint Indices[MAX_LIGHTS_PER_CAMERA];
+    uint LightCount;
+};
+
+layout(set = 0, binding = 0, std430) readonly buffer LightSSB {
+    Light Lights[];
+};
+layout(set = 0, binding = 1, std430) readonly buffer CameraBoundsSSB {
+    vec4 CameraMinMax[];
+};
+
+layout(set = 1, binding = 0, std430) buffer LightIndicesSSB {
+    LightIndices LightIndicesArray[];
+};
+
+layout(set = 2, binding = 0) uniform Params {
+    uint CameraCount;
+    uint LightCount;
+};
+
+shared uint sCount;
+shared uint sList[MAX_LIGHTS_PER_CAMERA];
+
+bool circleIntersectsRect(vec2 c, float r, vec2 mn, vec2 mx) {
+    vec2 q = clamp(c, mn, mx);
+    vec2 d = c - q;
+    return dot(d, d) <= r * r;
+}
+
+void main() {
+    uint camIdx = gl_WorkGroupID.x;
+    if (camIdx >= CameraCount) return;
+
+    // init shared accumulator
+    if (gl_LocalInvocationID.x == 0u)
+        sCount = 0u;
+        
+    barrier(); // all lanes see sCount=0
+
+    vec4 cb   = CameraMinMax[camIdx];
+    vec2 minP = cb.xy;
+    vec2 maxP = cb.zw;
+
+    uint lane     = gl_LocalInvocationID.x;
+    uint laneStep = gl_WorkGroupSize.x;
+
+    for (uint li = lane; li < LightCount; li += laneStep) {
+        if (sCount >= MAX_LIGHTS_PER_CAMERA) break;
+
+        Light L      = Lights[li];
+        vec2  lpos   = L.Position.xy;
+        float radius = L.Position.w;
+
+        if (!circleIntersectsRect(lpos, radius, minP, maxP))
+            continue;
+
+        uint slot = atomicAdd(sCount, 1u);
+        if (slot < MAX_LIGHTS_PER_CAMERA)
+            sList[slot] = li;
+    }
+
+    barrier();
+
+    if (gl_LocalInvocationID.x == 0u) {
+        uint n = (sCount > MAX_LIGHTS_PER_CAMERA) ? MAX_LIGHTS_PER_CAMERA : sCount;
+        LightIndicesArray[camIdx].LightCount = n;
+    }
+
+    uint nToStore = (sCount > MAX_LIGHTS_PER_CAMERA) ? MAX_LIGHTS_PER_CAMERA : sCount;
+    for (uint i = gl_LocalInvocationID.x; i < nToStore; i += gl_WorkGroupSize.x)
+        LightIndicesArray[camIdx].Indices[i] = sList[i];
+}

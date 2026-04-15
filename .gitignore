@@ -1,0 +1,20 @@
+# Binaries
+**/bin/
+
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+
+# Lib files
+/lib/debug/shaderc_combined.lib
+/lib/debug/libprotobuf.lib
+/lib/release/shaderc_combined.lib
+/lib/release/libprotobuf.lib
+/lib/debug/Fish.lib
+/lib/release/Fish.lib
+
+# Shader build
+shader_build/
