@@ -24,7 +24,7 @@ private:
 
 	void UpdateDefaultDockingSpace();
 	void UpdateHostJoin();
-	void UpdateAudio();
+	void UpdateVoiceConnections();
 
 	void UpdateReceivedPlot();
 	void ReceivedStatePlot();

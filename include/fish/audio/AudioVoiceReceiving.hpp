@@ -88,7 +88,7 @@ namespace fs {
 			bool InitPlayer(uint8_t playerID);
 			void ShutdownPlayer(uint8_t playerID);
 
-
+			void ForwardFrameData();
 
 			std::atomic<bool> m_running{ false };
 			std::thread m_voiceReceivingThread;
@@ -101,6 +101,9 @@ namespace fs {
 
 			Clock m_playbackClock;
 			float s_voiceAccumulator{};
+
+			//server buffer
+			std::unordered_map<uint8_t, std::vector<EncodedFrame>> m_clientForwardData;
 		};
 	}
 

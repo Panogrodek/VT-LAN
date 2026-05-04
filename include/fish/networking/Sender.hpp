@@ -51,12 +51,13 @@ namespace fs {
 
 		private:
 			friend class VoiceSendingManager;
+			friend class VoiceReceivingManager;
 			//---------------------------------------------------------------------
 			// Both sides viable
 			//---------------------------------------------------------------------
 
 			//NON THREAD SAFE
-			void SendVoicePacket(fs::ReceiverFlag receivers, std::vector<unsigned char>& data, uint16_t sequenceID) const;
+			void SendVoicePacket(fs::ReceiverFlag receivers, uint8_t senderGameID, const std::vector<unsigned char>& data, uint16_t sequenceID) const;
 		private:
 			friend class NetworkingManager;
 
