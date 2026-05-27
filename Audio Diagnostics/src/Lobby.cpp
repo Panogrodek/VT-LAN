@@ -91,12 +91,13 @@ static void OpenEmailInviteFromLobby(const std::string& ip, int port)
 {
 #ifdef _WIN32
 	std::string link = "vtlan://" + ip + ":" + std::to_string(port);
+	std::string portStr = std::to_string(port);
 	std::string body =
-		"Zaproszenie do spotkania prowadzonego w srodowisku VT-LAN\n"
-		"Kliknij ponizszy link, aby dolaczyc:\n" + link + "\n\n"
+		"Zaproszenie do spotkania prowadzonego w srodowisku VT-LAN\n\n"
+		"Kliknij ponizszy link, aby dolaczyc:\n"
+		+ link + "\n\n"
 		"Jesli link nie zadziala, otworz aplikacje VT-LAN z nastepujacymi parametrami:\n"
-		"  Adres IP: " + ip + "\n"
-		"  Port:     " + std::to_string(port);
+		"Adres IP: " + ip + "\nPort: " + portStr;
 
 	auto encode = [](const std::string& s) {
 		std::string out;
@@ -112,9 +113,13 @@ static void OpenEmailInviteFromLobby(const std::string& ip, int port)
 		return out;
 	};
 
+	// Gmail compose URL — opens in the browser, no mail client required.
+	// Format: https://mail.google.com/mail/?view=cm&fs=1&su=SUBJECT&body=BODY
 	std::string subject = "Zaproszenie do spotkania w VT-LAN";
-	std::string mailto = "mailto:?subject=" + encode(subject) + "&body=" + encode(body);
-	ShellExecuteA(nullptr, "open", mailto.c_str(), nullptr, nullptr, SW_SHOWNORMAL);
+	std::string gmailUrl =
+		"https://mail.google.com/mail/?view=cm&fs=1&su=" + encode(subject) +
+		"&body=" + encode(body);
+	ShellExecuteA(nullptr, "open", gmailUrl.c_str(), nullptr, nullptr, SW_SHOWNORMAL);
 #endif
 }
 
@@ -416,7 +421,7 @@ void Lobby::UpdateInviteModal()
 			m_inviteCopied = true;
 		}
 		ImGui::SameLine();
-		if (ImGui::Button("Wyślij e-mailem", ImVec2(bW, 34.f)))
+		if (ImGui::Button("Wyslij przez Gmail", ImVec2(bW, 34.f)))
 			OpenEmailInviteFromLobby(s_hostIP, s_hostPort);
 
 		if (m_inviteCopied)
