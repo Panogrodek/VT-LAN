@@ -23,8 +23,6 @@ private:
 	void UpdateMainMenu();
 
 	void UpdateDefaultDockingSpace();
-	void UpdateHostJoin();
-	void UpdateVoiceConnections();
 
 	void UpdateReceivedPlot();
 	void ReceivedStatePlot();

@@ -1,6 +1,6 @@
 #pragma once
 #include "Connection.hpp"
-
+#include "utilities/Macros.hpp"
 /*
 
 DOCUMENTATION
@@ -69,13 +69,15 @@ namespace fs {
 				HSteamNetConnection receiver = k_HSteamNetConnection_Invalid;
 				std::vector<char> data{};
 				size_t dataSize = 0;
-				int flags = k_nSteamNetworkingSend_Reliable;
+				int      flags = k_nSteamNetworkingSend_Reliable;
+				uint16_t lane  = 1; // 0 = high priority (voice), 1 = low priority (data/files)
 
 
 				MessageDataType() = default;
 
-				MessageDataType(HSteamNetConnection recv, std::vector<char> _data, size_t size, int _flags = k_nSteamNetworkingSend_Reliable)
-					: receiver(recv), data(_data), dataSize(size), flags(_flags) {}
+				MessageDataType(HSteamNetConnection recv, std::vector<char> _data, size_t size,
+				                int _flags = k_nSteamNetworkingSend_Reliable, uint16_t _lane = 1)
+					: receiver(recv), data(_data), dataSize(size), flags(_flags), lane(_lane) {}
 			};
 
 			mutable std::vector<MessageDataType> m_messagesToSend; //server side

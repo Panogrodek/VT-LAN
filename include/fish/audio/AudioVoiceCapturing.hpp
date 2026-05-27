@@ -31,6 +31,10 @@ namespace fs {
 			void Start();
 			void Shutdown();
 
+			//so the same as mutting your own mic
+			void StopCapture(bool stop = true);
+			bool IsStopCapture();
+
 			void SwapUserVoiceBuffer(VoiceBuffer& out);
 		private:
 			friend class VoiceSendingManager;
@@ -43,6 +47,7 @@ namespace fs {
 			void Update();
 		private:
 			std::atomic<bool> m_running{ false };
+			std::atomic<bool> m_stopCapture{ true };
 			std::thread m_voiceCaptureThread;
 
 			std::array<float, AUDIO_DATA_BUFFER_SIZE> m_capturedAudioTempBuffer;

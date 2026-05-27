@@ -28,26 +28,28 @@
 #endif
 #include <tests/VoiceChatTest.hpp>
 
-bool ParseIPv4(const char* ipStr, uint16 port, SteamNetworkingIPAddr& outAddr)
-{
-	unsigned int b1, b2, b3, b4;
+#include "states/State Machine.hpp"
+#include "states/LoginScreen.hpp"
+#include "states/Lobby.hpp"
 
-	// Strict parsing: must match exactly 4 numbers
-	if (sscanf(ipStr, "%u.%u.%u.%u", &b1, &b2, &b3, &b4) != 4)
-		return false;
+static void ClientDisconnected(fs::ClientStatus status) {
+	if (status == fs::ClientStatus::Disconnecting) {
+		// Only clear and restart when Lobby is on top.
+		// While LoginScreen is on top (user is in the connecting phase),
+		// LoginScreen handles the failure itself â€” we must not destroy it.
+		if (dynamic_cast<Lobby*>(StateMachine.GetTop()) != nullptr) {
+			StateMachine.Clear();
+			StateMachine.PushTop(new LoginScreen);
+		}
+	}
+}
 
-	// Range check
-	if (b1 > 255 || b2 > 255 || b3 > 255 || b4 > 255)
-		return false;
+static void SDL_DROP(SDL_Event ev) {
+	if (ev.type != SDL_EVENT_DROP_FILE)
+		return;
 
-	uint32 ip =
-		(b1 << 24) |
-		(b2 << 16) |
-		(b3 << 8) |
-		(b4);
-
-	outAddr.SetIPv4(ip, port);
-	return true;
+	//TODO: fix this
+	static_cast<Lobby*>(StateMachine.GetTop())->OnDropFile(ev.drop.data);
 }
 
 Application::Application() {
@@ -68,8 +70,9 @@ Application::Application() {
 	fs::audioDeviceManager.OpenDefaultDevice(fs::AudioDeviceKind::Playback);
 	fs::audioDeviceManager.OpenDefaultDevice(fs::AudioDeviceKind::Recording, &src);
 
-	fs::soundManager.Add(fs::Sound{ &fs::AudioSourceManager.Get("sample") }, "sample");
-	fs::soundManager.Get("sample")->SetVolume(0.2f);
+	StateMachine.PushTop(new LoginScreen);
+
+	fs::callbacks.Get<fs::CallbackType::clientDisconnectStatus>().Add(new fs::Callback<fs::CallbackType::clientDisconnectStatus>(ClientDisconnected));
 }
 
 Application::~Application() {
@@ -85,14 +88,16 @@ void Application::Update() {
 	ImGui_ImplSDLGPU3_NewFrame();
 	ImGui_ImplSDL3_NewFrame();
 	ImGui::NewFrame();
+
+	
 	UpdateDefaultDockingSpace();
 	UpdateMainMenu();
 
-	UpdateHostJoin();
-	UpdateVoiceConnections();
+	StateMachine.Update();
+	//UpdateVoiceConnections();
 
 
-	UpdateReceivedPlot();
+	//UpdateReceivedPlot();
 
 
 	MessageManager.Update();
@@ -105,7 +110,7 @@ void Application::Render() {
 	Render Start
 	*/
 
-	//...
+	StateMachine.Render();
 
 	/*
 	Render End
@@ -126,12 +131,29 @@ void Application::Render() {
 void Application::UpdateMainMenu() {
 	ImGui::BeginMainMenuBar();
 
-	if (ImGui::BeginMenu("View")) {
-		if (ImGui::MenuItem("Reset view")) {
+	// App title
+	ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.65f, 0.30f, 1.f, 1.f));
+	ImGui::TextUnformatted("VT-LAN Audio Diagnostics");
+	ImGui::PopStyleColor();
 
-		}
+	ImGui::SameLine();
+	ImGui::TextDisabled("|");
+	ImGui::SameLine();
 
-		ImGui::EndMenu();
+	// Connection status
+	if (fs::networking.Server())
+		ImGui::TextColored(ImVec4(0.3f, 0.9f, 0.4f, 1.f), "HOST");
+	else if (fs::networking.Client())
+		ImGui::TextColored(ImVec4(0.4f, 0.7f, 1.0f, 1.f), "Polaczony");
+	else
+		ImGui::TextDisabled("Niepodlaczony");
+
+	// User name on the right side
+	if (!Lobby::s_localDisplayName.empty()) {
+		float nameW = ImGui::CalcTextSize(Lobby::s_localDisplayName.c_str()).x + 16.f;
+		ImGui::SameLine(ImGui::GetWindowWidth() - nameW);
+		ImGui::TextColored(ImVec4(0.85f, 0.85f, 0.85f, 1.f),
+		                   "%s", Lobby::s_localDisplayName.c_str());
 	}
 
 	m_mainMenuBarHeight = ImGui::GetWindowSize().y;
@@ -168,182 +190,9 @@ void Application::UpdateDefaultDockingSpace() {
 	ImGui::End();
 }
 
-void Application::UpdateHostJoin()
-{
-	if (ImGui::Begin("Network"))
-	{
-		ImGui::Text("Choose an action:");
-		ImGui::Separator();
-		ImGui::Spacing();
-
-		static char ipBuffer[64] = "127.0.0.1";
-		static int port = 27020;
-
-		ImGui::Text("Target:");
-		ImGui::SetNextItemWidth(200.0f);
-		ImGui::InputText("IP", ipBuffer, IM_ARRAYSIZE(ipBuffer));
-
-		ImGui::SetNextItemWidth(120.0f);
-		ImGui::InputInt("Port", &port);
-
-		if (port < 1) port = 1;
-		if (port > 65535) port = 65535;
-
-		ImGui::Spacing();
-		ImGui::Separator();
-		ImGui::Spacing();
-
-		SteamNetworkingIPAddr previewAddr;
-		bool ipOk = ParseIPv4(ipBuffer, static_cast<uint16>(port), previewAddr);
-
-		if (!ipOk)
-			ImGui::TextColored(ImVec4(1, 0.6f, 0.2f, 1), "Invalid IP address.");
-
-		ImGui::Spacing();
-
-		if (ImGui::Button("Host", ImVec2(120, 40)))
-		{
-			SteamNetworkingIPAddr addr;
-			if (ParseIPv4(ipBuffer, static_cast<uint16>(port), addr))
-			{
-				fs::networking.StartListening(fs::NetworkingHostingMode::Local, addr);
-			}
-		}
-
-		ImGui::SameLine();
-
-		if (ImGui::Button("Connect", ImVec2(120, 40)))
-		{
-			SteamNetworkingIPAddr addr;
-			if (ParseIPv4(ipBuffer, static_cast<uint16>(port), addr))
-			{
-				fs::networking.ConnectToServer(addr);
-			}
-		}
-
-		ImGui::Spacing();
-	}
-	ImGui::End();
-}
-
-void Application::UpdateVoiceConnections()
-{
-	ImGui::Begin("Voice - Connections");
-
-	const auto& all = fs::connections.GetAll();
-
-	if (all.empty()) {
-		ImGui::TextDisabled("No active connections.");
-		ImGui::End();
-		return;
-	}
-
-	static std::unordered_map<uint8_t, fs::PlayerVoiceSettings> s_settings;
-
-	//For new connections
-	for (const auto& [gameID, conn] : all) {
-		if (s_settings.find(gameID) == s_settings.end()) {
-			fs::PlayerVoiceSettings defaults;
-			defaults.gain = 1.0f;
-			defaults.muted = false;
-			s_settings[gameID] = defaults;
-		}
-	}
-
-	//For old connections
-	for (auto it = s_settings.begin(); it != s_settings.end(); ) {
-		if (all.find(it->first) == all.end())
-			it = s_settings.erase(it);
-		else
-			++it;
-	}
-
-	const fs::Connection& self = fs::connections.GetSelf();
-
-	ImGui::Separator();
-
-	for (const auto& [gameID, conn] : all) {
-		bool isSelf = conn.IsSelf();
-		bool isHost = conn.IsHost();
-
-		ImGui::PushID(gameID);
-
-		char label[64];
-		if (isSelf)
-			snprintf(label, sizeof(label), "Client %d (you)%s", gameID, isHost ? " [host]" : "");
-		else
-			snprintf(label, sizeof(label), "Client %d%s", gameID, isHost ? " [host]" : "");
-
-		ImGui::Text("%s", label);
-		ImGui::SameLine(160.0f);
-
-		fs::PlayerVoiceSettings& cfg = s_settings[gameID];
-
-		if (isSelf) {
-			ImGui::TextDisabled("(local mic)");
-		}
-		else {
-			// Mute toggle
-			const char* muteLabel = cfg.muted ? "Unmute" : "Mute";
-			if (ImGui::Button(muteLabel, ImVec2(70, 0)))
-				cfg.muted = !cfg.muted;
-
-			ImGui::SameLine();
-
-			// voice slider
-			if (cfg.muted)
-				ImGui::BeginDisabled();
-
-			ImGui::SetNextItemWidth(150.0f);
-			ImGui::SliderFloat("##gain", &cfg.gain, 0.0f, 4.0f, "%.2f x");
-
-			if (cfg.muted)
-				ImGui::EndDisabled();
-
-			ImGui::SameLine();
-
-			// Podg³oœnienie do 200%
-			if (ImGui::Button("+", ImVec2(24, 0))) {
-				cfg.gain = std::min(cfg.gain + 0.25f, 4.0f);
-			}
-			ImGui::SameLine();
-			if (ImGui::Button("-", ImVec2(24, 0))) {
-				cfg.gain = std::max(cfg.gain - 0.25f, 0.0f);
-			}
-			ImGui::SameLine();
-			if (ImGui::Button("Reset", ImVec2(50, 0))) {
-				cfg.gain = 1.0f;
-				cfg.muted = false;
-			}
 
 
-			fs::voiceReceivingManager.SetPlayerVoiceSettings(gameID, cfg);
-		}
 
-		ImGui::Separator();
-		ImGui::PopID();
-	}
-
-	//Mute/Unmute all
-	ImGui::Spacing();
-	if (ImGui::Button("Mute all", ImVec2(100, 0))) {
-		for (auto& [gameID, cfg] : s_settings) {
-			if (all.at(gameID).IsSelf()) continue;
-			cfg.muted = true;
-			fs::voiceReceivingManager.SetPlayerVoiceSettings(gameID, cfg);
-		}
-	}
-	ImGui::SameLine();
-	if (ImGui::Button("Unmute all", ImVec2(100, 0))) {
-		for (auto& [gameID, cfg] : s_settings) {
-			if (all.at(gameID).IsSelf()) continue;
-			cfg.muted = false;
-			fs::voiceReceivingManager.SetPlayerVoiceSettings(gameID, cfg);
-		}
-	}
-
-	ImGui::End();
-}
 
 void Application::UpdateReceivedPlot()
 {
@@ -465,7 +314,12 @@ void Application::InitializeImGui() {
 	init_info.PresentMode = SDL_GPU_PRESENTMODE_VSYNC;
 	ImGui_ImplSDLGPU3_Init(&init_info);
 
-	SetEventCallback([](SDL_Event event) { ImGui_ImplSDL3_ProcessEvent(&event); });
+	SetEventCallback([](SDL_Event event) { 
+		ImGui_ImplSDL3_ProcessEvent(&event);
+		if (event.type == SDL_EVENT_DROP_FILE) {
+			static_cast<Lobby*>(StateMachine.GetTop())->OnDropFile(event.drop.data);
+		}
+	});
 }
 
 void Application::InitializeImGuiStyle() {
@@ -473,68 +327,103 @@ void Application::InitializeImGuiStyle() {
 	io.FontDefault = io.Fonts->AddFontFromFileTTF("res/roboto-regular.ttf", 18.0f);
 
 	ImGuiStyle& style = ImGui::GetStyle();
-	style.WindowRounding = 5.3f;
-	style.FrameRounding = 2.3f;
-	style.ScrollbarRounding = 0;
 
-	ImVec4* colors = style.Colors;
+	// --- Shape ---
+	style.WindowRounding    = 8.0f;
+	style.FrameRounding     = 5.0f;
+	style.ChildRounding     = 5.0f;
+	style.PopupRounding     = 6.0f;
+	style.ScrollbarRounding = 4.0f;
+	style.GrabRounding      = 4.0f;
+	style.TabRounding       = 5.0f;
 
-	colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
-	colors[ImGuiCol_TextDisabled] = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
-	colors[ImGuiCol_WindowBg] = ImVec4(0.06f, 0.06f, 0.06f, 0.94f);
-	colors[ImGuiCol_ChildBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-	colors[ImGuiCol_PopupBg] = ImVec4(0.08f, 0.08f, 0.08f, 0.94f);
-	colors[ImGuiCol_Border] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
-	colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-	colors[ImGuiCol_FrameBg] = ImVec4(0.19f, 0.19f, 0.19f, 0.54f);
-	colors[ImGuiCol_FrameBgHovered] = ImVec4(0.60f, 0.26f, 0.98f, 0.40f);
-	colors[ImGuiCol_FrameBgActive] = ImVec4(0.60f, 0.26f, 0.98f, 0.67f);
-	colors[ImGuiCol_TitleBg] = ImVec4(0.04f, 0.04f, 0.04f, 1.00f);
-	colors[ImGuiCol_TitleBgActive] = ImVec4(0.31f, 0.16f, 0.48f, 1.00f);
-	colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.00f, 0.00f, 0.00f, 0.51f);
-	colors[ImGuiCol_MenuBarBg] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
-	colors[ImGuiCol_ScrollbarBg] = ImVec4(0.02f, 0.02f, 0.02f, 0.53f);
-	colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.31f, 0.31f, 0.31f, 1.00f);
-	colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.41f, 0.41f, 0.41f, 1.00f);
-	colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.51f, 0.51f, 0.51f, 1.00f);
-	colors[ImGuiCol_CheckMark] = ImVec4(0.60f, 0.26f, 0.98f, 1.00f);
-	colors[ImGuiCol_SliderGrab] = ImVec4(0.54f, 0.24f, 0.88f, 1.00f);
-	colors[ImGuiCol_SliderGrabActive] = ImVec4(0.60f, 0.26f, 0.98f, 1.00f);
-	colors[ImGuiCol_Button] = ImVec4(0.60f, 0.26f, 0.98f, 0.40f);
-	colors[ImGuiCol_ButtonHovered] = ImVec4(0.60f, 0.26f, 0.98f, 1.00f);
-	colors[ImGuiCol_ButtonActive] = ImVec4(0.49f, 0.06f, 0.98f, 1.00f);
-	colors[ImGuiCol_Header] = ImVec4(0.60f, 0.26f, 0.98f, 0.31f);
-	colors[ImGuiCol_HeaderHovered] = ImVec4(0.60f, 0.26f, 0.98f, 0.80f);
-	colors[ImGuiCol_HeaderActive] = ImVec4(0.60f, 0.26f, 0.98f, 1.00f);
-	colors[ImGuiCol_Separator] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
-	colors[ImGuiCol_SeparatorHovered] = ImVec4(0.41f, 0.10f, 0.75f, 0.78f);
-	colors[ImGuiCol_SeparatorActive] = ImVec4(0.41f, 0.10f, 0.75f, 1.00f);
-	colors[ImGuiCol_ResizeGrip] = ImVec4(0.60f, 0.26f, 0.98f, 0.20f);
-	colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.60f, 0.26f, 0.98f, 0.67f);
-	colors[ImGuiCol_ResizeGripActive] = ImVec4(0.60f, 0.26f, 0.98f, 0.95f);
-	colors[ImGuiCol_TabHovered] = ImVec4(0.60f, 0.26f, 0.98f, 0.80f);
-	colors[ImGuiCol_Tab] = ImVec4(0.37f, 0.18f, 0.58f, 0.86f);
-	colors[ImGuiCol_TabSelected] = ImVec4(0.42f, 0.20f, 0.68f, 1.00f);
-	colors[ImGuiCol_TabSelectedOverline] = ImVec4(0.60f, 0.26f, 0.98f, 1.00f);
-	colors[ImGuiCol_TabDimmed] = ImVec4(0.11f, 0.07f, 0.15f, 0.97f);
-	colors[ImGuiCol_TabDimmedSelected] = ImVec4(0.27f, 0.14f, 0.42f, 1.00f);
-	colors[ImGuiCol_TabDimmedSelectedOverline] = ImVec4(0.50f, 0.50f, 0.50f, 0.00f);
-	colors[ImGuiCol_DockingPreview] = ImVec4(0.60f, 0.26f, 0.98f, 0.70f);
-	colors[ImGuiCol_DockingEmptyBg] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
-	colors[ImGuiCol_PlotLines] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
-	colors[ImGuiCol_PlotLinesHovered] = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
-	colors[ImGuiCol_PlotHistogram] = ImVec4(0.90f, 0.45f, 0.60f, 1.00f);
-	colors[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
-	colors[ImGuiCol_TableHeaderBg] = ImVec4(0.19f, 0.19f, 0.20f, 1.00f);
-	colors[ImGuiCol_TableBorderStrong] = ImVec4(0.31f, 0.31f, 0.35f, 1.00f);
-	colors[ImGuiCol_TableBorderLight] = ImVec4(0.23f, 0.23f, 0.25f, 1.00f);
-	colors[ImGuiCol_TableRowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-	colors[ImGuiCol_TableRowBgAlt] = ImVec4(1.00f, 1.00f, 1.00f, 0.06f);
-	colors[ImGuiCol_TextLink] = ImVec4(0.60f, 0.26f, 0.98f, 1.00f);
-	colors[ImGuiCol_TextSelectedBg] = ImVec4(0.53f, 0.53f, 0.53f, 0.45f);
-	colors[ImGuiCol_DragDropTarget] = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
-	colors[ImGuiCol_NavCursor] = ImVec4(0.60f, 0.26f, 0.98f, 1.00f);
-	colors[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
-	colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
-	colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
+	// --- Spacing ---
+	style.WindowPadding     = ImVec2(12.f, 10.f);
+	style.FramePadding      = ImVec2(8.f,  5.f);
+	style.ItemSpacing       = ImVec2(8.f,  6.f);
+	style.ItemInnerSpacing  = ImVec2(6.f,  4.f);
+	style.ScrollbarSize     = 12.f;
+	style.GrabMinSize       = 10.f;
+	style.WindowBorderSize  = 1.f;
+	style.FrameBorderSize   = 0.f;
+
+	// --- Accent color: rich purple (#7B35C8) ---
+	const float Ar = 0.48f, Ag = 0.20f, Ab = 0.78f; // accent
+
+	ImVec4* c = style.Colors;
+
+	c[ImGuiCol_Text]                  = ImVec4(0.95f, 0.95f, 0.95f, 1.00f);
+	c[ImGuiCol_TextDisabled]          = ImVec4(0.45f, 0.45f, 0.50f, 1.00f);
+
+	c[ImGuiCol_WindowBg]              = ImVec4(0.07f, 0.06f, 0.10f, 0.97f);
+	c[ImGuiCol_ChildBg]               = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+	c[ImGuiCol_PopupBg]               = ImVec4(0.10f, 0.09f, 0.14f, 0.97f);
+
+	c[ImGuiCol_Border]                = ImVec4(Ar * 0.6f, Ag * 0.6f, Ab * 0.6f, 0.55f);
+	c[ImGuiCol_BorderShadow]          = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+
+	c[ImGuiCol_FrameBg]               = ImVec4(0.15f, 0.13f, 0.22f, 0.70f);
+	c[ImGuiCol_FrameBgHovered]        = ImVec4(Ar, Ag, Ab, 0.35f);
+	c[ImGuiCol_FrameBgActive]         = ImVec4(Ar, Ag, Ab, 0.60f);
+
+	c[ImGuiCol_TitleBg]               = ImVec4(0.06f, 0.05f, 0.10f, 1.00f);
+	c[ImGuiCol_TitleBgActive]         = ImVec4(Ar * 0.65f, Ag * 0.65f, Ab * 0.65f, 1.00f);
+	c[ImGuiCol_TitleBgCollapsed]      = ImVec4(0.00f, 0.00f, 0.00f, 0.51f);
+
+	c[ImGuiCol_MenuBarBg]             = ImVec4(0.10f, 0.09f, 0.14f, 1.00f);
+
+	c[ImGuiCol_ScrollbarBg]           = ImVec4(0.02f, 0.02f, 0.05f, 0.53f);
+	c[ImGuiCol_ScrollbarGrab]         = ImVec4(Ar * 0.55f, Ag * 0.55f, Ab * 0.55f, 1.00f);
+	c[ImGuiCol_ScrollbarGrabHovered]  = ImVec4(Ar * 0.80f, Ag * 0.80f, Ab * 0.80f, 1.00f);
+	c[ImGuiCol_ScrollbarGrabActive]   = ImVec4(Ar, Ag, Ab, 1.00f);
+
+	c[ImGuiCol_CheckMark]             = ImVec4(Ar + 0.15f, Ag + 0.10f, Ab + 0.10f, 1.00f);
+	c[ImGuiCol_SliderGrab]            = ImVec4(Ar, Ag, Ab, 0.90f);
+	c[ImGuiCol_SliderGrabActive]      = ImVec4(Ar + 0.10f, Ag + 0.05f, Ab + 0.10f, 1.00f);
+
+	c[ImGuiCol_Button]                = ImVec4(Ar, Ag, Ab, 0.38f);
+	c[ImGuiCol_ButtonHovered]         = ImVec4(Ar + 0.10f, Ag + 0.05f, Ab + 0.10f, 0.90f);
+	c[ImGuiCol_ButtonActive]          = ImVec4(Ar - 0.05f, Ag, Ab - 0.05f, 1.00f);
+
+	c[ImGuiCol_Header]                = ImVec4(Ar, Ag, Ab, 0.30f);
+	c[ImGuiCol_HeaderHovered]         = ImVec4(Ar, Ag, Ab, 0.75f);
+	c[ImGuiCol_HeaderActive]          = ImVec4(Ar, Ag, Ab, 1.00f);
+
+	c[ImGuiCol_Separator]             = ImVec4(Ar * 0.4f, Ag * 0.4f, Ab * 0.5f, 0.60f);
+	c[ImGuiCol_SeparatorHovered]      = ImVec4(Ar, Ag, Ab, 0.78f);
+	c[ImGuiCol_SeparatorActive]       = ImVec4(Ar, Ag, Ab, 1.00f);
+
+	c[ImGuiCol_ResizeGrip]            = ImVec4(Ar, Ag, Ab, 0.20f);
+	c[ImGuiCol_ResizeGripHovered]     = ImVec4(Ar, Ag, Ab, 0.67f);
+	c[ImGuiCol_ResizeGripActive]      = ImVec4(Ar, Ag, Ab, 0.95f);
+
+	c[ImGuiCol_Tab]                   = ImVec4(Ar * 0.55f, Ag * 0.40f, Ab * 0.65f, 0.86f);
+	c[ImGuiCol_TabHovered]            = ImVec4(Ar, Ag, Ab, 0.80f);
+	c[ImGuiCol_TabSelected]           = ImVec4(Ar + 0.05f, Ag + 0.02f, Ab + 0.05f, 1.00f);
+	c[ImGuiCol_TabSelectedOverline]   = ImVec4(Ar + 0.15f, Ag + 0.10f, Ab + 0.15f, 1.00f);
+	c[ImGuiCol_TabDimmed]             = ImVec4(0.09f, 0.06f, 0.13f, 0.97f);
+	c[ImGuiCol_TabDimmedSelected]     = ImVec4(Ar * 0.45f, Ag * 0.35f, Ab * 0.55f, 1.00f);
+	c[ImGuiCol_TabDimmedSelectedOverline] = ImVec4(0.50f, 0.50f, 0.50f, 0.00f);
+
+	c[ImGuiCol_DockingPreview]        = ImVec4(Ar, Ag, Ab, 0.70f);
+	c[ImGuiCol_DockingEmptyBg]        = ImVec4(0.12f, 0.10f, 0.16f, 1.00f);
+
+	c[ImGuiCol_PlotLines]             = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
+	c[ImGuiCol_PlotLinesHovered]      = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
+	c[ImGuiCol_PlotHistogram]         = ImVec4(0.90f, 0.45f, 0.60f, 1.00f);
+	c[ImGuiCol_PlotHistogramHovered]  = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
+
+	c[ImGuiCol_TableHeaderBg]         = ImVec4(0.16f, 0.14f, 0.22f, 1.00f);
+	c[ImGuiCol_TableBorderStrong]     = ImVec4(0.28f, 0.26f, 0.35f, 1.00f);
+	c[ImGuiCol_TableBorderLight]      = ImVec4(0.20f, 0.18f, 0.26f, 1.00f);
+	c[ImGuiCol_TableRowBg]            = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+	c[ImGuiCol_TableRowBgAlt]         = ImVec4(1.00f, 1.00f, 1.00f, 0.05f);
+
+	c[ImGuiCol_TextLink]              = ImVec4(Ar + 0.15f, Ag + 0.20f, Ab + 0.15f, 1.00f);
+	c[ImGuiCol_TextSelectedBg]        = ImVec4(Ar, Ag, Ab, 0.40f);
+	c[ImGuiCol_DragDropTarget]        = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
+	c[ImGuiCol_NavCursor]             = ImVec4(Ar + 0.15f, Ag + 0.10f, Ab + 0.15f, 1.00f);
+	c[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
+	c[ImGuiCol_NavWindowingDimBg]     = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
+	c[ImGuiCol_ModalWindowDimBg]      = ImVec4(0.05f, 0.03f, 0.10f, 0.60f);
 }

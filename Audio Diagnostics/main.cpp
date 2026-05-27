@@ -3,15 +3,76 @@
 
 #include "networking/RPC.hpp"
 
-constexpr bool launchMultipleInstances = 0;
-constexpr int childInstances = 1;
+#include <string>
+#include <cstring>
 
-int main(int argc, char* argv[]) {
+#ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#endif
+
+// Globals filled from vtlan:// command-line argument (consumed by LoginScreen on startup)
+std::string g_cmdPrefilledIP;
+int         g_cmdPrefilledPort = 0;
+
+static void ParseVtlanArg(const char* arg)
+{
+	if (!arg) return;
+	const std::string s(arg);
+	const std::string prefix = "vtlan://";
+	if (s.rfind(prefix, 0) != 0) return;
+
+	std::string rest = s.substr(prefix.size());
+	// strip trailing slashes
+	while (!rest.empty() && (rest.back() == '/' || rest.back() == '\\'))
+		rest.pop_back();
+
+	auto colon = rest.find(':');
+	if (colon != std::string::npos) {
+		g_cmdPrefilledIP = rest.substr(0, colon);
+		try { g_cmdPrefilledPort = std::stoi(rest.substr(colon + 1)); }
+		catch (...) { g_cmdPrefilledPort = 27020; }
+	}
+}
+
+constexpr bool launchMultipleInstances = 0;
+constexpr int  childInstances = 1;
+
+int main(int argc, char* argv[])
+{
+#ifdef _WIN32
+	// When Windows launches the app via a vtlan:// protocol handler it sets the
+	// working directory to C:\Windows\System32 instead of the app folder.
+	// Fix this immediately so that relative asset paths ("res/shaders/...") work.
+	{
+		char exePath[MAX_PATH] = {};
+		GetModuleFileNameA(nullptr, exePath, MAX_PATH);
+		char* lastSep = strrchr(exePath, '\\');
+		if (!lastSep) lastSep = strrchr(exePath, '/');
+		if (lastSep) {
+			*lastSep = '\0';
+			SetCurrentDirectoryA(exePath);
+		}
+	}
+#endif
+
 	fs::getRPCMap().Lock();
 
+	// Parse vtlan:// protocol link before anything else
+	for (int i = 1; i < argc; ++i) {
+		if (argv[i] && strncmp(argv[i], "vtlan://", 8) == 0) {
+			ParseVtlanArg(argv[i]);
+			break;
+		}
+	}
+
+
+
 	{
-		//this is needed to properly test networking on localhost
-		fs::InstanceConfig cfg{ launchMultipleInstances, childInstances };
+		// If launched via vtlan:// deep link, disable child spawning to avoid
+		// multiple instances all trying to connect to the same host.
+		const bool multiInst = g_cmdPrefilledIP.empty() && launchMultipleInstances;
+		fs::InstanceConfig cfg{ multiInst, childInstances };
 		const fs::LaunchMode mode = fs::instanceManager.init(argc, argv, cfg);
 
 		if (mode == fs::LaunchMode::Parent)
@@ -20,9 +81,11 @@ int main(int argc, char* argv[]) {
 			fs::instanceManager.startParentWatcherIfNeeded();
 	}
 
+
+
 	fs::WindowData data;
-	data.Size = glm::uvec2(1600/2, 900/2);
-	data.Title = "Audio Diagnostics";
+	data.Size  = glm::uvec2(1600 / 2, 900 / 2);
+	data.Title = "VT-LAN Audio Diagnostics";
 
 	fs::Runtime::Initialize(data);
 

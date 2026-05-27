@@ -24,6 +24,7 @@ namespace fs {
 			const CSteamID& GetLobbyID();
 			
 			bool IsServer() const;
+			bool IsClient() const;
 
 			//callbacks
 			void OnLobbyCreated(LobbyCreated_t* pCallback);
@@ -41,7 +42,7 @@ namespace fs {
 			void ConnectionStateDead(SteamNetConnectionStatusChangedCallback_t* pCallback);
 		private:
 			bool m_listening = false;
-			bool m_connectingToServer = false;
+			bool m_clientStatus = false;
 
 			HSteamNetConnection m_listeningSocket{};
 			CSteamID m_currentLobbyID;

@@ -26,6 +26,8 @@ project "Audio Diagnostics"
         "Fish"
     }
 
+	defines { "USE_STD_FILESYSTEM" }
+
 	if USE_STEAM_GNS then
         defines { "USE_STEAM_GNS=1" }
 		includedirs {

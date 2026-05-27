@@ -1,6 +1,7 @@
 #pragma once
 
 #include "glm/vec2.hpp"
+#include <string>
 
 struct SDL_GPUTexture;
 struct SDL_GPURenderPass;

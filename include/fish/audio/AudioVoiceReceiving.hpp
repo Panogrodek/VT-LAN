@@ -6,7 +6,9 @@
 
 #include "system/Clock.hpp"
 
+#include <glm/vec3.hpp>
 #include <thread>
+#include <map>
 
 namespace fs {
 	class Runtime;

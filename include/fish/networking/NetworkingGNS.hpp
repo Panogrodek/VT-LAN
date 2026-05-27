@@ -23,6 +23,7 @@ namespace fs {
 			const CSteamID& GetLobbyID();
 
 			bool IsServer() const;
+			bool IsClient() const;
 
 			static void HandleConnectionHelper(SteamNetConnectionStatusChangedCallback_t* callback);
 
@@ -37,10 +38,10 @@ namespace fs {
 			void ConnectionStateDead(SteamNetConnectionStatusChangedCallback_t* pCallback);
 		private:
 			bool m_listening = false;
-			bool m_connectingToServer = false;
+			bool m_clientStatus = false;
 
 			HSteamNetConnection m_listeningSocket{};
-			CSteamID m_currentLobbyID;
+			CSteamID m_currentLobbyID{}; //<- this value is not used by GNS, only SteamGNS
 		};
 
 		inline NetworkingGNS networkingImpl;

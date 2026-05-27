@@ -43,6 +43,8 @@ namespace fs {
 			bool DisconnectFromServer();
 
 			bool Server() const;
+			bool Client() const;
+			bool ActiveSession() const;
 
 			const CSteamID& GetLobbyId() const;
 
