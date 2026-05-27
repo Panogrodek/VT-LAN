@@ -133,7 +133,7 @@ void Application::UpdateMainMenu() {
 
 	// App title
 	ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.65f, 0.30f, 1.f, 1.f));
-	ImGui::TextUnformatted("VT-LAN Audio Diagnostics");
+	ImGui::TextUnformatted("VT-LAN");
 	ImGui::PopStyleColor();
 
 	ImGui::SameLine();
@@ -144,9 +144,9 @@ void Application::UpdateMainMenu() {
 	if (fs::networking.Server())
 		ImGui::TextColored(ImVec4(0.3f, 0.9f, 0.4f, 1.f), "HOST");
 	else if (fs::networking.Client())
-		ImGui::TextColored(ImVec4(0.4f, 0.7f, 1.0f, 1.f), "Polaczony");
+		ImGui::TextColored(ImVec4(0.4f, 0.7f, 1.0f, 1.f), "Połączony");
 	else
-		ImGui::TextDisabled("Niepodlaczony");
+		ImGui::TextDisabled("Niepodłączony");
 
 	// User name on the right side
 	if (!Lobby::s_localDisplayName.empty()) {

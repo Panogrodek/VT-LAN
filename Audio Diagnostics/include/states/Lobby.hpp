@@ -13,7 +13,7 @@
 // Chat message
 // --------------------------------------------------------------------------
 struct ChatMessage {
-	enum class Type { Text, Image, FileReceived };
+	enum class Type { Text, Image, FileReceived, FileSent };
 
 	Type        type      = Type::Text;
 	uint8_t     authorID  = 0;

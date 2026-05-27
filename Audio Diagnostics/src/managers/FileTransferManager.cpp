@@ -201,6 +201,13 @@ bool FileTransferManager::TryAssembleLocked(uint32_t transferID) {
 			          static_cast<std::streamsize>(assembled.size()));
 	}
 
+	// Convert to absolute path so ShellExecuteA works regardless of CWD
+	{
+		std::error_code absEc;
+		auto absPath = std::filesystem::absolute(savedPath, absEc);
+		if (!absEc) savedPath = absPath.string();
+	}
+
 	ReceivedFile rf;
 	rf.senderID  = t.senderID;
 	rf.filename  = t.filename;

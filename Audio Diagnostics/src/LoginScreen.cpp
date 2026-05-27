@@ -140,10 +140,10 @@ std::string LoginScreen::BuildInviteMessage() const
 {
 	std::string link = "vtlan://" + m_sessionIP + ":" + std::to_string(m_sessionPort);
 	return
-		"Hej! Zapraszam Cie do rozmowy przez VT-LAN Audio Diagnostics.\n"
+		"Zaproszenie do spotkania prowadzonego w srodowisku VT-LAN\n"
 		"Kliknij ponizszy link, aby dolaczyc:\n"
 		+ link + "\n\n"
-		"Jesli link nie dziala, otworz aplikacje recznie i podaj:\n"
+		"Jesli link nie dziala, otworz aplikacje VT-LAN z nastepujacymi parametrami:\n"
 		"  Adres IP: " + m_sessionIP + "\n"
 		"  Port:     " + std::to_string(m_sessionPort);
 }
@@ -167,7 +167,7 @@ void LoginScreen::OpenEmailInvite() const
 		return out;
 	};
 
-	std::string subject = "Zaproszenie do VT-LAN Audio Diagnostics";
+	std::string subject = "Zaproszenie do VT-LAN";
 	std::string body    = BuildInviteMessage();
 	std::string mailto  = "mailto:?subject=" + encode(subject) + "&body=" + encode(body);
 
@@ -288,9 +288,9 @@ void LoginScreen::RenderSelectMode()
 	const float W = 380.f, H = 250.f;
 	BeginCenteredWindow("##SelectMode", W, H);
 
-	TitleLabel("VT-LAN Audio Diagnostics");
+	TitleLabel("VT-LAN");
 
-	ImGui::TextWrapped("Wybierz sposob polaczenia:");
+	ImGui::TextWrapped("Wybierz sposób połączenia:");
 	ImGui::Spacing();
 
 	const float bW = (W - 48.f - ImGui::GetStyle().ItemSpacing.x) * 0.5f;
@@ -299,7 +299,7 @@ void LoginScreen::RenderSelectMode()
 	ImGui::PushStyleColor(ImGuiCol_ButtonHovered,  ImVec4(0.45f, 0.20f, 0.85f, 1.f));
 	ImGui::PushStyleColor(ImGuiCol_ButtonActive,   ImVec4(0.35f, 0.10f, 0.75f, 1.f));
 
-	if (ImGui::Button("Stworz pokoj", ImVec2(bW, 60.f)))
+	if (ImGui::Button("Stwórz pokój", ImVec2(bW, 60.f)))
 		m_mode = Mode::CreateRoom;
 
 	ImGui::SameLine();
@@ -308,7 +308,7 @@ void LoginScreen::RenderSelectMode()
 	ImGui::PushStyleColor(ImGuiCol_ButtonHovered,  ImVec4(0.20f, 0.45f, 0.85f, 1.f));
 	ImGui::PushStyleColor(ImGuiCol_ButtonActive,   ImVec4(0.10f, 0.35f, 0.75f, 1.f));
 
-	if (ImGui::Button("Dolacz do pokoju", ImVec2(bW, 60.f)))
+	if (ImGui::Button("Dołącz do pokoju", ImVec2(bW, 60.f)))
 		m_mode = Mode::JoinRoom;
 
 	ImGui::PopStyleColor(6);
@@ -327,13 +327,13 @@ void LoginScreen::RenderCreateRoom()
 	const float W = 420.f, H = 390.f;
 	BeginCenteredWindow("##CreateRoom", W, H);
 
-	TitleLabel("Stworz pokoj");
+	TitleLabel("Stwórz pokój");
 
 	const float labelW = 140.f;
 	const float fieldW = W - 48.f - labelW - ImGui::GetStyle().ItemSpacing.x;
 
 	// --- Name ---
-	FieldLabel("Imie:", labelW);
+	FieldLabel("Imię:", labelW);
 	ImGui::SetNextItemWidth(fieldW);
 	ImGui::InputText("##cr_fn", m_profile.firstName, sizeof(m_profile.firstName));
 
@@ -356,12 +356,12 @@ void LoginScreen::RenderCreateRoom()
 	ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
 
 	// --- Password ---
-	FieldLabel("Haslo (opcja):", labelW);
+	FieldLabel("Hasło (opcja):", labelW);
 	ImGui::SetNextItemWidth(fieldW);
 	ImGui::InputText("##cr_pwd", m_passwordBuf, sizeof(m_passwordBuf),
 	                 ImGuiInputTextFlags_Password);
 	ImGui::SetCursorPosX(labelW + ImGui::GetStyle().ItemSpacing.x + 2.f);
-	ImGui::TextDisabled("Pozostaw puste, aby nie chroniac pokoju");
+	ImGui::TextDisabled("(zalecane)");
 
 	ImGui::Spacing();
 
@@ -384,7 +384,7 @@ void LoginScreen::RenderCreateRoom()
 	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.25f, 0.75f, 0.25f, 1.f));
 	ImGui::PushStyleColor(ImGuiCol_ButtonActive,  ImVec4(0.10f, 0.45f, 0.10f, 1.f));
 
-	if (ImGui::Button("Utwoz pokoj  >>", ImVec2(bW, 34.f))) {
+	if (ImGui::Button("Utwórz pokój  >>", ImVec2(bW, 34.f))) {
 		m_errorMsg.clear();
 		if (m_profile.firstName[0] == '\0') {
 			m_errorMsg = "Prosze podac swoje imie.";
@@ -419,13 +419,13 @@ void LoginScreen::RenderJoinRoom()
 	const float W = 420.f, H = 340.f;
 	BeginCenteredWindow("##JoinRoom", W, H);
 
-	TitleLabel("Dolacz do pokoju");
+	TitleLabel("Dołącz do pokoju");
 
 	const float labelW = 140.f;
 	const float fieldW = W - 48.f - labelW - ImGui::GetStyle().ItemSpacing.x;
 
 	// --- Name ---
-	FieldLabel("Imie:", labelW);
+	FieldLabel("Imię:", labelW);
 	ImGui::SetNextItemWidth(fieldW);
 	ImGui::InputText("##jr_fn", m_profile.firstName, sizeof(m_profile.firstName));
 
@@ -448,12 +448,12 @@ void LoginScreen::RenderJoinRoom()
 	ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
 
 	// --- Password ---
-	FieldLabel("Haslo:", labelW);
+	FieldLabel("Hasło:", labelW);
 	ImGui::SetNextItemWidth(fieldW);
 	ImGui::InputText("##jr_pwd", m_passwordBuf, sizeof(m_passwordBuf),
 	                 ImGuiInputTextFlags_Password);
 	ImGui::SetCursorPosX(labelW + ImGui::GetStyle().ItemSpacing.x + 2.f);
-	ImGui::TextDisabled("Wpisz jesli pokoj jest chroniony");
+	ImGui::TextDisabled("Wpisz jeżeli pokój jest chroniony");
 
 	ImGui::Spacing();
 
@@ -476,7 +476,7 @@ void LoginScreen::RenderJoinRoom()
 	ImGui::PushStyleColor(ImGuiCol_ButtonHovered,  ImVec4(0.20f, 0.45f, 0.85f, 1.f));
 	ImGui::PushStyleColor(ImGuiCol_ButtonActive,   ImVec4(0.10f, 0.35f, 0.75f, 1.f));
 
-	if (ImGui::Button("Dolacz  >>", ImVec2(bW, 34.f))) {
+	if (ImGui::Button("Dołącz  >>", ImVec2(bW, 34.f))) {
 		m_errorMsg.clear();
 		if (m_profile.firstName[0] == '\0') {
 			m_errorMsg = "Prosze podac swoje imie.";
@@ -569,7 +569,7 @@ void LoginScreen::RenderConnecting()
 	const float W = 440.f, H = 210.f;
 	BeginCenteredWindow("##Connecting", W, H);
 
-	TitleLabel("Laczenie z serwerem...");
+	TitleLabel("Łączenie z serwerem...");
 
 	// Animated spinner character
 	static const char kSpin[] = "|/-\\";
@@ -581,7 +581,7 @@ void LoginScreen::RenderConnecting()
 	ImGui::SetWindowFontScale(1.f);
 
 	ImGui::Spacing();
-	ImGui::TextDisabled("Prosze czekac na potwierdzenie polaczenia...");
+	ImGui::TextDisabled("Proszę czekać na potwierdzenie połączenia...");
 	ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
 
 	const float bW = W - 48.f;
@@ -598,7 +598,7 @@ void LoginScreen::RenderConnecting()
 	// Error popup — opened every frame while m_connectFailed is true so it
 	// stays on screen until the user acknowledges it.
 	if (m_connectFailed)
-		ImGui::OpenPopup("Blad polaczenia##connect_err");
+		ImGui::OpenPopup("Błąd połączenia##connect_err");
 
 	ImVec2 popupSz(420.f, 190.f);
 	ImGuiIO& io = ImGui::GetIO();
@@ -608,12 +608,12 @@ void LoginScreen::RenderConnecting()
 		ImGuiCond_Always);
 	ImGui::SetNextWindowSize(popupSz, ImGuiCond_Always);
 
-	if (ImGui::BeginPopupModal("Blad polaczenia##connect_err", nullptr,
+	if (ImGui::BeginPopupModal("Błąd połączenia##connect_err", nullptr,
 		ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove))
 	{
 		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.f, 0.35f, 0.35f, 1.f));
 		ImGui::SetWindowFontScale(1.05f);
-		ImGui::TextUnformatted("Nie mozna polaczyc");
+		ImGui::TextUnformatted("Nie można połączyć");
 		ImGui::SetWindowFontScale(1.f);
 		ImGui::PopStyleColor();
 		ImGui::Separator(); ImGui::Spacing();
@@ -641,7 +641,7 @@ void LoginScreen::RenderSessionInfo()
 	const float W = 460.f, H = 330.f;
 	BeginCenteredWindow("##SessionInfo", W, H);
 
-	TitleLabel("Pokoj zostal utworzony!", ImVec4(0.3f, 0.9f, 0.4f, 1.f));
+	TitleLabel("Pokój został utworzony!", ImVec4(0.3f, 0.9f, 0.4f, 1.f));
 
 	// --- Info block ---
 	const float lw = 130.f;
@@ -660,17 +660,17 @@ void LoginScreen::RenderSessionInfo()
 	ImGui::TextColored(ImVec4(0.55f, 0.80f, 1.f, 1.f), "%s", link.c_str());
 
 	if (!Lobby::s_roomPassword.empty()) {
-		ImGui::Text("Haslo:");
+		ImGui::Text("Hasło:");
 		ImGui::SameLine(lw);
 		ImGui::TextColored(ImVec4(1.f, 0.75f, 0.3f, 1.f), "ustawione");
 	} else {
-		ImGui::Text("Haslo:");
+		ImGui::Text("Hasło:");
 		ImGui::SameLine(lw);
-		ImGui::TextDisabled("brak (pokoj publiczny)");
+		ImGui::TextDisabled("brak (pokój publiczny)");
 	}
 
 	ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
-	ImGui::TextUnformatted("Zaprosc innych uczestnikow:");
+	ImGui::TextUnformatted("Zaproś innych uczestników:");
 	ImGui::Spacing();
 
 	const float bW = (W - 48.f - ImGui::GetStyle().ItemSpacing.x) * 0.5f;
@@ -680,7 +680,7 @@ void LoginScreen::RenderSessionInfo()
 		m_inviteCopied = true;
 	}
 	ImGui::SameLine();
-	if (ImGui::Button("Wyslij e-mailem", ImVec2(bW, 34.f)))
+	if (ImGui::Button("Wyślij e-mailem", ImVec2(bW, 34.f)))
 		OpenEmailInvite();
 
 	if (m_inviteCopied) {
@@ -694,7 +694,7 @@ void LoginScreen::RenderSessionInfo()
 	ImGui::PushStyleColor(ImGuiCol_ButtonHovered,  ImVec4(0.45f, 0.20f, 0.85f, 1.f));
 	ImGui::PushStyleColor(ImGuiCol_ButtonActive,   ImVec4(0.35f, 0.10f, 0.75f, 1.f));
 
-	if (ImGui::Button("Wejdz do pokoju  >>", ImVec2(W - 48.f, 36.f))) {
+	if (ImGui::Button("Wejdź do pokoju  >>", ImVec2(W - 48.f, 36.f))) {
 		Lobby::s_localDisplayName = m_profile.GetDisplayName();
 		StateMachine.PushTop(new Lobby);
 	}

@@ -92,9 +92,9 @@ static void OpenEmailInviteFromLobby(const std::string& ip, int port)
 #ifdef _WIN32
 	std::string link = "vtlan://" + ip + ":" + std::to_string(port);
 	std::string body =
-		"Hej! Zapraszam Cie do rozmowy przez VT-LAN Audio Diagnostics.\n"
+		"Zaproszenie do spotkania prowadzonego w srodowisku VT-LAN\n"
 		"Kliknij ponizszy link, aby dolaczyc:\n" + link + "\n\n"
-		"Jesli link nie dziala, otworz aplikacje recznie i podaj:\n"
+		"Jesli link nie zadziala, otworz aplikacje VT-LAN z nastepujacymi parametrami:\n"
 		"  Adres IP: " + ip + "\n"
 		"  Port:     " + std::to_string(port);
 
@@ -112,7 +112,7 @@ static void OpenEmailInviteFromLobby(const std::string& ip, int port)
 		return out;
 	};
 
-	std::string subject = "Zaproszenie do VT-LAN Audio Diagnostics";
+	std::string subject = "Zaproszenie do spotkania w VT-LAN";
 	std::string mailto = "mailto:?subject=" + encode(subject) + "&body=" + encode(body);
 	ShellExecuteA(nullptr, "open", mailto.c_str(), nullptr, nullptr, SW_SHOWNORMAL);
 #endif
@@ -346,7 +346,13 @@ void Lobby::AttachFile(const std::string& path)
 			PostTextMessage(selfID, selfLabel, "[Blad ladowania obrazka: " + path + "]");
 	} else {
 		std::string name = std::filesystem::path(path).filename().string();
-		PostTextMessage(selfID, selfLabel, "[Wysylanie: " + name + "]");
+		auto msg         = std::make_unique<ChatMessage>();
+		msg->type        = ChatMessage::Type::FileSent;
+		msg->authorID    = selfID;
+		msg->authorLabel = selfLabel;
+		msg->text        = name;      // filename for display
+		msg->savedPath   = path;      // original absolute path for click-to-open
+		m_messages.push_back(std::move(msg));
 	}
 
 	m_scrollToBottom = true;
@@ -377,7 +383,7 @@ void Lobby::UpdateInviteModal()
 	{
 		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.65f, 0.30f, 1.f, 1.f));
 		ImGui::SetWindowFontScale(1.1f);
-		ImGui::TextUnformatted("Zaprosc innych uczestnikow");
+		ImGui::TextUnformatted("Zaproś innych uczestników");
 		ImGui::SetWindowFontScale(1.f);
 		ImGui::PopStyleColor();
 		ImGui::Separator(); ImGui::Spacing();
@@ -401,7 +407,7 @@ void Lobby::UpdateInviteModal()
 		const float bW = (modalSize.x - 32.f - ImGui::GetStyle().ItemSpacing.x) * 0.5f;
 
 		std::string inviteText =
-			"Hej! Zapraszam Cie do VT-LAN Audio Diagnostics.\n"
+			"Otrzymano zaproszenie do spotkania prowadzonego w VT-LAN.\n"
 			"Kliknij link: " + link + "\n"
 			"lub wpisz: IP=" + s_hostIP + " Port=" + std::to_string(s_hostPort);
 
@@ -410,7 +416,7 @@ void Lobby::UpdateInviteModal()
 			m_inviteCopied = true;
 		}
 		ImGui::SameLine();
-		if (ImGui::Button("Wyslij e-mailem", ImVec2(bW, 34.f)))
+		if (ImGui::Button("Wyślij e-mailem", ImVec2(bW, 34.f)))
 			OpenEmailInviteFromLobby(s_hostIP, s_hostPort);
 
 		if (m_inviteCopied)
@@ -460,7 +466,7 @@ void Lobby::UpdateVoiceConnections()
 	const auto& all = fs::connections.GetAll();
 
 	if (all.empty()) {
-		ImGui::TextDisabled("Brak aktywnych polaczen...");
+		ImGui::TextDisabled("Brak aktywnych połączeń...");
 	} else {
 		// Sync voice settings map with current connections
 		for (const auto& [gameID, conn] : all)
@@ -510,7 +516,7 @@ void Lobby::UpdateVoiceConnections()
 				if (ImGui::Button("-", ImVec2(20, 0))) cfg.gain = std::max(cfg.gain - 0.25f, 0.f);
 				ImGui::SameLine();
 				if (ImGui::Button("R", ImVec2(20, 0))) { cfg.gain = 1.f; cfg.muted = false; }
-				if (ImGui::IsItemHovered()) ImGui::SetTooltip("Reset (glosnosc = 1.0, odcisz)");
+				if (ImGui::IsItemHovered()) ImGui::SetTooltip("Reset (głośność = 1.0, odcisz)");
 
 				fs::voiceReceivingManager.SetPlayerVoiceSettings(gameID, cfg);
 			}
@@ -549,7 +555,7 @@ void Lobby::UpdateVoiceConnections()
 
 	// Microphone toggle
 	bool isStopCapture = fs::voiceCaptureManager.IsStopCapture();
-	const char* micLabel = isStopCapture ? "Wlacz mikrofon" : "Wycisz mikrofon";
+	const char* micLabel = isStopCapture ? "Włącz mikrofon" : "Wycisz mikrofon";
 	if (ImGui::Button(micLabel, ImVec2(innerW, 30.f)))
 		fs::voiceCaptureManager.StopCapture(!isStopCapture);
 
@@ -560,7 +566,7 @@ void Lobby::UpdateVoiceConnections()
 		ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.10f, 0.35f, 0.60f, 1.f));
 		ImGui::PushStyleColor(ImGuiCol_ButtonHovered,  ImVec4(0.20f, 0.55f, 0.85f, 1.f));
 		ImGui::PushStyleColor(ImGuiCol_ButtonActive,   ImVec4(0.05f, 0.25f, 0.50f, 1.f));
-		if (ImGui::Button("Zaprosc uczestnikow...", ImVec2(innerW, 0)))
+		if (ImGui::Button("Zaproś uczestników...", ImVec2(innerW, 0)))
 			m_showInvitePopup = true;
 		ImGui::PopStyleColor(3);
 	}
@@ -638,22 +644,55 @@ void Lobby::UpdateChat()
 				ImGui::Image((ImTextureID)msg.imageTexture->GetHandle(),
 				             ImVec2(msg.imageW, msg.imageH));
 				if (ImGui::IsItemHovered()) {
+					ImGui::SetMouseCursor(ImGuiMouseCursor_Hand);
 					ImGui::BeginTooltip();
 					ImGui::TextUnformatted(msg.imagePath.c_str());
+					ImGui::TextDisabled("Kliknij, aby otworzyć");
 					ImGui::EndTooltip();
 				}
+				if (ImGui::IsItemClicked()) {
+#ifdef _WIN32
+					ShellExecuteA(nullptr, "open", msg.imagePath.c_str(),
+					              nullptr, nullptr, SW_SHOWNORMAL);
+#endif
+				}
 			} else {
-				ImGui::TextColored(ImVec4(1.f, 0.4f, 0.4f, 1.f), "[Blad ladowania obrazka]");
+				ImGui::TextColored(ImVec4(1.f, 0.4f, 0.4f, 1.f), "[Błąd ładowania obrazka]");
 			}
 		}
-		else { // FileReceived
+		else if (msg.type == ChatMessage::Type::FileReceived) {
 			ImGui::TextColored(ImVec4(0.4f, 0.85f, 0.4f, 1.f),
 			                   "[Plik: %s  %s]",
 			                   msg.text.c_str(), FormatBytes(msg.fileSize).c_str());
 			if (ImGui::IsItemHovered()) {
+				ImGui::SetMouseCursor(ImGuiMouseCursor_Hand);
 				ImGui::BeginTooltip();
 				ImGui::TextUnformatted(msg.savedPath.c_str());
+				ImGui::TextDisabled("Kliknij, aby otworzyć");
 				ImGui::EndTooltip();
+			}
+			if (ImGui::IsItemClicked()) {
+#ifdef _WIN32
+				ShellExecuteA(nullptr, "open", msg.savedPath.c_str(),
+				              nullptr, nullptr, SW_SHOWNORMAL);
+#endif
+			}
+		}
+		else { // FileSent
+			ImGui::TextColored(ImVec4(0.75f, 0.75f, 0.35f, 1.f),
+			                   "[Wysłano: %s]", msg.text.c_str());
+			if (ImGui::IsItemHovered()) {
+				ImGui::SetMouseCursor(ImGuiMouseCursor_Hand);
+				ImGui::BeginTooltip();
+				ImGui::TextUnformatted(msg.savedPath.c_str());
+				ImGui::TextDisabled("Kliknij, aby otworzyć");
+				ImGui::EndTooltip();
+			}
+			if (ImGui::IsItemClicked()) {
+#ifdef _WIN32
+				ShellExecuteA(nullptr, "open", msg.savedPath.c_str(),
+				              nullptr, nullptr, SW_SHOWNORMAL);
+#endif
 			}
 		}
 
@@ -676,7 +715,7 @@ void Lobby::UpdateChat()
 	// --- Active file transfers ---
 	if (!m_fileProgress.empty()) {
 		ImGui::Separator();
-		ImGui::TextDisabled("PRZESYLANIE PLIKOW:");
+		ImGui::TextDisabled("PRZESYŁANIE PLIKÓW:");
 		for (const auto& [id, prog] : m_fileProgress) {
 			const float frac = prog.totalChunks > 0
 				? (float)prog.chunksReceived / (float)prog.totalChunks : 0.f;
@@ -707,7 +746,7 @@ void Lobby::UpdateChat()
 		ImGui::PushStyleColor(ImGuiCol_ButtonHovered,  ImVec4(0.45f, 0.20f, 0.85f, 1.f));
 		ImGui::PushStyleColor(ImGuiCol_ButtonActive,   ImVec4(0.35f, 0.10f, 0.75f, 1.f));
 
-		if ((ImGui::Button("Wyslij", ImVec2(sendW, 0)) || enter) && m_inputBuf[0] != '\0') {
+		if ((ImGui::Button("Wyślij", ImVec2(sendW, 0)) || enter) && m_inputBuf[0] != '\0') {
 			const auto& all = fs::connections.GetAll();
 			auto [selfID, selfLabel] = FindSelf(all,
 				[this](uint8_t id, bool s, bool h) { return GetClientLabel(id, s, h); });

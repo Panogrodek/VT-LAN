@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
 
 	fs::WindowData data;
 	data.Size  = glm::uvec2(1600 / 2, 900 / 2);
-	data.Title = "VT-LAN Audio Diagnostics";
+	data.Title = "VT-LAN";
 
 	fs::Runtime::Initialize(data);
 
