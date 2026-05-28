@@ -43,12 +43,13 @@ struct ChatMessage {
 class Lobby : public State {
 public:
 	// Session state shared from LoginScreen before entering Lobby
-	static std::string s_localDisplayName; // display name of the local user
-	static std::string s_roomPassword;      // host's password (empty = open room)
-	static std::string s_joinPassword;      // password entered when joining
-	static std::string s_hostIP;            // IP the host bound to
-	static int         s_hostPort;          // port the host is on
-	static bool        s_showInviteOnStart; // auto-open invite modal when Lobby is pushed by host
+	static std::string s_localDisplayName;    // display name of the local user
+	static std::string s_roomPassword;        // host's password (empty = open room)
+	static std::string s_joinPassword;        // password entered when joining
+	static std::string s_hostIP;              // IP the host bound to
+	static int         s_hostPort;            // port the host is on
+	static bool        s_showInviteOnStart;   // auto-open invite modal when Lobby is pushed by host
+	static std::string s_disconnectedReason;  // non-empty = kick reason passed back to LoginScreen
 
 	Lobby();
 	~Lobby() = default;
@@ -64,6 +65,7 @@ private:
 	void UpdateVoiceConnections();
 	void UpdateChat();
 	void UpdateInviteModal();
+	void UpdateAuthFailPopup();
 	void AttachFile(const std::string& path);
 
 	// Helpers
@@ -97,8 +99,11 @@ private:
 	bool   m_pendingDisconnect  = false;
 
 	// --- Invite popup state ---
-	bool m_showInvitePopup = false;
-	bool m_inviteCopied    = false;
+	bool m_showInvitePopup  = false;
+	bool m_inviteCopied     = false;
+
+	// --- Auth failure popup ---
+	bool m_showAuthFailPopup = false;
 
 	static constexpr float kLeftPanelWidth = 290.f;
 	static constexpr float kMaxImageWidth  = 320.f;

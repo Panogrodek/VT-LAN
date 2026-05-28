@@ -188,6 +188,10 @@ LoginScreen::LoginScreen()
 		strncpy(m_joinIPBuf, g_cmdPrefilledIP.c_str(), sizeof(m_joinIPBuf) - 1);
 		m_joinPort = g_cmdPrefilledPort;
 		m_mode     = Mode::JoinRoom;
+		if (!g_cmdPrefilledPassword.empty()) {
+			strncpy(m_passwordBuf, g_cmdPrefilledPassword.c_str(), sizeof(m_passwordBuf) - 1);
+			g_cmdPrefilledPassword.clear();
+		}
 		// If a profile name is already saved, skip the form and auto-connect.
 		// Otherwise the form is pre-filled; the user fills in their name and clicks Join.
 		if (m_profile.firstName[0] != '\0')
@@ -209,6 +213,13 @@ LoginScreen::~LoginScreen()
 // --------------------------------------------------------------------------
 void LoginScreen::Update()
 {
+	// Kicked out of Lobby (e.g. wrong password) — show reason and return to join form.
+	if (!Lobby::s_disconnectedReason.empty()) {
+		m_errorMsg = Lobby::s_disconnectedReason;
+		Lobby::s_disconnectedReason.clear();
+		m_mode = Mode::JoinRoom;
+	}
+
 	// Deferred Lobby push: syncedPlayersWhenJoined fired → we are fully in the session.
 	// Done here (not inside the callback) to avoid pushing a state mid-callback.
 	if (m_connectSuccess) {

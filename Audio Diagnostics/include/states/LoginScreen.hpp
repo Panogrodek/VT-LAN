@@ -20,6 +20,7 @@ struct UserProfile {
 // Filled by main() when the app is launched via a vtlan:// link
 extern std::string g_cmdPrefilledIP;
 extern int         g_cmdPrefilledPort;
+extern std::string g_cmdPrefilledPassword;
 
 // --------------------------------------------------------------------------
 class LoginScreen : public State {

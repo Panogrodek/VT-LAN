@@ -14,6 +14,28 @@
 // Globals filled from vtlan:// command-line argument (consumed by LoginScreen on startup)
 std::string g_cmdPrefilledIP;
 int         g_cmdPrefilledPort = 0;
+std::string g_cmdPrefilledPassword;
+
+static std::string UrlDecode(const std::string& s)
+{
+	std::string out;
+	for (size_t i = 0; i < s.size(); ++i) {
+		if (s[i] == '%' && i + 2 < s.size()) {
+			unsigned int val = 0;
+			if (sscanf(s.c_str() + i + 1, "%2x", &val) == 1) {
+				out += (char)val;
+				i += 2;
+			} else {
+				out += s[i];
+			}
+		} else if (s[i] == '+') {
+			out += ' ';
+		} else {
+			out += s[i];
+		}
+	}
+	return out;
+}
 
 static void ParseVtlanArg(const char* arg)
 {
@@ -27,11 +49,27 @@ static void ParseVtlanArg(const char* arg)
 	while (!rest.empty() && (rest.back() == '/' || rest.back() == '\\'))
 		rest.pop_back();
 
+	// split off query string (?pwd=...)
+	std::string query;
+	auto qmark = rest.find('?');
+	if (qmark != std::string::npos) {
+		query = rest.substr(qmark + 1);
+		rest  = rest.substr(0, qmark);
+	}
+
 	auto colon = rest.find(':');
 	if (colon != std::string::npos) {
 		g_cmdPrefilledIP = rest.substr(0, colon);
 		try { g_cmdPrefilledPort = std::stoi(rest.substr(colon + 1)); }
 		catch (...) { g_cmdPrefilledPort = 27020; }
+	}
+
+	// extract password from query string
+	if (!query.empty()) {
+		const std::string pwdKey = "pwd=";
+		auto pos = query.find(pwdKey);
+		if (pos != std::string::npos)
+			g_cmdPrefilledPassword = UrlDecode(query.substr(pos + pwdKey.size()));
 	}
 }
 

@@ -1,5 +1,5 @@
 project "Audio Diagnostics"
-    kind "ConsoleApp"
+    kind "WindowedApp"
     language "C++"
     cppdialect "C++17"
     staticruntime "on"
@@ -27,6 +27,9 @@ project "Audio Diagnostics"
     }
 
 	defines { "USE_STD_FILESYSTEM" }
+
+	filter "system:windows"
+		linkoptions { "/ENTRY:mainCRTStartup" }
 
 	if USE_STEAM_GNS then
         defines { "USE_STEAM_GNS=1" }

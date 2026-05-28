@@ -25,8 +25,9 @@ std::string Lobby::s_localDisplayName;
 std::string Lobby::s_roomPassword;
 std::string Lobby::s_joinPassword;
 std::string Lobby::s_hostIP;
-int         Lobby::s_hostPort         = 0;
+int         Lobby::s_hostPort          = 0;
 bool        Lobby::s_showInviteOnStart = false;
+std::string Lobby::s_disconnectedReason;
 
 // --------------------------------------------------------------------------
 // Helpers
@@ -69,6 +70,19 @@ static bool StartsWith(const std::string& s, const char* prefix)
 	return s.rfind(prefix, 0) == 0;
 }
 
+static std::string UrlEncodePassword(const std::string& s)
+{
+	std::string out;
+	for (unsigned char c : s) {
+		if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~')
+			out += (char)c;
+		else {
+			char h[4]; snprintf(h, sizeof(h), "%%%02X", c); out += h;
+		}
+	}
+	return out;
+}
+
 // --------------------------------------------------------------------------
 // Clipboard helper (used for invite popup)
 // --------------------------------------------------------------------------
@@ -91,13 +105,17 @@ static void OpenEmailInviteFromLobby(const std::string& ip, int port)
 {
 #ifdef _WIN32
 	std::string link = "vtlan://" + ip + ":" + std::to_string(port);
+	if (!Lobby::s_roomPassword.empty())
+		link += "?pwd=" + UrlEncodePassword(Lobby::s_roomPassword);
 	std::string portStr = std::to_string(port);
+	std::string passStr = !Lobby::s_roomPassword.empty() ? "Hasło: " + Lobby::s_roomPassword : "\nPokój nie jest chroniony hasłem.";
+
 	std::string body =
-		"Zaproszenie do spotkania prowadzonego w srodowisku VT-LAN\n\n"
-		"Kliknij ponizszy link, aby dolaczyc:\n"
+		"Zaproszenie do spotkania prowadzonego w środowisku VT-LAN\n\n"
+		"Kliknij poniższy link, aby dołączyć:\n"
 		+ link + "\n\n"
-		"Jesli link nie zadziala, otworz aplikacje VT-LAN z nastepujacymi parametrami:\n"
-		"Adres IP: " + ip + "\nPort: " + portStr;
+		"Jeśli link nie zadziała, otwórz aplikację VT-LAN z następującymi parametrami:\n"
+		"Adres IP: " + ip + "\nPort: " + portStr + "\n" + passStr;
 
 	auto encode = [](const std::string& s) {
 		std::string out;
@@ -138,6 +156,7 @@ void Lobby::Update()
 	PollNetworkMessages();
 	UpdateVoiceConnections();
 	UpdateChat();
+	UpdateAuthFailPopup();
 }
 
 void Lobby::Render() {}
@@ -220,9 +239,7 @@ void Lobby::PollNetworkMessages()
 				int targetID = std::stoi(msg.text.substr(11));
 				for (const auto& [id, conn] : all) {
 					if (conn.IsSelf() && (int)id == targetID) {
-						// Defer disconnect — calling it here would destroy 'all'
-						// and any subsequent message iteration would read freed memory.
-						m_pendingDisconnect = true;
+						m_showAuthFailPopup = true;
 						break;
 					}
 				}
@@ -243,7 +260,8 @@ void Lobby::PollNetworkMessages()
 	if (m_pendingDisconnect) {
 		m_pendingDisconnect = false;
 		fs::networking.DisconnectFromServer();
-		return; // connections are gone, nothing else to process this frame
+		Shutdown(); // pop Lobby, return to LoginScreen
+		return;
 	}
 
 	for (auto& rf : fileTransferManager.PollCompleted())
@@ -403,6 +421,8 @@ void Lobby::UpdateInviteModal()
 		ImGui::TextColored(ImVec4(1.f, 1.f, 0.6f, 1.f), "%d", s_hostPort);
 
 		std::string link = "vtlan://" + s_hostIP + ":" + std::to_string(s_hostPort);
+		if (!s_roomPassword.empty())
+			link += "?pwd=" + UrlEncodePassword(s_roomPassword);
 		ImGui::Text("Link:");
 		ImGui::SameLine(lw);
 		ImGui::TextColored(ImVec4(0.55f, 0.80f, 1.f, 1.f), "%s", link.c_str());
@@ -411,10 +431,11 @@ void Lobby::UpdateInviteModal()
 
 		const float bW = (modalSize.x - 32.f - ImGui::GetStyle().ItemSpacing.x) * 0.5f;
 
+		std::string passStr = !Lobby::s_roomPassword.empty() ? "Haslo: " + Lobby::s_roomPassword : "\nPokoj nie jest chroniony haslem.";
 		std::string inviteText =
 			"Otrzymano zaproszenie do spotkania prowadzonego w VT-LAN.\n"
 			"Kliknij link: " + link + "\n"
-			"lub wpisz: IP=" + s_hostIP + " Port=" + std::to_string(s_hostPort);
+			"lub wpisz:\nAdres IP: " + s_hostIP + "\nPort: " + std::to_string(s_hostPort) + "\n" + passStr;
 
 		if (ImGui::Button("Kopiuj zaproszenie", ImVec2(bW, 34.f))) {
 			CopyTextToClipboard(inviteText);
@@ -432,6 +453,45 @@ void Lobby::UpdateInviteModal()
 		if (ImGui::Button("Zamknij", ImVec2(modalSize.x - 32.f, 32.f))) {
 			m_showInvitePopup = false;
 			m_inviteCopied = false;
+			ImGui::CloseCurrentPopup();
+		}
+
+		ImGui::EndPopup();
+	}
+}
+
+// --------------------------------------------------------------------------
+// Auth failure popup — shown when host rejects this client (wrong password)
+// --------------------------------------------------------------------------
+void Lobby::UpdateAuthFailPopup()
+{
+	if (!m_showAuthFailPopup) return;
+
+	ImGui::OpenPopup("Odrzucono polaczenie##auth_fail");
+
+	const ImVec2 sz(420.f, 190.f);
+	ImGuiIO& io = ImGui::GetIO();
+	ImGui::SetNextWindowPos(
+		{ (io.DisplaySize.x - sz.x) * 0.5f, (io.DisplaySize.y - sz.y) * 0.5f },
+		ImGuiCond_Always);
+	ImGui::SetNextWindowSize(sz, ImGuiCond_Always);
+
+	if (ImGui::BeginPopupModal("Odrzucono połączenie##auth_fail", nullptr,
+	    ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove))
+	{
+		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.f, 0.35f, 0.35f, 1.f));
+		ImGui::SetWindowFontScale(1.05f);
+		ImGui::TextUnformatted("Połączenie odrzucone");
+		ImGui::SetWindowFontScale(1.f);
+		ImGui::PopStyleColor();
+		ImGui::Separator(); ImGui::Spacing();
+		ImGui::TextWrapped("Host odrzucił połączenie. Sprawdź poprawność hasła i spróbuj ponownie.");
+		ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
+
+		if (ImGui::Button("OK", ImVec2(sz.x - 48.f, 34.f))) {
+			m_showAuthFailPopup = false;
+			s_disconnectedReason = "Polaczenie odrzucone: nieprawidlowe haslo.";
+			m_pendingDisconnect  = true;
 			ImGui::CloseCurrentPopup();
 		}
 
