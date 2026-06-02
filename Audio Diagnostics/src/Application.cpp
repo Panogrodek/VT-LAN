@@ -426,4 +426,7 @@ void Application::InitializeImGuiStyle() {
 	c[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
 	c[ImGuiCol_NavWindowingDimBg]     = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
 	c[ImGuiCol_ModalWindowDimBg]      = ImVec4(0.05f, 0.03f, 0.10f, 0.60f);
+
+	io.ConfigDpiScaleFonts = false;
+	io.ConfigDpiScaleViewports = true;
 }

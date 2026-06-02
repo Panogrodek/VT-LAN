@@ -74,7 +74,7 @@ static void ParseVtlanArg(const char* arg)
 }
 
 constexpr bool launchMultipleInstances = 0;
-constexpr int  childInstances = 1;
+constexpr int  childInstances = 0;
 
 int main(int argc, char* argv[])
 {

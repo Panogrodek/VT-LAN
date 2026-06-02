@@ -600,7 +600,7 @@ void Lobby::UpdateVoiceConnections()
 	float halfW  = (innerW - ImGui::GetStyle().ItemSpacing.x) * 0.5f;
 
 	// Bulk mute controls
-	if (ImGui::Button("Wycisz wszystkich", ImVec2(halfW, 0))) {
+	if (ImGui::Button("Wycisz innych", ImVec2(halfW, 0))) {
 		for (auto& [gameID, cfg] : m_voiceSettings) {
 			if (all.count(gameID) && all.at(gameID).IsSelf()) continue;
 			cfg.muted = true;
@@ -608,7 +608,7 @@ void Lobby::UpdateVoiceConnections()
 		}
 	}
 	ImGui::SameLine();
-	if (ImGui::Button("Odcisz wszystkich", ImVec2(halfW, 0))) {
+	if (ImGui::Button("Odcisz innych", ImVec2(halfW, 0))) {
 		for (auto& [gameID, cfg] : m_voiceSettings) {
 			if (all.count(gameID) && all.at(gameID).IsSelf()) continue;
 			cfg.muted = false;

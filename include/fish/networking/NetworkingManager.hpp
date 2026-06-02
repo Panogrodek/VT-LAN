@@ -73,7 +73,7 @@ namespace fs {
 			//HandleConnectionFunctions
 
 			bool m_initialized = false;
-			uint8_t m_maxConnections = 4; //TODO: move it somewhere else
+			uint8_t m_maxConnections = 16; //TODO: move it somewhere else
 		};
 	}
 
