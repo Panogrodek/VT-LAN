@@ -73,6 +73,10 @@ Application::Application() {
 	StateMachine.PushTop(new LoginScreen);
 
 	fs::callbacks.Get<fs::CallbackType::clientDisconnectStatus>().Add(new fs::Callback<fs::CallbackType::clientDisconnectStatus>(ClientDisconnected));
+
+
+	fs::TextureManager.Load("unmuted", "res/tex/unmuted.png");
+	fs::TextureManager.Load("muted", "res/tex/muted.png");
 }
 
 Application::~Application() {

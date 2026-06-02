@@ -105,6 +105,9 @@ private:
 	// --- Auth failure popup ---
 	bool m_showAuthFailPopup = false;
 
+	// --- Mic muted on join notice ---
+	bool m_showMicMutedNotice = false;
+
 	static constexpr float kLeftPanelWidth = 290.f;
 	static constexpr float kMaxImageWidth  = 320.f;
 	static constexpr float kMaxImageHeight = 240.f;

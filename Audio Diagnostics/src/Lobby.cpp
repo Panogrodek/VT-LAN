@@ -4,6 +4,7 @@
 #include <audio/AudioVoiceReceiving.hpp>
 #include <audio/AudioVoiceCapturing.hpp>
 #include <networking/Networking.hpp>
+#include <managers/Resource Manager.hpp>
 #include <imgui/ImGuiFileDialog.h>
 
 #include <algorithm>
@@ -148,6 +149,9 @@ Lobby::Lobby()
 		m_showInvitePopup  = true;
 		s_showInviteOnStart = false;
 	}
+
+	if (fs::voiceCaptureManager.IsStopCapture())
+		m_showMicMutedNotice = true;
 }
 
 void Lobby::Update()
@@ -542,11 +546,14 @@ void Lobby::UpdateVoiceConnections()
 		for (auto it = m_voiceSettings.begin(); it != m_voiceSettings.end(); )
 			it = all.find(it->first) == all.end() ? m_voiceSettings.erase(it) : ++it;
 
-		// Reserve space for bottom controls
+		// Reserve space for bottom controls (+ notice block when mic is muted)
+		const float kNoticeH = m_showMicMutedNotice
+			? (42.f + ImGui::GetFrameHeight() * 3.f + ImGui::GetStyle().ItemSpacing.y * 10.f + 4.f)
+			: 0.f;
 		const float kBottomH = 1.f
 			+ ImGui::GetStyle().ItemSpacing.y * 6.f
 			+ ImGui::GetFrameHeight() * 2.f
-			+ 30.f + 4.f;
+			+ 30.f + 4.f + kNoticeH;
 
 		ImGui::BeginChild("##VoiceList", ImVec2(0, -kBottomH), false);
 
@@ -619,10 +626,29 @@ void Lobby::UpdateVoiceConnections()
 	ImGui::Spacing();
 
 	// Microphone toggle
-	bool isStopCapture = fs::voiceCaptureManager.IsStopCapture();
-	const char* micLabel = isStopCapture ? "Włącz mikrofon" : "Wycisz mikrofon";
-	if (ImGui::Button(micLabel, ImVec2(innerW, 30.f)))
-		fs::voiceCaptureManager.StopCapture(!isStopCapture);
+	{
+		bool isStopCapture = fs::voiceCaptureManager.IsStopCapture();
+		const char* micLabel = isStopCapture ? "Wlacz mikrofon" : "Wycisz mikrofon";
+		fs::Texture& micTex = isStopCapture
+			? fs::TextureManager.Get("muted")
+			: fs::TextureManager.Get("unmuted");
+
+		// Draw the button, then overlay icon in the top-left corner via DrawList
+		ImVec2 btnPos = ImGui::GetCursorScreenPos();
+		bool clicked = ImGui::Button(micLabel, ImVec2(innerW, 30.f));
+
+		if (micTex.GetHandle()) {
+			const float iconSz = 20.f;
+			ImDrawList* dl = ImGui::GetWindowDrawList();
+			float ix = btnPos.x + 6.f;
+			float iy = btnPos.y + (30.f - iconSz) * 0.5f;
+			dl->AddImage((ImTextureID)micTex.GetHandle(),
+				ImVec2(ix, iy), ImVec2(ix + iconSz, iy + iconSz));
+		}
+
+		if (clicked)
+			fs::voiceCaptureManager.StopCapture(!isStopCapture);
+	}
 
 	ImGui::Spacing();
 
@@ -633,6 +659,43 @@ void Lobby::UpdateVoiceConnections()
 		ImGui::PushStyleColor(ImGuiCol_ButtonActive,   ImVec4(0.05f, 0.25f, 0.50f, 1.f));
 		if (ImGui::Button("Zaproś uczestników...", ImVec2(innerW, 0)))
 			m_showInvitePopup = true;
+		ImGui::PopStyleColor(3);
+	}
+
+	// Mic muted notice — shown for both host and client when mic is off
+	if (m_showMicMutedNotice) {
+		ImGui::Spacing();
+		ImGui::Separator();
+		ImGui::Spacing();
+
+		// Centered muted mic icon
+		fs::Texture& mutedTex = fs::TextureManager.Get("muted");
+		if (mutedTex.GetHandle()) {
+			const float iconSz = 40.f;
+			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (innerW - iconSz) * 0.5f);
+			ImGui::Image((ImTextureID)mutedTex.GetHandle(), ImVec2(iconSz, iconSz));
+			ImGui::Spacing();
+		}
+
+		// Centered warning text
+		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.f, 0.75f, 0.2f, 1.f));
+		const char* line1 = "Mikrofon wyciszony!";
+		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (innerW - ImGui::CalcTextSize(line1).x) * 0.5f);
+		ImGui::TextUnformatted(line1);
+		ImGui::PopStyleColor();
+
+		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.65f, 0.65f, 0.65f, 1.f));
+		const char* line2 = "Inni Cię nie słyszą.";
+		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (innerW - ImGui::CalcTextSize(line2).x) * 0.5f);
+		ImGui::TextUnformatted(line2);
+		ImGui::PopStyleColor();
+
+		ImGui::Spacing();
+		ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.28f, 0.18f, 0.04f, 1.f));
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered,  ImVec4(0.48f, 0.32f, 0.08f, 1.f));
+		ImGui::PushStyleColor(ImGuiCol_ButtonActive,   ImVec4(0.18f, 0.12f, 0.02f, 1.f));
+		if (ImGui::Button("OK##micnotice", ImVec2(innerW, 0)))
+			m_showMicMutedNotice = false;
 		ImGui::PopStyleColor(3);
 	}
 
