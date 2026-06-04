@@ -19,6 +19,188 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
+    \entry{SDL3}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=c1c110d949fa06d2faa477553ca698b2}{%
+           family={{SDL Community}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{fullhash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{fullhashraw}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{bibnamehash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{authorbibnamehash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{authornamehash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{authorfullhash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{authorfullhashraw}{c1c110d949fa06d2faa477553ca698b2}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Simple DirectMedia Layer} ({SDL})}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://github.com/libsdl-org/SDL
+      \endverb
+      \verb{url}
+      \verb https://github.com/libsdl-org/SDL
+      \endverb
+    \endentry
+    \entry{SDLMixer}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=c1c110d949fa06d2faa477553ca698b2}{%
+           family={{SDL Community}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{fullhash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{fullhashraw}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{bibnamehash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{authorbibnamehash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{authornamehash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{authorfullhash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{authorfullhashraw}{c1c110d949fa06d2faa477553ca698b2}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{SDL\_mixer} -- An audio mixer library for {SDL}}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://github.com/libsdl-org/SDL_mixer
+      \endverb
+      \verb{url}
+      \verb https://github.com/libsdl-org/SDL_mixer
+      \endverb
+    \endentry
+    \entry{OpusRFC}{report}{}{}
+      \name{author}{3}{}{%
+        {{hash=fba88511ddfa6a8f148f55369289f611}{%
+           family={Valin},
+           familyi={V\bibinitperiod},
+           given={Jean-Marc},
+           giveni={J\bibinithyphendelim M\bibinitperiod}}}%
+        {{hash=9ec90a956581b2b411dca5b6b7bd5277}{%
+           family={Vos},
+           familyi={V\bibinitperiod},
+           given={Koen},
+           giveni={K\bibinitperiod}}}%
+        {{hash=8882bdf0e7aad4fb23b314c91de383e4}{%
+           family={Terriberry},
+           familyi={T\bibinitperiod},
+           given={Timothy},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Internet Engineering Task Force ({IETF})}%
+      }
+      \strng{namehash}{9435f0a1430326380f827425ea81f786}
+      \strng{fullhash}{9435f0a1430326380f827425ea81f786}
+      \strng{fullhashraw}{9435f0a1430326380f827425ea81f786}
+      \strng{bibnamehash}{9435f0a1430326380f827425ea81f786}
+      \strng{authorbibnamehash}{9435f0a1430326380f827425ea81f786}
+      \strng{authornamehash}{9435f0a1430326380f827425ea81f786}
+      \strng{authorfullhash}{9435f0a1430326380f827425ea81f786}
+      \strng{authorfullhashraw}{9435f0a1430326380f827425ea81f786}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{9}
+      \field{number}{6716}
+      \field{title}{Definition of the {Opus} Audio Codec}
+      \field{type}{{RFC}}
+      \field{year}{2012}
+      \verb{urlraw}
+      \verb https://www.rfc-editor.org/rfc/rfc6716
+      \endverb
+      \verb{url}
+      \verb https://www.rfc-editor.org/rfc/rfc6716
+      \endverb
+    \endentry
+    \entry{GNS}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=3550f48b7034e3d7cadadb40413478f1}{%
+           family={{Valve Corporation}},
+           familyi={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{3550f48b7034e3d7cadadb40413478f1}
+      \strng{fullhash}{3550f48b7034e3d7cadadb40413478f1}
+      \strng{fullhashraw}{3550f48b7034e3d7cadadb40413478f1}
+      \strng{bibnamehash}{3550f48b7034e3d7cadadb40413478f1}
+      \strng{authorbibnamehash}{3550f48b7034e3d7cadadb40413478f1}
+      \strng{authornamehash}{3550f48b7034e3d7cadadb40413478f1}
+      \strng{authorfullhash}{3550f48b7034e3d7cadadb40413478f1}
+      \strng{authorfullhashraw}{3550f48b7034e3d7cadadb40413478f1}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{GameNetworkingSockets} -- Reliable \& unreliable messages over {UDP}}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://github.com/ValveSoftware/GameNetworkingSockets
+      \endverb
+      \verb{url}
+      \verb https://github.com/ValveSoftware/GameNetworkingSockets
+      \endverb
+    \endentry
+    \entry{OpenSSL}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=90a97d68cacba4966e7bf191b803e11c}{%
+           family={{OpenSSL Software Foundation}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{90a97d68cacba4966e7bf191b803e11c}
+      \strng{fullhash}{90a97d68cacba4966e7bf191b803e11c}
+      \strng{fullhashraw}{90a97d68cacba4966e7bf191b803e11c}
+      \strng{bibnamehash}{90a97d68cacba4966e7bf191b803e11c}
+      \strng{authorbibnamehash}{90a97d68cacba4966e7bf191b803e11c}
+      \strng{authornamehash}{90a97d68cacba4966e7bf191b803e11c}
+      \strng{authorfullhash}{90a97d68cacba4966e7bf191b803e11c}
+      \strng{authorfullhashraw}{90a97d68cacba4966e7bf191b803e11c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{OpenSSL} -- Cryptography and {SSL/TLS} Toolkit}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://www.openssl.org
+      \endverb
+      \verb{url}
+      \verb https://www.openssl.org
+      \endverb
+    \endentry
+    \entry{protobuf}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=7b568e72d25af32b0cec03e49cbf3f70}{%
+           family={{Google LLC}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{7b568e72d25af32b0cec03e49cbf3f70}
+      \strng{fullhash}{7b568e72d25af32b0cec03e49cbf3f70}
+      \strng{fullhashraw}{7b568e72d25af32b0cec03e49cbf3f70}
+      \strng{bibnamehash}{7b568e72d25af32b0cec03e49cbf3f70}
+      \strng{authorbibnamehash}{7b568e72d25af32b0cec03e49cbf3f70}
+      \strng{authornamehash}{7b568e72d25af32b0cec03e49cbf3f70}
+      \strng{authorfullhash}{7b568e72d25af32b0cec03e49cbf3f70}
+      \strng{authorfullhashraw}{7b568e72d25af32b0cec03e49cbf3f70}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Protocol Buffers} -- {Google's} data interchange format}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://github.com/protocolbuffers/protobuf
+      \endverb
+      \verb{url}
+      \verb https://github.com/protocolbuffers/protobuf
+      \endverb
+    \endentry
     \entry{WITWytyczneSI}{online}{}{}
       \name{author}{1}{}{%
         {{hash=dbbe10dc0f91d8aa4f1ae77ec2fc972b}{%
@@ -35,17 +217,143 @@
       \strng{authornamehash}{dbbe10dc0f91d8aa4f1ae77ec2fc972b}
       \strng{authorfullhash}{dbbe10dc0f91d8aa4f1ae77ec2fc972b}
       \strng{authorfullhashraw}{dbbe10dc0f91d8aa4f1ae77ec2fc972b}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Wytyczne dot. narzędzi GenAI}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://wit.pwr.edu.pl/wydzial/jakosc_ksztalcenia/wytyczne-dot-narzedzigenai
+      \endverb
+      \verb{url}
+      \verb https://wit.pwr.edu.pl/wydzial/jakosc_ksztalcenia/wytyczne-dot-narzedzigenai
+      \endverb
+    \endentry
+    \entry{DiscordEFF}{online}{}{}
+      \name{author}{2}{}{%
+        {{hash=72cd5481c83db3d6f7c3bb60101bcc0c}{%
+           family={Alajaji},
+           familyi={A\bibinitperiod},
+           given={Rindala},
+           giveni={R\bibinitperiod}}}%
+        {{hash=a7b284b5fbacc891ba1b5e0ca5620e8a}{%
+           family={Baldwin},
+           familyi={B\bibinitperiod},
+           given={Samantha},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{7b01dac45c69e3d899cfe3e9073da0bc}
+      \strng{fullhash}{7b01dac45c69e3d899cfe3e9073da0bc}
+      \strng{fullhashraw}{7b01dac45c69e3d899cfe3e9073da0bc}
+      \strng{bibnamehash}{7b01dac45c69e3d899cfe3e9073da0bc}
+      \strng{authorbibnamehash}{7b01dac45c69e3d899cfe3e9073da0bc}
+      \strng{authornamehash}{7b01dac45c69e3d899cfe3e9073da0bc}
+      \strng{authorfullhash}{7b01dac45c69e3d899cfe3e9073da0bc}
+      \strng{authorfullhashraw}{7b01dac45c69e3d899cfe3e9073da0bc}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{2}
+      \field{title}{Discord Voluntarily Pushes Mandatory Age Verification Despite Recent Data Breach}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://www.eff.org/deeplinks/2026/02/discord-voluntarily-pushes-mandatory-age-verification-despite-recent-data-breach
+      \endverb
+      \verb{url}
+      \verb https://www.eff.org/deeplinks/2026/02/discord-voluntarily-pushes-mandatory-age-verification-despite-recent-data-breach
+      \endverb
+    \endentry
+    \entry{DiscordPostpone}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=9c0a3410417e72c82641f041ab22d292}{%
+           family={Holguin},
+           familyi={H\bibinitperiod},
+           given={Mauricio\bibnamedelima B.},
+           giveni={M\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c0a3410417e72c82641f041ab22d292}
+      \strng{fullhash}{9c0a3410417e72c82641f041ab22d292}
+      \strng{fullhashraw}{9c0a3410417e72c82641f041ab22d292}
+      \strng{bibnamehash}{9c0a3410417e72c82641f041ab22d292}
+      \strng{authorbibnamehash}{9c0a3410417e72c82641f041ab22d292}
+      \strng{authornamehash}{9c0a3410417e72c82641f041ab22d292}
+      \strng{authorfullhash}{9c0a3410417e72c82641f041ab22d292}
+      \strng{authorfullhashraw}{9c0a3410417e72c82641f041ab22d292}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Wytyczne dot. SI na WIT}
-      \field{year}{2025}
+      \field{title}{Discord is now delaying its global age verification plans after huge backlash}
+      \field{year}{2026}
       \verb{urlraw}
-      \verb https://wit.pwr.edu.pl/wydzial/jakosc_ksztalcenia/wytyczne-dot-narzedzia-si-na-wit
+      \verb https://alternativeto.net/news/2026/2/discord-is-now-delaying-its-global-age-verification-plans-after-huge-backlash
       \endverb
       \verb{url}
-      \verb https://wit.pwr.edu.pl/wydzial/jakosc_ksztalcenia/wytyczne-dot-narzedzia-si-na-wit
+      \verb https://alternativeto.net/news/2026/2/discord-is-now-delaying-its-global-age-verification-plans-after-huge-backlash
+      \endverb
+    \endentry
+    \entry{TeamSpeak}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=067b86323f133901ed3ee69e94a6aec1}{%
+           family={{TeamSpeak Systems GmbH}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{067b86323f133901ed3ee69e94a6aec1}
+      \strng{fullhash}{067b86323f133901ed3ee69e94a6aec1}
+      \strng{fullhashraw}{067b86323f133901ed3ee69e94a6aec1}
+      \strng{bibnamehash}{067b86323f133901ed3ee69e94a6aec1}
+      \strng{authorbibnamehash}{067b86323f133901ed3ee69e94a6aec1}
+      \strng{authornamehash}{067b86323f133901ed3ee69e94a6aec1}
+      \strng{authorfullhash}{067b86323f133901ed3ee69e94a6aec1}
+      \strng{authorfullhashraw}{067b86323f133901ed3ee69e94a6aec1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{TeamSpeak} -- Voice Communication for Online Gaming}
+      \field{urlday}{4}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.teamspeak.com
+      \endverb
+      \verb{url}
+      \verb https://www.teamspeak.com
+      \endverb
+    \endentry
+    \entry{Mumble}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=23de274db4265ce76750da17db615496}{%
+           family={{Mumble Project}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{23de274db4265ce76750da17db615496}
+      \strng{fullhash}{23de274db4265ce76750da17db615496}
+      \strng{fullhashraw}{23de274db4265ce76750da17db615496}
+      \strng{bibnamehash}{23de274db4265ce76750da17db615496}
+      \strng{authorbibnamehash}{23de274db4265ce76750da17db615496}
+      \strng{authornamehash}{23de274db4265ce76750da17db615496}
+      \strng{authorfullhash}{23de274db4265ce76750da17db615496}
+      \strng{authorfullhashraw}{23de274db4265ce76750da17db615496}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Mumble} -- Open Source, Low-Latency, High Quality Voice Chat}
+      \field{urlday}{4}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/mumble-voip/mumble
+      \endverb
+      \verb{url}
+      \verb https://github.com/mumble-voip/mumble
       \endverb
     \endentry
     \entry{KNUTH01}{book}{}{}
@@ -71,8 +379,8 @@
       \strng{authorfullhash}{ec08e6f01da5f3814f28a70c89c64656}
       \strng{authorfullhashraw}{ec08e6f01da5f3814f28a70c89c64656}
       \field{extraname}{1}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{3rd}
@@ -105,8 +413,8 @@
       \strng{authorfullhash}{ec08e6f01da5f3814f28a70c89c64656}
       \strng{authorfullhashraw}{ec08e6f01da5f3814f28a70c89c64656}
       \field{extraname}{2}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{3rd}
@@ -141,8 +449,8 @@
       \strng{authornamehash}{9a449fc748b83cdf7e498655a7b147aa}
       \strng{authorfullhash}{9a449fc748b83cdf7e498655a7b147aa}
       \strng{authorfullhashraw}{9a449fc748b83cdf7e498655a7b147aa}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{IEEE/ACM Trans. Netw.}
@@ -189,8 +497,8 @@
       \strng{authornamehash}{a548a9c3296b4de2b87cc8a8582e3738}
       \strng{authorfullhash}{4f8ee040753deff58ba0c540a96b786b}
       \strng{authorfullhashraw}{4f8ee040753deff58ba0c540a96b786b}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Mobihoc'07}

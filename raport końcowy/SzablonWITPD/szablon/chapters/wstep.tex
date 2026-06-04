@@ -1,61 +1,326 @@
 \chapter{Wstęp}
 \label{chapt:Wstep}
 
-Tutaj napisz krótkie wprowadzenie do swojej pracy. Możesz omówić podstawowe algorytmy związane z celem swojej pracy. Możesz podać krótki rys historyczny. Pamiętaj jednak o zwięzłości tekstu i o unikaniu nic nie wnoszących ogólników.   
-Oto przykładowy początek takiego wprowadzenia:
+Dynamiczny rozwój narzędzi do komunikacji zdalnej, zapoczątkowany w latach 90. XX wieku
+wraz z upowszechnieniem się Internetu, doprowadził do powstania szerokiej gamy komunikatorów
+tekstowych i głosowych. Współczesne rozwiązania, takie jak Microsoft Teams, Discord czy Slack,
+oferują rozbudowane funkcjonalności, jednak ich architektura opiera się na centralnych serwerach
+zewnętrznych dostawców - oznacza to, że przesyłane dane opuszczają sieć lokalną i mogą być
+przetwarzane przez podmioty trzecie.
 
-\begin{quote}
-Problem algorytmów wyspecjalizowanych do analizy danych strumieniowych wzbudził duże zainteresowanie badaczy na początku XX wieku. Jednen z pierwszych takich algorytmów służył do wyboru losowego elementu zgodnie z rozkładem jednostajnym  z okna złożonego z ostatnich $N$ elementów strumienia, gdzie $N$ jest ustaloną liczbą.  ...
-\end{quote}
+W środowiskach wymagających zachowania poufności komunikacji, takich jak sieci korporacyjne,
+laboratoria badawcze czy instalacje przemysłowe, powyższe rozwiązania mogą stanowić istotne
+zagrożenie dla bezpieczeństwa informacji. Aplikacja VT-LAN powstała jako odpowiedź na tę
+potrzebę - jest to komunikator tekstowo-głosowy działający wyłącznie w obrębie sieci lokalnej
+(LAN), w którym pakiety danych nie są nigdy przekazywane poza jej granice. Kwestia
+bezpieczeństwa znalazła odzwierciedlenie również na poziomie doboru bibliotek - jako
+warstwę sieciową zastosowano GameNetworkingSockets (GNS), bibliotekę oferującą wbudowane
+szyfrowanie transmisji oparte na protokole AES-256-GCM oraz uwierzytelnianie połączeń.
+Takie podejście zapewnia ochronę przesyłanych danych nie tylko poprzez ograniczenie ruchu
+do sieci lokalnej, lecz także przez szyfrowanie komunikacji na poziomie aplikacji.
+
+Projekt kładzie nacisk na minimalizm i wydajność - aplikacja charakteryzuje się niskim narzutem
+na zasoby sprzętowe (CPU, GPU, RAM), prostą obsługą oraz skupieniem na realizacji kluczowych
+funkcji komunikacyjnych bez zbędnych dodatków. Kod źródłowy aplikacji udostępniono na licencji
+open source, co umożliwia społeczności jego weryfikację, audyt bezpieczeństwa oraz dalszy rozwój.
 
       
-\section{Cel i struktura pracy}
+\section{Cel i struktura raportu}
                                        
-Postaraj się tutaj opisać możliwie zwięźle i precyzyjnie cel pracy. Oto przykład początku tej sekcji pracy:
+Celem raportu jest przedstawienie procesu projektowania i implementacji aplikacji
+VT-LAN. W raporcie omówiono poszczególne moduły składające się na całość systemu, ze
+szczególnym uwzględnieniem zastosowanych narzędzi, bibliotek oraz przyjętych decyzji
+projektowych wraz z ich uzasadnieniem.
 
-\begin{quote}
-W pracy tej będziemy zajmować się problemem wyznaczania $k$ - najczęściej występujących elementów w oknie złożonym z $N$ ostatnich elementów strumienia danych. ... 
-\end{quote}
 
-\subsection*{Struktura pracy}
 
-Tutaj opisz krótko, po kolei, wszystkie rozdziały swojej pracy. Oto przykład:
+%\subsection*{Struktura pracy}
 
-\begin{quote}
-Rozdział pierwszy zaczynamy (patrz \ref{chapt1:sec:intro}) od opisu wymagań stawianych algorytmom strumieniowym (główne wymaganie to wymaganie użycia logarytmicznej pamięci względem rozmiaru strumienia), opisujemy pojęcie przesuwnego okna strumienia danych, omawiamy algorytm Bravermana,  ... .\par
+%Tutaj opisz krótko, po kolei, wszystkie rozdziały swojej pracy. Oto przykład:
 
-W rozdziale drugim omawiamy ... \par
-...
-\end{quote}
+%\begin{quote}
+%Rozdział pierwszy zaczynamy (patrz \ref{chapt1:sec:intro}) od opisu wymagań stawianych algorytmom strumieniowym (główne wymaganie to wymaganie użycia %logarytmicznej pamięci względem rozmiaru strumienia), opisujemy pojęcie przesuwnego okna strumienia danych, omawiamy algorytm Bravermana,  ... .\par
+
+%W rozdziale drugim omawiamy ... \par
+%...
+%\end{quote}
 
 \subsection*{Zastosowane technologie}
-
-Tutaj opisz, z jakich języków programowania oraz z jakich kompilatorów korzystałeś, 
-w jakim środowisku uruchamiałeś oraz testowałeś budowane oprogramowanie. Wskaż również najważniejsze biblioteki wykorzystane w zbudowanych programach.
+Podczas pracy nad aplikacją VT-LAN zespół korzystał z następujących technologii:
+\begin{enumerate}
+	\item \textbf{Język C++} - główny i jedyny język wykorzystywany do implementacji
+	logiki aplikacji. Odpowiada zarówno za programowanie interfejsu użytkownika,
+	jak i za obsługę komunikacji sieciowej, przechwytywanie oraz odtwarzanie dźwięku.
+	Wybór C++ podyktowany był wymaganiami wydajnościowymi projektu - język ten
+	zapewnia niski narzut pamięciowy i pełną kontrolę nad zasobami systemowymi,
+	co jest kluczowe przy przetwarzaniu strumieni audio w czasie rzeczywistym.
+	
+	\item \textbf{Microsoft Visual Studio 2022} - zintegrowane środowisko deweloperskie
+	(IDE) wraz z kompilatorem MSVC, wykorzystywane jako główne narzędzie do budowania
+	i debugowania projektu. Dostarcza zaawansowane narzędzia diagnostyczne, w tym
+	debugger z obsługą wielowątkowości oraz profilery wydajności, które były
+	pomocne przy optymalizacji krytycznych fragmentów kodu.
+	
+	\item \textbf{Premake5} - system budowania projektów oparty na skryptach Lua.
+	Umożliwia generowanie plików rozwiązania (\texttt{.sln}) dla Visual Studio
+	z pojedynczego, czytelnego pliku konfiguracyjnego. Zastosowanie Premake5
+	zamiast bezpośredniej edycji plików projektu upraszcza zarządzanie zależnościami
+	oraz ułatwia konfigurację środowiska członkom zespołu - wszelkie zmiany
+	struktury projektu zawarte są w plikach Lua i automatycznie odzwierciedlane
+	przy kolejnym generowaniu rozwiązania.
+	
+	\item \textbf{GitHub} - platforma do współdzielenia kodu źródłowego oparta na systemie
+	kontroli wersji Git. Służyła jako centralne narzędzie do koordynacji prac zespołu
+	- przeglądania zmian w kodzie, udostępniania aktualizacji oraz śledzenia zadań
+	i błędów za pomocą systemu zgłoszeń. Repozytorium pełni również rolę miejsca
+	dystrybucji projektu - użytkownicy mają możliwość wglądu w kod źródłowy aplikacji,
+	a także pobrania skompilowanej wersji wykonywalnej.
+	
+	\item \textbf{Biblioteki firm trzecich} - projekt korzysta z następujących bibliotek:
+	\begin{itemize}
+		\item \textbf{SDL3} \cite{SDL3} - wieloplatformowa biblioteka obsługi okna aplikacji,
+		renderowania interfejsu użytkownika oraz systemu audio. W zakresie dźwięku
+		SDL3 dostarcza niskopoziomowe API do otwierania urządzeń wejściowych
+		i wyjściowych, przechwytywania próbek audio z mikrofonu oraz ich odtwarzania
+		przez głośniki. Do miksowania i nakładania strumieni audio aplikacja korzysta
+		z biblioteki \textbf{SDL\_mixer} \cite{SDLMixer} - oficjalnego rozszerzenia SDL3
+		umożliwiającego jednoczesne odtwarzanie wielu kanałów audio z regulacją głośności.
+		
+		\item \textbf{Opus} \cite{OpusRFC} - otwarty kodek audio o niskim opóźnieniu,
+		zoptymalizowany pod transmisję mowy, ze zmiennym bitrate dostosowującym się
+		do warunków sieci. Bezpośrednio integruje się z buforami próbek pobieranymi
+		przez SDL3, kompresując dane przed wysyłką przez GNS i dekompresując je
+		po stronie odbiorcy. Zastosowanie Opus pozwala znacząco zredukować
+		przepustowość wymaganą do transmisji głosu przy zachowaniu wysokiej jakości
+		dźwięku.
+		
+		\item \textbf{GameNetworkingSockets (GNS)} \cite{GNS} - biblioteka sieciowa
+		firmy Valve zapewniająca niezawodną, szyfrowaną komunikację opartą na protokole
+		UDP. Oferuje mechanizmy detekcji opóźnień, kontrolę przepływu oraz opcjonalne
+		gwarancje dostarczenia pakietów, co czyni ją dobrze dopasowaną zarówno
+		do komunikacji klient-serwer, jak i peer-to-peer w sieci LAN. Szyfrowanie
+		realizowane jest przy użyciu algorytmu AES-GCM-256 per pakiet,
+		z wymianą kluczy opartą na Curve25519 \cite{GNS}. GNS korzysta wewnętrznie
+		z następujących bibliotek:
+		\begin{itemize}
+			\item \textbf{OpenSSL} \cite{OpenSSL} - biblioteka kryptograficzna
+			zapewniająca szyfrowanie transmisji oraz uwierzytelnianie połączeń,
+			\item \textbf{protobuf} \cite{protobuf} - biblioteka Google Protocol Buffers
+			wykorzystywana do serializacji wewnętrznych komunikatów sterujących
+			protokołu GNS.
+		\end{itemize}
+	\end{itemize}
+\end{enumerate}
 
 \section{Wykorzystanie AI}
 
-Jeśli podczas realizacji pracy wykorzystywano współczesne narzędzia AI, 
-to w tej części należy je opisać, czyli napisać, jakie narzędzia AI były wykorzystywane, do czego były używane oraz których miejsc pracy to dotyczy. \textbf{Tej części pracy nie możesz pominąć}, aczkolwiek możesz ją umieścić w innym miejscu pracy. 
-Koniecznie zapoznaj się z ``Wytycznymi dotyczącymi zasad wykorzystywania AI'', które znajdują się na stronach naszego Wydziału (patrz \cite{WITWytyczneSI}).\par
+W trakcie realizacji niniejszej pracy projektowej zespół korzystał z narzędzi
+generatywnej sztucznej inteligencji zgodnie z wytycznymi Wydziału Informatyki
+i Telekomunikacji Politechniki Wrocławskiej \cite{WITWytyczneSI}.
+Wykorzystywane były następujące narzędzia:
 
-Jeśli AI było wykorzystywane do generowania kodów, to również o tym tutaj napisz, a w kodach programu (w komentarzach) zaznacz  te fragmenty, w które ingerowała AI. Oto przykład:
+\begin{itemize}
+	\item \textbf{Claude (Anthropic, wersja Pro)},
+	\item \textbf{ChatGPT (OpenAI, wersja Pro)}.
+\end{itemize}
 
-\begin{quote}
-  W pracy korzystano z asystenta Gemini 3.0 firmy Google w wersji Pro do pomocy w przekształceniu kodów z języka programowania C na język programowania Haskell (patrz, między innymi, \cref{lst:hhaskell:qs}) oraz do pomocy w dokumentowaniu kodów wszystkich zbudowanych w trakcie realizacji pracy modułów. 
-\end{quote}
+Narzędzia te były stosowane wyłącznie jako pomoc techniczna i redakcyjna,
+w następujących obszarach:
 
-Jeśli podczas realizacji pracy nie była  wykorzystywana AI, to w sekcji tej umieść mniej więcej takie zdanie: 
-"\textit{W pracy nie korzystano ze Sztucznej Inteligencji}".    
+\begin{itemize}
+	\item \textbf{Wspomaganie implementacji} -- generowanie fragmentów kodu,
+	podpowiedzi dotyczących struktury rozwiązań oraz debugowanie błędów.
+	Fragmenty kodu powstałe przy udziale narzędzi AI zostały oznaczone
+	stosownymi komentarzami bezpośrednio w raporcie,
+	
+	\item \textbf{Wyszukiwanie informacji o bibliotekach i technologiach} --
+	zbieranie informacji na temat dostępnych bibliotek, przyjętych standardów
+	oraz rozwiązań stosowanych w branży (m.in. GameNetworkingSockets, Opus, SDL3),
+	
+	\item \textbf{Korekta stylistyczna i językowa tekstu} -- poprawa poprawności
+	gramatycznej, spójności stylu oraz dostosowanie języka do wymogów raportu.
+\end{itemize}
 
+Autorzy pracy zachowali pełną odpowiedzialność za merytoryczną poprawność
+wszystkich zawartych w niej treści. Każda informacja pozyskana przy udziale
+narzędzi AI była samodzielnie weryfikowana, w szczególności w zakresie
+poprawności bibliograficznej i technicznej. Narzędzia AI nie były wykorzystywane
+do generowania całych rozdziałów ani struktury pracy.
 
-\section{Wprowadzenie} 
-\label{chapt1:sec:intro}
+\section{Opłacalność projektu}
 
-Tutaj możesz opisać podstawowe pojęcia, terminy i oznaczenia, którymi posługujesz się w pracy. 
+VT-LAN jest projektem open source udostępnianym nieodpłatnie, którego model
+finansowy opiera się na zerowym koszcie utrzymania po stronie autorów.
+Całość infrastruktury działa wyłącznie na maszynach użytkowników w sieci lokalnej
+- nie istnieje żaden centralny serwer, który wymagałby hostowania, opłacania
+ani administrowania. Koszt utrzymania projektu po stronie twórców jest zatem
+zerowy.
 
-\section{Podstawy teoretyczne}
+Trwałość projektu zapewniana jest przez społeczność - model open source
+umożliwia każdemu użytkownikowi zgłaszanie poprawek, łatanie usterek oraz
+rozwijanie nowych funkcjonalności w formie tzw. patchy. Dzięki temu jakość
+aplikacji może rosnąć bez ponoszenia przez autorów kosztów deweloperskich.
+Dodatkowym, dobrowolnym źródłem finansowania mogą być dotacje przekazywane
+przez użytkowników (np. poprzez platformy typu GitHub Sponsors lub Open
+Collective), co jest powszechnie stosowaną praktyką w projektach open source.
 
-Możesz podać podstawowe wyniki, z których korzystasz w pracy. 
-Mogą to być odwołania do literatury - w rozdziale \ref{examples:cite} omówiono sposób formatowania bibliografii oraz metody odwoływania się w pracy do konkretnych pozycji (\verb|\cite{...}|, \verb|\citeauthor{...}|, ...)    
+Biorąc pod uwagę powyższe, projekt cechuje się pełną opłacalnością przy
+zerowym progu wejścia - zarówno dla autorów, jak i dla użytkowników końcowych.
 
+\section{Użyteczność społeczna produktu}
+\label{sec:użytek}
+Rosnąca świadomość zagrożeń związanych z prywatnością danych w komunikatorach
+internetowych czyni VT-LAN odpowiedzią na realną potrzebę społeczną. Popularne
+platformy komunikacyjne, takie jak Discord, Teams czy Slack, przesyłają dane
+głosowe i tekstowe przez zewnętrzne serwery swoich dostawców, co oznacza
+potencjalną ekspozycję tych danych na osoby trzecie.
+
+Trafnym przykładem ilustrującym tę obawę jest kontrowersja wokół Discorda
+z początku 2026 roku. Platforma ogłosiła wprowadzenie globalnego systemu
+weryfikacji wieku, wymagającego od użytkowników przesłania skanu dowodu
+tożsamości lub wykonania skanu twarzy. Decyzja ta wywołała falę krytyki
+ze strony społeczności i organizacji zajmujących się ochroną prywatności
+- tym bardziej, że we wrześniu 2025 roku doszło do wycieku zdjęć dokumentów
+tożsamości nawet 70\,000 użytkowników Discorda wskutek naruszenia bezpieczeństwa
+u zewnętrznego dostawcy usług \cite{DiscordEFF}. Skala reakcji była na tyle
+duża, że Discord oficjalnie opóźnił wdrożenie systemu do drugiej połowy 2026
+roku \cite{DiscordPostpone}.
+
+Incydent ten uwidocznił fundamentalny problem centralnych komunikatorów:
+dane użytkowników znajdują się poza ich kontrolą. VT-LAN eliminuje ten problem
+u podstaw - ruch sieciowy nigdy nie opuszcza sieci lokalnej, a szyfrowanie
+na poziomie aplikacji (AES-GCM-256) dodatkowo chroni przesyłane treści.
+Aplikacja jest szczególnie użyteczna w środowiskach wymagających poufności,
+takich jak sieci korporacyjne, laboratoria, instytucje edukacyjne czy
+domowe sieci prywatne.
+
+Jako projekt open source VT-LAN wpisuje się ponadto w ideę transparentności
+oprogramowania - każdy użytkownik może zweryfikować kod źródłowy i upewnić
+się, że aplikacja działa zgodnie z deklarowanymi zasadami. Repozytorium
+dostępne publicznie w serwisie GitHub umożliwia pobranie dowolnej wersji
+projektu wraz z pełnym kodem źródłowym i samodzielne skompilowanie go na
+własnej maszynie. Dzięki temu użytkownicy nie są uzależnieni od decyzji
+autorów - w przeciwieństwie do zamkniętych platform, takich jak Discord,
+żadna przyszła aktualizacja nie może bez wiedzy społeczności wprowadzić
+mechanizmów weryfikacji tożsamości ani przetwarzania danych biometrycznych.
+
+\section{Plan finansowy projektu}
+
+Ze względu na otwartoźródłowy charakter aplikacji oraz jej architekturę
+opartą wyłącznie na infrastrukturze użytkownika, VT-LAN nie generuje
+żadnych stałych kosztów operacyjnych po stronie autorów. Poniżej
+przedstawiono zestawienie kosztów i potencjalnych przychodów projektu.
+
+\subsection*{Koszty}
+
+\begin{itemize}
+	\item \textbf{Hosting i infrastruktura serwerowa} - brak. Aplikacja
+	działa wyłącznie na maszynach użytkowników w sieci LAN; autorzy nie
+	ponoszą żadnych kosztów serwerowych.
+	\item \textbf{Licencje} - brak. Wszystkie zastosowane biblioteki
+	(SDL3, GameNetworkingSockets, Opus, protobuf) udostępniane są na
+	licencjach open source, niewymagających żadnych opłat.
+	\item \textbf{Dystrybucja} - brak. Projekt dystrybuowany jest
+	bezpłatnie za pośrednictwem repozytorium GitHub.
+	\item \textbf{Utrzymanie} - pokrywane społecznie w modelu open source
+	poprzez zgłoszenia błędów, patche oraz pull requesty. Autorzy mogą
+	hobbystycznie, w miarę dostępnego czasu, weryfikować i zatwierdzać
+	wkład społeczności lub samodzielnie rozwijać projekt.
+\end{itemize}
+
+\subsection*{Przychody}
+
+\begin{itemize}
+	\item \textbf{Dobrowolne dotacje użytkowników} -- projekt może korzystać
+	z platform umożliwiających dobrowolne wspieranie finansowe twórców
+	open source, takich jak GitHub Sponsors lub Open Collective.
+	Przychody z tego źródła mają charakter nieregularny i zależą
+	od zaangażowania społeczności.
+\end{itemize}
+
+Projekt nie jest nastawiony na generowanie zysku. Jego wartość mierzona jest
+społecznym zasięgiem, liczbą aktywnych użytkowników oraz wkładem społeczności
+w jego rozwój.
+
+\section{Przegląd rozwiązań dostępnych na rynku}
+
+Na rynku komunikatorów głosowych i tekstowych funkcjonuje kilka ugruntowanych
+rozwiązań, które można uznać za punkty odniesienia dla projektu VT-LAN.
+Poniżej przedstawiono ich charakterystykę wraz z oceną pod kątem prywatności,
+architektury sieciowej i otwartości kodu.
+
+\subsection*{Discord}
+
+Discord \cite{DiscordEFF} to jedna z najpopularniejszych platform komunikacyjnych,
+oferująca czat tekstowy, głosowy oraz wideo. Aplikacja jest
+bezpłatna w wersji podstawowej, z opcjonalną subskrypcją Discord Nitro.
+
+Z punktu widzenia prywatności Discord jest rozwiązaniem centralnym - cały
+ruch sieciowy przechodzi przez serwery firmy, co oznacza brak kontroli
+użytkownika nad przesyłanymi danymi. Kontrowersje wokół próby wprowadzenia
+przez platformę weryfikacji wieku poprzez skanowanie dokumentu tożsamości
+i danych biometrycznych, opisane szczegółowo w sekcji~\ref{sec:użytek},
+uwidoczniły systemowe ryzyko wynikające z centralizacji danych
+\cite{DiscordPostpone}.
+
+\subsection*{TeamSpeak}
+
+TeamSpeak \cite{TeamSpeak} to wieloletnia platforma VoIP skupiona przede
+wszystkim na komunikacji głosowej, szeroko stosowana w środowiskach graczy
+oraz w zastosowaniach profesjonalnych. Wyróżnia się niskim opóźnieniem
+transmisji oraz możliwością uruchomienia własnego serwera, co daje
+administratorowi pełną kontrolę nad infrastrukturą. Wersja podstawowa
+jest bezpłatna, natomiast utrzymanie własnego serwera wiąże się z kosztami
+hostingu. Kod źródłowy pozostaje zamknięty.
+
+\subsection*{Mumble}
+
+Mumble \cite{Mumble} jest otwartoźródłowym komunikatorem głosowym
+o niskim opóźnieniu, działającym w modelu klient-serwer. Serwer (Murmur)
+może być uruchomiony w sieci lokalnej, co eliminuje konieczność przesyłania
+danych przez serwery zewnętrzne. Aplikacja jest w pełni bezpłatna i dostępna na licencji
+open source. Słabą stroną Mumble jest brak natywnej obsługi przesyłania plików.
+
+\subsection*{Microsoft Teams}
+
+Microsoft Teams to korporacyjna platforma komunikacyjna zintegrowana
+z ekosystemem Microsoft 365. Oferuje czat tekstowy, połączenia głosowe
+i wideo, a także współdzielenie plików i zaawansowane narzędzia pracy
+zespołowej. Jest rozwiązaniem wyłącznie chmurowym - dane przetwarzane są
+na serwerach Microsoft, co w środowiskach o podwyższonych wymaganiach
+bezpieczeństwa może stanowić istotne ograniczenie. Produkt jest płatny
+w ramach subskrypcji Microsoft 365.
+
+\subsection*{Podsumowanie i pozycja VT-LAN}
+VT-LAN zajmuje unikalną niszę wśród powyższych rozwiązań. Jest jedynym
+komunikatorem zaprojektowanym z myślą o działaniu wyłącznie w sieci LAN,
+łączącym czat tekstowy, transmisję głosową i przesyłanie plików w jednej
+lekkiej aplikacji open source, niewymagającej żadnej infrastruktury
+zewnętrznej ani kont użytkowników.
+
+\begin{table}[H]
+	\centering
+	\caption{Porównanie komunikatorów dostępnych na rynku}
+	\begin{tabularx}{\textwidth}{|l|X|X|X|X|X|}
+		\hline
+		\textbf{Cecha} & \textbf{Discord} & \textbf{TeamSpeak} & \textbf{Mumble}
+		& \textbf{MS Teams} & \textbf{VT-LAN} \\
+		\hline
+		Czat tekstowy       & Tak  & Ograniczony & Ograniczony & Tak  & Tak \\
+		\hline
+		Głos (VoIP)         & Tak  & Tak         & Tak         & Tak  & Tak \\
+		\hline
+		Przesyłanie plików  & Tak  & Nie         & Nie         & Tak  & Tak \\
+		\hline
+		Tylko LAN           & Nie  & Nie         & Możliwe     & Nie  & Tak \\
+		\hline
+		Open source         & Nie  & Nie         & Tak         & Nie  & Tak \\
+		\hline
+		Własny serwer       & Nie  & Tak         & Tak         & Nie  & Tak \\
+		\hline
+		Bezpłatny           & Częściowo & Częściowo & Tak    & Nie  & Tak \\
+		\hline
+		Narzut zasobów      & Wysoki & Niski     & Niski       & Wysoki & Niski \\
+		\hline
+	\end{tabularx}
+\end{table}

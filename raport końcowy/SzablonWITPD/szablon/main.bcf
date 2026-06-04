@@ -2373,13 +2373,26 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">bibliography.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1" intorder="1">WITWytyczneSI</bcf:citekey>
-    <bcf:citekey order="2" intorder="1">KNUTH01</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">KNUTH01</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">KNUTH02</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">KNUTH02</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">KuhnWZ08</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">PapaGeo07</bcf:citekey>
+    <bcf:citekey order="1" intorder="1">SDL3</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">SDLMixer</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">OpusRFC</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">GNS</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">GNS</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">OpenSSL</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">protobuf</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">WITWytyczneSI</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">DiscordEFF</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">DiscordPostpone</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">DiscordEFF</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">DiscordPostpone</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">TeamSpeak</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">Mumble</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">KNUTH01</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">KNUTH01</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">KNUTH02</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">KNUTH02</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">KuhnWZ08</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">PapaGeo07</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
