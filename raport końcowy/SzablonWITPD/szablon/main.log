@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.6.3)  4 JUN 2026 16:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.6.3)  5 JUN 2026 20:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1090,8 +1090,7 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (main.aux
 Package babel Info: 'polish' activates 'polish' shorthands.
 (babel)             Reported on input line 12.
- (abstract.aux) (chapters/wstep.aux) (chapters/info.aux)
-(chapters/backend.aux))
+ (abstract.aux) (chapters/wstep.aux) (chapters/backend.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 63.
@@ -1504,8 +1503,6 @@ LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 
 
 
-] [4
-
 ]
 \openout2 = `chapters/wstep.aux'.
 
@@ -1539,60 +1536,42 @@ LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
 (Font)              scaled to size 12.0pt on input line 81.
 
 [2{C:/Users/lipcz/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/tex-gyre/q-ts1.
-enc}] [3]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [4]
-[5]
+enc}] [3] [4] [5]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.95pt on input line 304.
+(Font)              scaled to size 10.95pt on input line 311.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 304.
+(Font)              scaled to size 10.95pt on input line 311.
 
-Overfull \hbox (3.4542pt too wide) in paragraph at lines 326--326
+Overfull \hbox (3.4542pt too wide) in paragraph at lines 333--333
 []|\T1/ntxtlf/b/n/12 (-20) TeamSpeak| 
  []
 
 
-Overfull \hbox (5.51604pt too wide) in paragraph at lines 326--326
+Overfull \hbox (5.51604pt too wide) in paragraph at lines 333--333
 []|\T1/ntxtlf/m/n/12 (-20) Ograniczony| 
  []
 
 
-Overfull \hbox (5.51604pt too wide) in paragraph at lines 326--326
+Overfull \hbox (5.51604pt too wide) in paragraph at lines 333--333
 []|\T1/ntxtlf/m/n/12 (-20) Ograniczony| 
  []
 
+) [6] [7]
+\openout2 = `chapters/backend.aux'.
 
-Underfull \vbox (badness 4518) has occurred while \output is active []
-
- [6])
-[7]
-\openout2 = `chapters/info.aux'.
-
- (chapters/info.tex
+ (chapters/backend.tex
 Rozdzia\l  2.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
+(Font)              scaled to size 12.0pt on input line 44.
 [8
 
 
 
 
-]
-<figures/ShortArcStrategy.jpg, id=184, 456.70625pt x 455.7025pt>
-File: figures/ShortArcStrategy.jpg Graphic file (type jpg)
-<use figures/ShortArcStrategy.jpg>
-Package pdftex.def Info: figures/ShortArcStrategy.jpg  used on input line 52.
-(pdftex.def)             Requested size: 110.25443pt x 110.01054pt.
-<figures/RandomLines.jpg, id=187, 361.35pt x 360.34625pt>
-File: figures/RandomLines.jpg Graphic file (type jpg)
-<use figures/RandomLines.jpg>
-Package pdftex.def Info: figures/RandomLines.jpg  used on input line 62.
-(pdftex.def)             Requested size: 162.60599pt x 162.15431pt.
- [9{C:/Users/lipcz/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/newtx/ntx-ot1-
-tlf.enc} <./figures/ShortArcStrategy.jpg>]
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 12.0pt on input line 88.
- [10 <./figures/RandomLines.jpg>]
+] [9] [10]
+(C:\Users\lipcz\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2025/11/14 1.11b listings language file
+)
 (C:\Users\lipcz\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
@@ -1600,49 +1579,87 @@ File: lstlang1.sty 2025/11/14 1.11b listings language file
 File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 161.
+nput line 181.
 LaTeX Font Info:    Font shape `T1/ntxtt/m/n' will be
-(Font)              scaled to size 10.95pt on input line 161.
+(Font)              scaled to size 10.95pt on input line 181.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.0pt on input line 162.
+(Font)              scaled to size 6.0pt on input line 182.
 LaTeX Font Info:    Trying to load font information for T1+txtt on input line 1
-62.
+84.
 
 (C:\Users\lipcz\AppData\Local\Programs\MiKTeX\tex/latex/txfonts\t1txtt.fd
 File: t1txtt.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Font shape `T1/ntxtt/m/it' in size <10.95> not available
-(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 162.
+LaTeX Font Info:    Font shape `T1/ntxtt/b/n' in size <10.95> not available
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 184.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `txtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Font shape `T1/ntxtt/b/n' in size <10.95> not available
-(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 166.
+
+Overfull \hbox (0.91869pt too wide) in paragraph at lines 191--193
+[]\T1/ntxtlf/m/n/12 (-20) Pole \T1/ntxtt/m/n/12 event.drop.data \T1/ntxtlf/m/n/
+12 (-20) za-wiera ±cie»k¦ do upusz-czo-nego pliku. Wy-wo-ªa-nie \T1/ntxtt/m/n/1
+2 OnDropFile
+ []
 
 [11]
-(C:\Users\lipcz\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(C:\Users\lipcz\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-)
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 196.
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 199.
+<figures/dataflow.png, id=214, 402.50375pt x 151.56625pt>
+File: figures/dataflow.png Graphic file (type png)
+<use figures/dataflow.png>
+Package pdftex.def Info: figures/dataflow.png  used on input line 237.
+(pdftex.def)             Requested size: 374.86777pt x 141.15866pt.
+ [12 <./figures/dataflow.png>]
+LaTeX Font Info:    Font shape `T1/ntxtt/m/it' in size <10.95> not available
+(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 281.
+LaTeX Font Info:    Font shape `T1/ntxtt/b/n' in size <14.4> not available
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 292.
+ [13{C:/Users/lipcz/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/newtx/ntx-ot1
+-tlf.enc}] [14]
+<figures/opus_quality.png, id=278, 797.46207pt x 590.62035pt>
+File: figures/opus_quality.png Graphic file (type png)
+<use figures/opus_quality.png>
+Package pdftex.def Info: figures/opus_quality.png  used on input line 422.
+(pdftex.def)             Requested size: 352.81554pt x 261.30669pt.
+ [15 <./figures/opus_quality.png>] [16]
+Overfull \hbox (38.98402pt too wide) in paragraph at lines 492--497
+\T1/ntxtlf/m/n/12 (-20) Poniewa» w mo-delu \T1/ntxtlf/m/it/12 (-20) li-sten se-
+rver \T1/ntxtlf/m/n/12 (-20) wszyst-kie pa-kiety prze-cho-dz¡ przez ho-sta, \T1
+/ntxtt/m/n/12 VoiceReceivingManager
+ []
 
-[12]) [13]
-\openout2 = `chapters/backend.aux'.
-
- (chapters/backend.tex
-Rozdzia\l  3.
-) [14
-
-
+[17]
+Overfull \hbox (8.5049pt too wide) in paragraph at lines 560--566
+[]\T1/ntxtlf/b/n/12 (-20) Wysyªanie seg-men-tów \T1/ntxtlf/m/n/12 (-20) - plik 
+dzie-lony jest na ka-waªki o sta-ªym roz-mia-rze (\T1/ntxtt/m/n/12 SEGMENT_SIZE
+\T1/ntxtlf/m/n/12 (-20) ).
+ []
 
 
-]
+Overfull \hbox (59.73105pt too wide) in paragraph at lines 613--617
+[]\T1/ntxtlf/b/n/12 (-20) Transmisja bez gwa-ran-cji (unre-lia-ble) \T1/ntxtlf/
+m/n/12 (-20) - flaga \T1/ntxtt/m/n/12 k_nSteamNetworkingSend_UnreliableNoNagle
+ []
+
+[18]
+Overfull \hbox (2.3327pt too wide) in paragraph at lines 636--639
+[]\T1/ntxtt/m/n/12 AllCurrentReceivers \T1/ntxtlf/m/n/12 (-20) i \T1/ntxtt/m/n/
+12 MeFlag \T1/ntxtlf/m/n/12 (-20) s¡ ato-mo-wymi zmien-nymi \T1/ntxtt/m/n/12 st
+d::atomic<uint16_t>\T1/ntxtlf/m/n/12 (-20) ,
+ []
+
+[19]
+Overfull \hbox (8.37927pt too wide) in paragraph at lines 689--694
+[]\T1/ntxtlf/b/n/12 (-20) Pakiety gªo-sowe \T1/ntxtlf/m/n/12 (-20) wy-sy-ªane s
+¡ z flag¡ \T1/ntxtt/m/n/12 k_nSteamNetworkingSend_UnreliableNoNagle
+ []
+
+<figures/gns_lanes.png, id=340, 623.32875pt x 278.03876pt>
+File: figures/gns_lanes.png Graphic file (type png)
+<use figures/gns_lanes.png>
+Package pdftex.def Info: figures/gns_lanes.png  used on input line 707.
+(pdftex.def)             Requested size: 441.01775pt x 196.7216pt.
+[20 <./figures/gns_lanes.png>]) [21]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/sc' will be
 (Font)              scaled to size 12.0pt on input line 91.
 Package microtype Info: Character `029' is missing
@@ -1655,29 +1672,28 @@ Overfull \hbox (11.89796pt too wide) in paragraph at lines 91--91
 om / ValveSoftware / GameNetworkingSockets$[][]\T1/ntxtlf/m/n/12 (-20) . 
  []
 
-[15
+[22
 
 
 
 {C:/Users/lipcz/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/newtx/ntx-ec-tlf-
-pc.enc}] [16] (main.aux (abstract.aux) (chapters/wstep.aux)
-(chapters/info.aux) (chapters/backend.aux))
+pc.enc}] (main.aux (abstract.aux) (chapters/wstep.aux) (chapters/backend.aux))
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: E22D6BFD19B3C2757E9B9561CD14E3E7;2556.
+(rerunfilecheck)             Checksum: 6ECFD9C7F31E9DF47EB0430ED508B19E;3588.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36971 strings out of 467683
- 693477 string characters out of 5414722
- 1597981 words of memory out of 5000000
- 65296 multiletter control sequences out of 15000+600000
- 724559 words of font info for 222 fonts, out of 8000000 for 9000
+ 36714 strings out of 467683
+ 689874 string characters out of 5414722
+ 1625916 words of memory out of 5000000
+ 64969 multiletter control sequences out of 15000+600000
+ 724224 words of font info for 238 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,10n,120p,1199b,2500s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/lipcz/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXM
@@ -1688,15 +1704,15 @@ tex-gyre/qtmr.pfb><C:/Users/lipcz/AppData/Local/Programs/MiKTeX/fonts/type1/pub
 lic/txfonts/t1xbtt.pfb><C:/Users/lipcz/AppData/Local/Programs/MiKTeX/fonts/type
 1/public/txfonts/t1xtt.pfb><C:/Users/lipcz/AppData/Local/Programs/MiKTeX/fonts/
 type1/public/txfonts/t1xtt.pfb><C:/Users/lipcz/AppData/Local/Programs/MiKTeX/fo
-nts/type1/public/newtx/txmiaX.pfb><C:/Users/lipcz/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/newtx/txsym.pfb><C:/Users/lipcz/AppData/Local/Programs/MiKT
+nts/type1/public/newtx/txexs.pfb><C:/Users/lipcz/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/newtx/txmiaX.pfb><C:/Users/lipcz/AppData/Local/Programs/MiKT
 eX/fonts/type1/public/newtx/txsys.pfb><C:/Users/lipcz/AppData/Local/Programs/Mi
 KTeX/fonts/type1/public/newtx/ztmb.pfb><C:/Users/lipcz/AppData/Local/Programs/M
 iKTeX/fonts/type1/public/newtx/ztmr.pfb><C:/Users/lipcz/AppData/Local/Programs/
 MiKTeX/fonts/type1/public/newtx/ztmri.pfb>
-Output written on main.pdf (20 pages, 363181 bytes).
+Output written on main.pdf (25 pages, 455109 bytes).
 PDF statistics:
- 383 PDF objects out of 1000 (max. 8388607)
- 99 named destinations out of 1000 (max. 500000)
- 46219 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 476 PDF objects out of 1000 (max. 8388607)
+ 149 named destinations out of 1000 (max. 500000)
+ 44696 words of extra memory for PDF output out of 51595 (max. 10000000)
 

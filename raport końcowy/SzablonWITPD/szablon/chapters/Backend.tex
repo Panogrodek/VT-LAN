@@ -1,2 +1,741 @@
 \chapter{Backend}
 \label{chapt:Backend}
+
+Backend aplikacji VT-LAN stanowi warstwę odpowiedzialną za całą logikę działania systemu
+- od zarządzania oknem graficznym, przez przechwytywanie i odtwarzanie dźwięku,
+aż po komunikację sieciową. Jego zadaniem jest integracja trzech niezależnych
+podsystemów: interfejsu użytkownika opartego na bibliotece ImGui renderowanej przez SDL3,
+warstwy audio zapewniającej przechwytywanie i odtwarzanie głosu przy użyciu kodeka Opus,
+oraz warstwy sieciowej zbudowanej na bibliotece GameNetworkingSockets (GNS). Backend
+pełni rolę łączącą te moduły w spójną całość - przekazuje dane audio do podsystemu
+sieciowego, odbiera pakiety głosowe i kieruje je do odtwarzacza, a komunikaty tekstowe
+i pliki binarne przesyła za pomocą niezawodnego kanału GNS.
+
+Poniższy rozdział opisuje kolejno: podstawy teoretyczne kodeka Opus oraz biblioteki GNS,
+obsługę okna graficznego i przechwytywanie zdarzeń SDL3, architekturę klient-serwer
+zastosowaną w projekcie, mechanizm przechwytywania i wysyłania danych głosowych wraz
+z detekcją aktywności mowy (VAD), odtwarzanie odebranych pakietów audio z obsługą utraty
+pakietów, przesyłanie danych tekstowych i plików binarnych z użyciem mechanizmu RPC,
+a na końcu szczegóły implementacji warstwy sieciowej GNS.
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Kodek Opus - podstawy teoretyczne}
+\label{sec:opus_theory}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Geneza i standaryzacja}
+
+Opus \cite{OpusRFC} to otwarty kodek audio opracowany przez grupę roboczą
+IETF i opublikowany w 2012 roku jako RFC~6716. Powstał z połączenia dwóch
+niezależnych projektów: kodeka SILK rozwijanego przez Skype od 2007 roku,
+zoptymalizowanego pod transmisję mowy, oraz kodeka CELT opracowanego przez
+fundację Xiph.Org, przeznaczonego do transmisji dźwięku ogólnego przeznaczenia
+przy bardzo niskim opóźnieniu \cite{OpusAbout}. Połączenie obu komponentów
+pozwoliło uzyskać kodek pokrywający szeroki zakres zastosowań - od wąskopasmowej
+transmisji mowy przy 6\,kbps aż po wysokiej jakości stereofoniczny dźwięk
+przy 510\,kbps \cite{OpusRFC}.
+
+\subsection*{Architektura hybrydowa - SILK i CELT}
+
+Koder Opus składa się z dwóch głównych warstw operujących na różnych
+reprezentacjach sygnału \cite{OpusRFC}:
+
+\begin{itemize}
+	\item \textbf{Warstwa LP (SILK)} - oparta na liniowym przewidywaniu
+	(ang. \textit{Linear Prediction}). Modeluje sygnał mowy jako pobudzenie
+	filtra autoregresyjnego, co jest wydajne obliczeniowo i daje dobre wyniki
+	dla mowy przy niskim bitrate. Stosowana w trybie SILK-only dla połączeń
+	do ok. 32\,kbps.
+	
+	\item \textbf{Warstwa MDCT (CELT)} - oparta na zmodyfikowanej dyskretnej
+	transformacie kosinusowej (ang. \textit{Modified Discrete Cosine Transform}).
+	Koduje sygnał w dziedzinie częstotliwości, co pozwala na bardzo niskie
+	opóźnienie algorytmiczne (od 2,5\,ms na ramkę) i wysoką jakość dla
+	sygnałów niewokalnych. Stosowana samodzielnie w trybie CELT-only lub
+	łączona z SILK w trybie hybrydowym.
+\end{itemize}
+
+RFC~6716 definiuje 32 możliwe konfiguracje kodeka, różniące się trybem
+pracy, pasmem audio i rozmiarem ramki \cite{OpusRFC}. W VT-LAN stosowany
+jest tryb SILK-only lub hybrydowy z ramką 20\,ms i bitrate 32\,kbps,
+co odpowiada konfiguracji zoptymalizowanej dla VoIP.
+
+\subsection*{Packet Loss Concealment (PLC)}
+
+Istotną właściwością dekodera Opus z punktu widzenia transmisji sieciowej
+jest wbudowany mechanizm PLC (ang. \textit{Packet Loss Concealment}).
+W przypadku wywołania \texttt{opus\_decode} z pustym wejściem
+(\texttt{nullptr, 0}) dekoder nie zwraca ciszy, lecz ekstrapoluje brakujący
+fragment sygnału na podstawie ostatnio zdekodowanych ramek. Dla sygnału
+mowy, który ma silną korelację czasową, algorytm PLC potrafi wiarygodnie
+odtworzyć krótkie ubytki rzędu 20-60\,ms bez subiektywnie odczuwalnych
+artefaktów \cite{OpusRFC}.
+
+\subsection*{Variable Bit Rate (VBR)}
+
+Opus wspiera zarówno stały (CBR), jak i zmienny bitrate (VBR). W trybie VBR
+koder dynamicznie przydziela więcej bitów ramkom zawierającym złożone
+fragmenty sygnału (spółgłoski, fragmenty szumowe), a mniej - ramkom
+zawierającym proste segmenty (samogłoski, cisza). Przekłada się to na
+zmniejszenie średniego zużycia pasma przy zachowaniu subiektywnej jakości
+dźwięku \cite{OpusRFC}. W VT-LAN VBR jest włączony z docelowym
+bitrate 32\,kbps.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Biblioteka GameNetworkingSockets - podstawy teoretyczne}
+\label{sec:gns_theory}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Geneza i przeznaczenie}
+
+GameNetworkingSockets (GNS) \cite{GNS} to biblioteka warstwy transportowej
+pierwotnie opracowana przez firmę Valve Corporation na potrzeby platformy
+Steam, a następnie udostępniona jako projekt open source. Jej głównym
+zadaniem jest dostarczenie programiście interfejsu opartego na modelu
+komunikatów (ang. \textit{message-oriented}), który ukrywa złożoność
+protokołu UDP, jednocześnie zachowując jego niskie opóźnienie.
+
+\subsection*{Model niezawodności}
+
+GNS rozszerza UDP o warstwę niezawodności wzorowaną na mechanizmach
+protokołu QUIC oraz algorytmie \textit{ack vector} z RFC~4340 \cite{GNS}.
+Odbiorca informuje nadajnika o statusie każdego odebranego pakietu, dzięki
+czemu retransmitowane są wyłącznie brakujące segmenty - bez czekania na
+wygaśnięcie timeoutu jak w TCP. Wiadomości mogą przekraczać rozmiar MTU,
+a fragmentacja i składanie pakietów obsługiwane są transparentnie
+przez bibliotekę \cite{GNS}.
+
+\subsection*{Tryby wysyłania wiadomości}
+
+GNS udostępnia kilka trybów dostarczenia wiadomości, wybieranych przez
+zestaw flag przekazywanych do funkcji wysyłającej \cite{GNS}:
+
+\begin{itemize}
+	\item \textbf{Reliable} - gwarantowane dostarczenie z zachowaniem
+	kolejności, analogiczne do TCP. Stosowane dla wiadomości tekstowych,
+	transferów plików i sygnałów sterujących.
+	\item \textbf{Unreliable} - wysyłka bez gwarancji dostarczenia ani
+	zachowania kolejności. Stosowane dla pakietów głosowych, gdzie
+	opóźnienie jest ważniejsze niż niezawodność.
+	\item \textbf{UnreliableNoNagle} - jak wyżej, ale z wyłączonym
+	algorytmem Nagle'a, który w standardowym TCP buforuje małe pakiety
+	przed wysłaniem w celu zwiększenia efektywności. Wyłączenie buforowania
+	redukuje opóźnienie kosztem nieznacznie wyższego narzutu sieciowego.
+\end{itemize}
+
+\subsection*{Szacowanie przepustowości}
+
+GNS implementuje mechanizm kontroli przepływu oparty na RFC~5348
+(TCP-friendly Rate Control, TFRC) \cite{GNS}. Biblioteka na bieżąco
+szacuje dostępną przepustowość połączenia i udostępnia te informacje
+aplikacji przez strukturę statystyk połączenia, umożliwiając adaptacyjne
+zarządzanie strumieniem danych - w VT-LAN wykorzystywane przy
+rate-limitingu segmentów pliku.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Obsługa okna graficznego}
+\label{sec:sdl}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Biblioteka SDL3}
+
+Simple DirectMedia Layer (SDL) \cite{SDL3} to wieloplatformowa biblioteka
+napisana w języku C, zapewniająca interfejs do sprzętu systemu
+operacyjnego: okien, renderingu, wejścia (klawiatura, mysz, kontrolery)
+oraz urządzeń audio.
+
+Powody wyboru SDL3 jako podstawy okna i systemu audio w VT-LAN:
+
+\begin{itemize}
+	\item \textbf{Niski narzut zasobów} - SDL3 jest biblioteką niskopoziomową,
+	w której programista zachowuje pełną kontrolę nad alokacją pamięci
+	i cyklem życia obiektów. W połączeniu z C++ przekłada się to na minimalne zużycie RAM oraz
+	niskie obciążenie procesora. Jest to szczególnie istotne przy równoczesnym
+	przetwarzaniu strumieni audio w czasie rzeczywistym, obsłudze połączeń
+	sieciowych oraz renderowaniu interfejsu użytkownika - wszystkich wykonywanych
+	jednocześnie w osobnych wątkach.
+
+	\item \textbf{Dostęp do urządzeń audio systemu operacyjnego} - SDL3
+	udostępnia jednolite API do otwierania fizycznych urządzeń
+	nagrywających i odtwarzających, niezależnie od platformy systemowej.
+	Programista operuje na uchwycie strumienia audio (\texttt{SDL\_AudioStream}),
+	który zachowuje się jak kolejka FIFO próbek z wbudowaną konwersją formatu
+	i częstotliwości próbkowania - bez konieczności ręcznej obsługi tych
+	przekształceń.
+
+	\item \textbf{Wieloplatformowość} - ten sam kod źródłowy kompiluje się
+	na systemach Windows, Linux i macOS bez modyfikacji warstwy systemowej.
+	Ewentualna kompilacja VT-LAN na innej platformie sprowadza się wyłącznie
+	do zmian w logice aplikacji, nie w kodzie obsługi urządzeń czy okna.
+\end{itemize}
+
+\subsection*{Przechwytywanie zdarzeń - drag and drop}
+
+SDL3 dostarcza pętlę zdarzeń (\texttt{SDL\_PollEvent}),
+z której aplikacja pobiera wszystkie zdarzenia systemowe: klawiaturę,
+mysz, zmianę rozmiaru okna, a także zdarzenia przeciągnij-i-upuść
+(\textit{drag and drop}).
+
+W VT-LAN obsługa upuszczania pliku na okno aplikacji zaimplementowana
+jest poprzez rejestrację callbacku na zdarzeniu \texttt{SDL\_EVENT\_DROP\_FILE}:
+
+\begin{lstlisting}[language=C++, caption={Obsługa zdarzenia drag-and-drop w SDL3 (praca własna)}, label={lst:drop}]
+SetEventCallback([](SDL_Event event) {
+    ImGui_ImplSDL3_ProcessEvent(&event);
+    if (event.type == SDL_EVENT_DROP_FILE) {
+        static_cast<Lobby*>(StateMachine.GetTop())
+            ->OnDropFile(event.drop.data);
+    }
+});
+\end{lstlisting}
+
+Pole \texttt{event.drop.data} zawiera ścieżkę do upuszczonego pliku. Wywołanie \texttt{OnDropFile}
+inicjuje procedurę przesyłania pliku opisaną w sekcji~\ref{sec:tcp}.
+
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Architektura aplikacji}
+\label{sec:architektura}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Model klient-serwer z hostem zintegrowanym}
+
+VT-LAN przyjmuje klasyczny model klient-serwer, z jedną istotną różnicą:
+instancja serwera nie jest odrębnym procesem ani dedykowaną maszyną -
+jeden z uczestników sesji jednocześnie pełni rolę hosta (serwera) i klienta.
+Jest to popularny wzorzec w grach wieloosobowych (\textit{listen server}),
+który eliminuje konieczność utrzymywania dedykowanej infrastruktury serwerowej
+w sieci LAN. Model ten dobrze wpisuje się w założenia projektu - użytkownik
+uruchamia pojedynczą aplikację, tworzy pokój lub dołącza do istniejącego,
+i może od razu rozpocząć komunikację bez konieczności konfiguracji
+dodatkowego oprogramowania.
+
+Podejście to ma następujące konsekwencje:
+
+\begin{itemize}
+    \item Host otwiera gniazdo nasłuchujące (\texttt{CreateListenSocketIP})
+    na wybranym porcie UDP i jest osiągalny przez pozostałych uczestników
+    sieci lokalnej po adresie IP.
+    \item Klienci łączą się do hosta wywołując \texttt{ConnectByIPAddress}.
+    \item Cały ruch przechodzi przez hosta: wiadomości tekstowe i pliki
+    wysyłane przez klienta trafiają najpierw do hosta, który je przekazuje
+    do pozostałych uczestników. Pakiety głosowe są przekazywane analogicznie,
+    jednak przez dedykowany mechanizm opisany w sekcji~\ref{sec:voicerecv}.
+    \item Zakończenie sesji przez hosta powoduje rozłączenie wszystkich
+    klientów - brak hosta oznacza brak sesji.
+\end{itemize}
+
+\subsection*{Diagram przepływu danych}
+
+Poniżej przedstawiono uproszczony schemat przepływu danych między uczestnikami
+sesji VT-LAN. Wyróżnione zostały dwie ścieżki transmisji: głosowa (UDP,
+bez gwarancji dostarczenia) oraz tekstowo-plikowa (GNS reliable, zachowanie
+kolejności).
+
+\begin{figure}[H]
+    \centering
+    % Wstaw diagram przepływu danych klient-serwer
+    \includegraphics[width=0.85\textwidth]{figures/dataflow.png}
+    \caption{Schemat przepływu danych w architekturze VT-LAN (praca własna)}
+    \label{fig:dataflow}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \caption{Porównanie kanałów transmisji w VT-LAN}
+	\begin{tabularx}{\textwidth}{|l|X|X|X|}
+		\hline
+		\textbf{Cecha} & \textbf{Głos (unreliable)} & \textbf{Tekst (reliable)} & \textbf{Pliki (reliable)} \\
+        \hline
+        Protokół & UDP (GNS unreliable) & UDP z gwarancją GNS & UDP z gwarancją GNS \\
+        \hline
+        Gwarancja dostarczenia & Nie & Tak & Tak \\
+        \hline
+        Zachowanie kolejności & Nie & Tak & Tak \\
+        \hline
+        Priorytet & Wysoki & Normalny & Niski \\
+        \hline
+        Typ danych & Zakodowane ramki Opus & Ciągi znaków & Segmenty binarne \\
+        \hline
+        Obsługa utraty pakietu & Opus PLC (Packet Loss Concealment) & Retransmisja przez GNS & Retransmisja przez GNS \\
+        \hline
+    \end{tabularx}
+    \label{tab:channels}
+\end{table}
+
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Przechwytywanie danych głosowych}
+\label{sec:voicecap}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Inicjalizacja urządzenia nagrywającego}
+
+SDL3 umożliwia otwieranie urządzeń audio przez \texttt{SDL\_OpenAudioDevice}
+(nagrywanie) i zwraca \texttt{SDL\_AudioStream} - strumień, z którego
+aplikacja pobiera próbki poleceniem \texttt{SDL\_GetAudioStreamData}.
+W VT-LAN urządzenie domyślne jest otwierane przy starcie aplikacji
+z następującą specyfikacją:
+
+\begin{lstlisting}[language=C++, caption={Inicjalizacja urządzenia nagrywającego (praca własna)}, label={lst:audioinit}]
+SDL_AudioSpec src{};
+src.freq     = 48000;        // 48 kHz - standard Opus
+src.format   = SDL_AUDIO_F32; // próbki zmiennoprzecinkowe 32-bit
+src.channels = 1;             // mono
+
+audioDeviceManager.OpenDefaultDevice(AudioDeviceKind::Recording, &src);
+\end{lstlisting}
+
+Parametry 48\,kHz, format \texttt{F32} i mono wynikają bezpośrednio
+z wymagań kodera Opus, który operuje w tym standardzie dla trybu VoIP
+\cite{OpusRFC}.
+
+\subsection*{Wątek przechwytywania - \texttt{VoiceCaptureManager}}
+
+Przechwytywanie audio odbywa się w dedykowanym wątku
+(\texttt{m\_voiceCaptureThread}), uruchamianym przez
+\texttt{VoiceCaptureManager::Start()}. Wątek co 1\,ms odpytuje strumień
+wejściowy wywołaniem \texttt{SDL\_GetAudioStreamData}, pobierając dostępne
+próbki PCM i dołączając je do wewnętrznego bufora \texttt{m\_sendVoiceBuffer}.
+Bufor ten chroniony jest przez \texttt{std::mutex}, ponieważ dostęp do niego
+współdzielony jest z wątkiem sieciowym odpowiedzialnym za kodowanie
+i wysyłkę danych. Zastosowanie osobnego wątku przechwytywania gwarantuje,
+że opóźnienia po stronie sieci lub kodeka nie wpływają na regularność
+pobierania próbek z urządzenia wejściowego.
+
+\subsection*{Voice Activity Detection (VAD)}
+
+Przed zakodowaniem i wysłaniem ramki audio sprawdzane jest, czy zawiera
+ona faktyczną aktywność głosową. Mechanizm detekcji aktywności mowy (VAD,
+ang. \textit{Voice Activity Detection}) oparty jest na pomiarze RMS
+(ang. \textit{Root Mean Square}) - pierwiastka ze średniej kwadratów
+amplitud próbek w ramce:
+
+\begin{equation}
+    \mathrm{RMS} = \sqrt{\frac{1}{N}\sum_{i=1}^{N} s_i^2}
+\end{equation}
+
+\noindent gdzie: 
+\begin{itemize}
+	\item $s_i$ - wartość $i$-tej próbki w ramce,
+	\item  $N$ - liczbę próbek.
+\end{itemize}
+Jeśli RMS jest niższy niż wartość progowa
+(\texttt{m\_rmsThreshold}), ramka uznawana jest za ciszę.
+Aby uniknąć urywania głosu przy chwilowych spadkach głośności,
+zaimplementowany jest mechanizm \textit{grace period}: ciche ramki
+są odrzucane dopiero po przekroczeniu licznika \texttt{IS\_SILENT\_GRACE\_FRAMES}
+kolejnych cichych klatek.
+
+\begin{lstlisting}[language=C++, caption={Implementacja VAD oparta na RMS (praca własna)}, label={lst:vad}]
+bool VoiceSendingManager::IsSilent(const float* frame, size_t samples)
+{
+    if (samples == 0) return true;
+
+    double sumSquares = 0.0;
+    for (size_t i = 0; i < samples; ++i) {
+        float s = frame[i];
+        sumSquares += static_cast<double>(s) * static_cast<double>(s);
+    }
+    float rms = static_cast<float>(std::sqrt(sumSquares / samples));
+
+    if (rms >= m_rmsThreshold) {
+        m_currentSilentFrames = 0;
+        return false;
+    }
+
+    if (m_currentSilentFrames < IS_SILENT_GRACE_FRAMES) {
+        m_currentSilentFrames++;
+        return false;
+    }
+    return true;
+}
+\end{lstlisting}
+
+Zakończenie aktywności mowy sygnalizowane jest przez wysłanie ostatniej
+ramki ciszy z numerem sekwencji ustawionym na wartość 1
+(\texttt{m\_nextSeq = 1}). Odbiorca interpretuje tę wartość
+jako sygnał resetu sekwencji - mechanizm ten opisano dokładniej
+w sekcji~\ref{sec:voicerecv}. Pozwala to zresetować wewnętrzny stan
+dekodera Opus po każdej przerwie w transmisji, co eliminuje artefakty
+dźwiękowe na początku kolejnego fragmentu mowy.
+
+\subsection*{Kodowanie Opus i kolejkowanie ramek}
+
+Każda ramka 960 próbek (odpowiadająca 20\,ms przy 48\,kHz) jest
+kompresowana koderem Opus skonfigurowanym w trybie VoIP z bitrate 32\,kbps
+i aktywnym VBR (ang. \textit{Variable Bit Rate}):
+
+\begin{lstlisting}[language=C++, caption={Inicjalizacja kodera Opus (praca własna)}, label={lst:opusinit}]
+m_encoder = opus_encoder_create(VOICE_SAMPLE_RATE, 1,
+                                OPUS_APPLICATION_VOIP, &err);
+opus_encoder_ctl(m_encoder, OPUS_SET_BITRATE(32000));
+opus_encoder_ctl(m_encoder, OPUS_SET_VBR(1));
+\end{lstlisting}
+
+Zakodowane ramki trafiają do kolejki \texttt{m\_encodedFrames},
+a wątek wysyłający wywołuje \texttt{sender.SendVoicePacket} dla każdej
+z nich, oznaczając je numerem sekwencji (\texttt{uint16\_t}),
+identyfikatorem nadawcy (\texttt{uint8\_t}) i flaga nagłówkową
+\texttt{VoicePacket}. Pakiety głosowe wysyłane są z flagą
+\texttt{k\_nSteamNetworkingSend\_UnreliableNoNagle}, co zapewnia
+minimalny narzut i najniższe możliwe opóźnienie transmisji.
+
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Odtwarzanie danych głosowych}
+\label{sec:voicerecv}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Kodek Opus - strona odbiorcza}
+
+Szczegółowy opis architektury i właściwości kodeka Opus przedstawiono
+w sekcji~\ref{sec:opus_theory}. Właściwości kodeka, które zdecydowały
+o jego wyborze w projekcie VT-LAN, zestawiono w tabeli~\ref{tab:opus}.
+
+\begin{table}[H]
+	\centering
+	\caption{Wybrane parametry kodeka Opus \cite{OpusRFC}}
+	\begin{tabularx}{\textwidth}{|l|X|}
+		\hline
+		\textbf{Parametr} & \textbf{Wartość / opis} \\
+		\hline
+		Wspierane bitrate & 6-510 kbps (VBR/CBR) \\
+		\hline
+		Wspierane częstotliwości próbkowania & 8, 12, 16, 24, 48 kHz \\
+		\hline
+		Rozmiar ramki & 2,5-60 ms \\
+		\hline
+		Opóźnienie algorytmiczne & 26,5 ms (tryb VoIP) \\
+		\hline
+		Obsługa PLC & Tak (wbudowana w \texttt{opus\_decode}) \\
+		\hline
+		Licencja & BSD, royalty-free \\
+		\hline
+	\end{tabularx}
+	\label{tab:opus}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    % Wstaw wykres zależności jakości (MUSHRA/PESQ) od bitrate dla Opus
+    % Źródło: https://opus-codec.org/comparison/
+    \includegraphics[width=0.80\textwidth]{figures/opus_quality.png}
+    \caption{Porównanie jakości kodeka Opus z innymi kodekami
+             w funkcji przepustowości (źródło: opus-codec.org)}
+    \label{fig:opus_quality}
+\end{figure}
+
+\subsection*{Wątek odtwarzania - \texttt{VoiceReceivingManager}}
+
+Odtwarzanie głosu realizowane jest przez \texttt{VoiceReceivingManager}
+działający na osobnym wątku. Wątek w każdej iteracji pętli wykonuje
+dwie operacje: odbiera z bufora sieciowego nowe zakodowane ramki
+(\texttt{PollAndProcessMessages}) i wywołuje \texttt{PlayAll}
+dla każdego aktywnego nadawcy.
+
+Dla każdego uczestnika sesji przechowywana jest struktura
+\texttt{PlayerVoiceData} zawierająca:
+\begin{itemize}
+    \item dekoder Opus (\texttt{OpusDecoder*}),
+    \item strumień audio SDL3 (\texttt{SDL\_AudioStream*}),
+    \item ścieżkę SDL\_mixer (\texttt{MIX\_Track*}) dla miksowania
+    z regulacją głośności i opcjonalnym dźwiękiem przestrzennym,
+    \item mapę oczekujących pakietów indeksowaną numerem sekwencji
+    (\texttt{std::map<uint16\_t, EncodedFrame>}).
+\end{itemize}
+
+\subsection*{Kolejkowanie i obsługa utraty pakietów (PLC)}
+
+Odebrane pakiety są wstawiane do mapy \texttt{m\_pendingVoicePackets}
+z kluczem odpowiadającym numerowi sekwencji. W każdym kroku wątek
+odtwarzania sprawdza, czy oczekiwany numer sekwencji
+(\texttt{m\_expectedSeq}) jest dostępny w mapie:
+
+\begin{enumerate}
+    \item \textbf{Ramka dostępna} - dekodowanie normalne przez
+    \texttt{opus\_decode}, próbki trafiają do strumienia SDL3.
+    \item \textbf{Ramka niedostępna, następna jest w zasięgu
+    (gap $\leq$ 3)} - \textit{Packet Loss Concealment} (PLC):
+    \texttt{opus\_decode} wywoływany jest z pustym wejściem
+    (\texttt{nullptr, 0}), co uruchamia wbudowany algorytm
+    ekstrapolacji PLC kodera Opus interpolujący brakujące próbki.
+    \item \textbf{Ramka niedostępna, luka jest duża} - stan dekodera
+    i strumień SDL3 są resetowane, a odtwarzanie rozpoczyna się
+    od najbliższego dostępnego pakietu.
+\end{enumerate}
+
+\begin{lstlisting}[language=C++, caption={PLC - wywołanie dekodera Opus z pustym wejściem (praca własna)}, label={lst:plc}]
+int plcSamples = opus_decode(
+    playerData.m_decoder,
+    nullptr, 0,        // brak danych - PLC
+    plcBuf,
+    kMaxFrameSamples,
+    0
+);
+\end{lstlisting}
+
+Reset stanu dekodera po przerwie w mowie wyzwalany jest odbiorem
+ramki z numerem sekwencji 1 (umowny sygnał końca aktywności mowy,
+wysyłany przez stronę nadawczą po wykryciu ciszy przez VAD):
+
+\begin{lstlisting}[language=C++, caption={Reset dekodera po wykryciu przerwy w mowie (praca własna)}, label={lst:reset}]
+if (sequenceID == 1) {
+    opus_decoder_ctl(playerData.m_decoder, OPUS_RESET_STATE);
+    SDL_ClearAudioStream(playerData.m_stream);
+    playerData.m_pendingVoicePackets.clear();
+    playerData.m_expectedSeq = 2;
+}
+\end{lstlisting}
+
+\subsection*{Przekazywanie pakietów głosowych przez serwer}
+
+Ponieważ w modelu \textit{listen server} wszystkie pakiety przechodzą
+przez hosta, \texttt{VoiceReceivingManager} na serwerze po odebraniu
+pakietu głosowego od klienta retransmituje go do wszystkich
+pozostałych klientów (\texttt{ForwardFrameData}), usuwając z maski
+odbiorców zarówno hosta, jak i nadawcę oryginalnego pakietu.
+
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Przesyłanie danych tekstowych i plików binarnych}
+\label{sec:tcp}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Mechanizm RPC}
+
+Komunikacja tekstowa i transfery plików realizowane są przy użyciu
+własnego mechanizmu zdalnych wywołań procedur (RPC, ang.
+\textit{Remote Procedure Call}). Każde RPC rejestrowane jest statycznie
+przy starcie aplikacji przez obiekt \texttt{RPCRegistrar}, który przypisuje
+mu unikalny identyfikator 16-bitowy, poziom uprawnień (\texttt{Authority})
+oraz funkcję typu lambda wywoływaną po odebraniu.
+
+\begin{lstlisting}[language=C++, caption={Rejestracja RPC nadawania wiadomości czatu (praca własna)}, label={lst:rpc}]
+static fs::RPCRegistrar reg_chat(
+    "ChatBroadcast",
+    fs::Authority::All,
+    [](uint8_t senderID, std::string text) {
+        auto self = fs::connections.GetSelf();
+        if (self.IsValid() && self.GetCustomID() == senderID)
+            return; // ignoruj echo własnej wiadomości
+        chatManager.Enqueue(senderID, text);
+    }
+);
+\end{lstlisting}
+
+Poziom uprawnień \texttt{Authority::All} oznacza, że zarówno serwer,
+jak i klienci mogą inicjować wywołanie. Klient wysyła \textit{request}
+do serwera, który po weryfikacji uprawnień przekazuje wiadomość
+do pozostałych uczestników (\texttt{ForwardRPCRequest}).
+
+\subsection*{Sygnały sterujące - hasło i inicjalizacja sesji}
+
+Przed przystąpieniem do sesji serwer może wymagać podania hasła.
+Weryfikacja odbywa się przez dedykowane RPC wywoływane tuż po
+nawiązaniu połączenia TCP-like. Jeśli hasło jest niepoprawne,
+serwer zamyka połączenie z kodem przyczyny (\texttt{m\_eEndReason}).
+Inicjalizacja nowego uczestnika przebiega następująco:
+
+\begin{enumerate}
+    \item Serwer otrzymuje żądanie połączenia
+    (\texttt{ConnectionStateConnecting}).
+    \item Po pomyślnym nawiązaniu
+    (\texttt{ConnectionStateConnected}) wysyła do nowego uczestnika
+    RPC \texttt{NewPlayerSync} z listą wszystkich aktualnych połączeń.
+    \item Do pozostałych uczestników wysyłane jest RPC
+    \texttt{AddPlayerSync} z danymi nowego klienta (identyfikator,
+    nazwa wyświetlana).
+\end{enumerate}
+
+\subsection*{Przesyłanie plików}
+
+Transfer pliku podzielony jest na dwie fazy realizowane przez
+\texttt{FileTransferManager}:
+
+\begin{enumerate}
+    \item \textbf{Inicjacja} - RPC \texttt{FileTransferStart} przekazuje
+    metadane: identyfikator transferu (32-bit), identyfikator nadawcy,
+    nazwę pliku, rozmiar całkowity i liczbę chunków.
+
+    \item \textbf{Wysyłanie segmentów} - plik dzielony jest na kawałki
+    o stałym rozmiarze (\texttt{SEGMENT\_SIZE}). Aby nie przepełnić
+    bufora nadawczego GNS (ok. 512\,KB na połączenie), segmenty wysyłane
+    są z ograniczeniem przepustowości przez metodę \texttt{Tick}
+    wywoływaną co 16\,ms z limitem \texttt{SEGMENTS\_PER\_TICK} segmentów
+    na iterację.
+\end{enumerate}
+
+Po stronie odbiorczej segmenty gromadzone są w mapie indeksowanej
+numerem segmentu. Gdy wszystkie fragmenty zostaną odebrane,
+\texttt{TryAssembleLocked} łączy je w całość i zapisuje plik
+w katalogu \texttt{received\_files/}, dodając sufiks w przypadku
+konfliktu nazwy.
+
+\begin{table}[H]
+    \centering
+    \caption{Struktura pakietu sieciowego wysyłającego segment pliku}
+    \begin{tabularx}{\textwidth}{|l|l|X|}
+        \hline
+        \textbf{Pole} & \textbf{Rozmiar} & \textbf{Opis} \\
+        \hline
+        Nagłówek sieciowy & 1 B & \texttt{NetworkingHeader::RPCCall} \\
+        \hline
+        ID RPC & 2 B & Identyfikator \texttt{FileTransferChunk} \\
+        \hline
+        Transfer ID & 4 B & Unikalny identyfikator transferu \\
+        \hline
+        Segment index & 4 B & Numer porządkowy fragmentu \\
+        \hline
+        Dane & do \texttt{SEGMENT\_SIZE} B & Surowe bajty fragmentu pliku \\
+        \hline
+    \end{tabularx}
+    \label{tab:chunk_packet}
+\end{table}
+
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Warstwa sieciowa}
+\label{sec:gns}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{GameNetworkingSockets}
+
+GameNetworkingSockets (GNS) \cite{GNS} to biblioteka sieciowa
+rozwijana przez firmę Valve Corporation, pierwotnie wbudowana
+w platformę Steam i udostępniona jako projekt open source.
+GNS opiera się na protokole UDP, rozszerzając go o dodatkowe
+mechanizmy dostępne w zależności od trybu wysyłania:
+
+\begin{itemize}
+    \item \textbf{Niezawodna kolejkowana transmisja} (analogiczna do TCP) -
+    gwarancja dostarczenia i zachowanie kolejności pakietów przy minimalnym
+    narzucie; używana dla wiadomości tekstowych, RPC i segmentów pliku.
+    \item \textbf{Transmisja bez gwarancji (unreliable)} -
+    flaga \texttt{k\_nSteamNetworkingSend\_UnreliableNoNagle} wyłącza
+    oczekiwanie na potwierdzenia; stosowana dla pakietów
+    głosowych, gdzie opóźnienie jest ważniejsze niż niezawodność.
+\end{itemize}
+
+\subsection*{Kanały i mechanizm \texttt{ConnectionMessageFlag}}
+
+Aby uniknąć iteracji po wszystkich aktywnych połączeniach przy każdej
+operacji wysyłania, VT-LAN wprowadza własną abstrakcję flag bitowych
+\texttt{ConnectionMessageFlag}. Każdy uczestnik sesji otrzymuje unikalny
+identyfikator (\texttt{CustomID}), któremu odpowiada bit w 16-bitowej
+masce. Operacje na maskach pozwalają szybko określić zestaw odbiorców:
+
+\begin{itemize}
+    \item \texttt{AllCurrentReceivers()} - maska wszystkich aktualnie
+    połączonych uczestników,
+    \item \texttt{ClearFlag(mask, flag)} - usunięcie konkretnego
+    uczestnika z maski (np. usunięcie nadawcy przed przekazaniem wiadomości),
+    \item \texttt{HostFlag()}, \texttt{MeFlag()} - predefiniowane flagi
+    hosta i samego siebie.
+\end{itemize}
+
+\texttt{AllCurrentReceivers} i \texttt{MeFlag} są atomowymi zmiennymi
+\texttt{std::atomic<uint16\_t>}, co zapewnia bezpieczny odczyt z wielu
+wątków bez blokad.
+
+\subsection*{System RPC - przekazywanie i uprawnienia}
+
+Pakiet RPC ma strukturę:
+\begin{itemize}
+	\item \texttt{[nagłówek 1B],}
+	\item \texttt{[ID RPC 2B],}
+	\item \texttt{[argumenty].}
+\end{itemize} 
+Argumenty konwertowane są do postaci binarnej i dołączane bezpośrednio do bufora.
+Na serwerze po odebraniu pakietu z typem \texttt{NetworkingHeader::RPCCall}
+wywoływana jest zarejestrowana funkcja lambda, a następnie - jeśli RPC ma poziom
+\texttt{Authority::All} - wiadomość przekazywana jest do pozostałych
+odbiorców przez \texttt{ForwardRPCRequest}.
+
+\subsection*{Callbacki stanu połączenia}
+
+GNS informuje aplikację o zmianach stanu połączenia przez
+globalny callback\\ \texttt{SteamNetConnectionStatusChangedCallback\_t}.
+W VT-LAN zarejestrowany jest handler
+\texttt{NetworkingGNS::HandleConnectionHelper}, który deleguje
+callbacki i na podstawie
+wartości \texttt{m\_info.m\_eState}
+wywołuje jedną z metod:
+
+\begin{table}[H]
+    \centering
+    \caption{Obsługiwane stany połączenia GNS}
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Stan GNS} & \textbf{Akcja w VT-LAN} \\
+        \hline
+        \texttt{Connecting} & Akceptacja połączenia (serwer) lub rejestracja hosta (klient) \\
+        \hline
+        \texttt{Connected} & Wysłanie RPC synchronizacji listy graczy \\
+        \hline
+        \texttt{ClosedByPeer} & Usunięcie uczestnika, powiadomienie pozostałych przez RPC \\
+        \hline
+        \texttt{ProblemDetectedLocally} & Jak wyżej, dodatkowo wywołanie callbacku utraty połączenia \\
+        \hline
+    \end{tabularx}
+    \label{tab:gns_states}
+\end{table}
+
+\subsection*{Podział ruchu - priorytety strumieni}
+
+GNS udostępnia API komunikatów sieciowych (\textit{Steam Networking Messages API}),
+w którym każda wiadomość może być opatrzona innym zestawem flag dostarczenia.
+VT-LAN wykorzystuje to do rozdzielenia ruchu na dwa niezależne strumienie:
+\begin{itemize}
+	\item \textbf{Pakiety głosowe} wysyłane są z flagą
+	\texttt{k\_nSteamNetworkingSend\_UnreliableNoNagle} - pakiet trafia do sieci
+	natychmiast po każdej iteracji wątku audio, bez buforowania i bez retransmisji.
+	Priorytetem jest minimalne opóźnienie kosztem gwarancji dostarczenia,
+	co jest akceptowalne w przypadku strumienia głosowego.
+	\item \textbf{Pozostałe pakiety} (wiadomości tekstowe, pliki, sygnały sterujące)
+	wysyłane są z domyślnymi flagami niezawodności przez wywołanie
+	\texttt{Sender::Flush}, które następuje raz na klatkę logiki aplikacji.
+	Gwarantuje to zachowanie kolejności i pewność dostarczenia kosztem
+	nieznacznie wyższego opóźnienia.
+\end{itemize}
+Taka architektura zapewnia, że przesyłanie pliku nie wpływa na jakość
+transmisji głosowej - oba strumienie konkurują o przepustowość niezależnie,
+dzięki czemu użytkownik może prowadzić rozmowę i jednocześnie wysyłać
+duże pliki bez zauważalnego wzrostu opóźnienia audio.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/gns_lanes.png}
+    \caption{Podział ruchu sieciowego na priorytetowy strumień głosowy
+             i standardowy strumień danych (praca własna)}
+    \label{fig:traffic}
+\end{figure}
+
+
+\section{Podsumowanie}
+\label{sec:backend_summary}
+
+Niniejszy rozdział opisał implementację warstwy backendowej aplikacji VT-LAN.
+Centralną rolę pełni SDL3, dostarczający zarówno okno graficzne z pętlą
+zdarzeń - umożliwiającą m.in. obsługę przeciągania i upuszczania plików
+(ang. \textit{drag-and-drop}) - jak i niskopoziomowe API urządzeń audio.
+Przechwytywanie dźwięku realizowane jest w dedykowanym wątku, co gwarantuje
+ciągłość strumienia niezależnie od obciążenia wątku głównego.
+
+Moduł detekcji aktywności mowy oparty na pomiarze RMS eliminuje zbędne
+ramki ciszy, redukując zużycie pasma i zapewniając poprawne resetowanie
+stanu dekodera Opus po stronie odbiorczej. Odtwarzanie głosu korzysta
+z wbudowanego mechanizmu PLC kodeka Opus, który minimalizuje wpływ utraty
+pakietów na jakość odbieranego dźwięku.
+
+Architektura \textit{listen server} eliminuje konieczność utrzymywania
+dedykowanej infrastruktury sieciowej, a mechanizm flag bitowych
+\texttt{ConnectionMessageFlag} upraszcza zarządzanie zestawem odbiorców
+przy minimalnym narzucie pamięciowym. Komunikacja tekstowa i transfer
+plików realizowane są przez własny mechanizm RPC z obsługą uprawnień
+oraz rate-limitingiem chunków, zapobiegającym przepełnieniu buforów
+sieciowych.
+
+Fizyczny podział ruchu na bezgwarancyjne pakiety głosowe i niezawodne
+pakiety danych sprawia, że jednoczesna rozmowa i transfer pliku nie
+powodują wzajemnych zakłóceń. Całość komunikacji szyfrowana jest
+automatycznie przez bibliotekę GNS z użyciem algorytmu AES-GCM-256.

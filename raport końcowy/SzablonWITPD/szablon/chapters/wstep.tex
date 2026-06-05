@@ -86,6 +86,14 @@ Podczas pracy nad aplikacją VT-LAN zespół korzystał z następujących techno
 		z biblioteki \textbf{SDL\_mixer} \cite{SDLMixer} - oficjalnego rozszerzenia SDL3
 		umożliwiającego jednoczesne odtwarzanie wielu kanałów audio z regulacją głośności.
 		
+		\item \textbf{Dear ImGui} \cite{ImGui} - biblioteka interfejsu użytkownika
+		dla języka C++. Odpowiada za renderowanie
+		wszystkich elementów graficznych aplikacji - okien, przycisków, pól tekstowych,
+		list oraz paneli czatu i głosowego. Charakteryzuje się minimalną liczbą
+		zależności i niskim narzutem wydajnościowym, co czyni ją szczególnie
+		odpowiednią dla aplikacji czasu rzeczywistego. Integruje się bezpośrednio
+		z SDL3 jako backendem okienkowym i wejściowym.
+		
 		\item \textbf{Opus} \cite{OpusRFC} - otwarty kodek audio o niskim opóźnieniu,
 		zoptymalizowany pod transmisję mowy, ze zmiennym bitrate dostosowującym się
 		do warunków sieci. Bezpośrednio integruje się z buforami próbek pobieranymi

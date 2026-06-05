@@ -75,6 +75,33 @@
       \verb https://github.com/libsdl-org/SDL_mixer
       \endverb
     \endentry
+    \entry{ImGui}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=3eca3eb35467f92594a5e4618e78e7fd}{%
+           family={Ocornut},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{3eca3eb35467f92594a5e4618e78e7fd}
+      \strng{fullhash}{3eca3eb35467f92594a5e4618e78e7fd}
+      \strng{fullhashraw}{3eca3eb35467f92594a5e4618e78e7fd}
+      \strng{bibnamehash}{3eca3eb35467f92594a5e4618e78e7fd}
+      \strng{authorbibnamehash}{3eca3eb35467f92594a5e4618e78e7fd}
+      \strng{authornamehash}{3eca3eb35467f92594a5e4618e78e7fd}
+      \strng{authorfullhash}{3eca3eb35467f92594a5e4618e78e7fd}
+      \strng{authorfullhashraw}{3eca3eb35467f92594a5e4618e78e7fd}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Dear ImGui: Bloat-free Graphical User interface for C++ with minimal dependencies}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://github.com/ocornut/imgui
+      \endverb
+      \verb{url}
+      \verb https://github.com/ocornut/imgui
+      \endverb
+    \endentry
     \entry{OpusRFC}{report}{}{}
       \name{author}{3}{}{%
         {{hash=fba88511ddfa6a8f148f55369289f611}{%
@@ -104,8 +131,8 @@
       \strng{authornamehash}{9435f0a1430326380f827425ea81f786}
       \strng{authorfullhash}{9435f0a1430326380f827425ea81f786}
       \strng{authorfullhashraw}{9435f0a1430326380f827425ea81f786}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{month}{9}
@@ -134,8 +161,8 @@
       \strng{authornamehash}{3550f48b7034e3d7cadadb40413478f1}
       \strng{authorfullhash}{3550f48b7034e3d7cadadb40413478f1}
       \strng{authorfullhashraw}{3550f48b7034e3d7cadadb40413478f1}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{{GameNetworkingSockets} -- Reliable \& unreliable messages over {UDP}}
@@ -161,8 +188,8 @@
       \strng{authornamehash}{90a97d68cacba4966e7bf191b803e11c}
       \strng{authorfullhash}{90a97d68cacba4966e7bf191b803e11c}
       \strng{authorfullhashraw}{90a97d68cacba4966e7bf191b803e11c}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{{OpenSSL} -- Cryptography and {SSL/TLS} Toolkit}
@@ -188,8 +215,8 @@
       \strng{authornamehash}{7b568e72d25af32b0cec03e49cbf3f70}
       \strng{authorfullhash}{7b568e72d25af32b0cec03e49cbf3f70}
       \strng{authorfullhashraw}{7b568e72d25af32b0cec03e49cbf3f70}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{{Protocol Buffers} -- {Google's} data interchange format}
@@ -217,8 +244,8 @@
       \strng{authornamehash}{dbbe10dc0f91d8aa4f1ae77ec2fc972b}
       \strng{authorfullhash}{dbbe10dc0f91d8aa4f1ae77ec2fc972b}
       \strng{authorfullhashraw}{dbbe10dc0f91d8aa4f1ae77ec2fc972b}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Wytyczne dot. narzędzi GenAI}
@@ -251,8 +278,8 @@
       \strng{authornamehash}{7b01dac45c69e3d899cfe3e9073da0bc}
       \strng{authorfullhash}{7b01dac45c69e3d899cfe3e9073da0bc}
       \strng{authorfullhashraw}{7b01dac45c69e3d899cfe3e9073da0bc}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{month}{2}
@@ -313,11 +340,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{{TeamSpeak} -- Voice Communication for Online Gaming}
-      \field{urlday}{4}
-      \field{urlmonth}{6}
-      \field{urlyear}{2026}
-      \field{year}{2025}
-      \field{urldateera}{ce}
+      \field{year}{2026}
       \verb{urlraw}
       \verb https://www.teamspeak.com
       \endverb
@@ -344,11 +367,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{{Mumble} -- Open Source, Low-Latency, High Quality Voice Chat}
-      \field{urlday}{4}
-      \field{urlmonth}{6}
-      \field{urlyear}{2026}
-      \field{year}{2025}
-      \field{urldateera}{ce}
+      \field{year}{2026}
       \verb{urlraw}
       \verb https://github.com/mumble-voip/mumble
       \endverb
@@ -356,154 +375,32 @@
       \verb https://github.com/mumble-voip/mumble
       \endverb
     \endentry
-    \entry{KNUTH01}{book}{}{}
+    \entry{OpusAbout}{online}{}{}
       \name{author}{1}{}{%
-        {{hash=ec08e6f01da5f3814f28a70c89c64656}{%
-           family={Knuth},
-           familyi={K\bibinitperiod},
-           given={Donald\bibnamedelima E.},
-           giveni={D\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=f88b42ad6bd2589108ef251e5b5c96bc}{%
+           family={{Xiph.Org Foundation and others}},
+           familyi={X\bibinitperiod}}}%
       }
-      \list{location}{1}{%
-        {Reading, Massachusetts}%
-      }
-      \list{publisher}{1}{%
-        {Addison-Wesley}%
-      }
-      \strng{namehash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{fullhash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{fullhashraw}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{bibnamehash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{authorbibnamehash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{authornamehash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{authorfullhash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{authorfullhashraw}{ec08e6f01da5f3814f28a70c89c64656}
-      \field{extraname}{1}
+      \strng{namehash}{f88b42ad6bd2589108ef251e5b5c96bc}
+      \strng{fullhash}{f88b42ad6bd2589108ef251e5b5c96bc}
+      \strng{fullhashraw}{f88b42ad6bd2589108ef251e5b5c96bc}
+      \strng{bibnamehash}{f88b42ad6bd2589108ef251e5b5c96bc}
+      \strng{authorbibnamehash}{f88b42ad6bd2589108ef251e5b5c96bc}
+      \strng{authornamehash}{f88b42ad6bd2589108ef251e5b5c96bc}
+      \strng{authorfullhash}{f88b42ad6bd2589108ef251e5b5c96bc}
+      \strng{authorfullhashraw}{f88b42ad6bd2589108ef251e5b5c96bc}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{edition}{3rd}
-      \field{series}{The art of computer programming}
-      \field{title}{The art of computer programming. Volumne 1: Fundamental Algorithms}
-      \field{volume}{1}
-      \field{year}{1997}
-      \keyw{algorithms,computer,seminumerical}
-    \endentry
-    \entry{KNUTH02}{book}{}{}
-      \name{author}{1}{}{%
-        {{hash=ec08e6f01da5f3814f28a70c89c64656}{%
-           family={Knuth},
-           familyi={K\bibinitperiod},
-           given={Donald\bibnamedelima E.},
-           giveni={D\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
-      }
-      \list{location}{1}{%
-        {Reading, Massachusetts}%
-      }
-      \list{publisher}{1}{%
-        {Addison-Wesley}%
-      }
-      \strng{namehash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{fullhash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{fullhashraw}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{bibnamehash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{authorbibnamehash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{authornamehash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{authorfullhash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{authorfullhashraw}{ec08e6f01da5f3814f28a70c89c64656}
-      \field{extraname}{2}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{edition}{3rd}
-      \field{series}{The art of computer programming}
-      \field{title}{The art of computer programming. Volume 2: Seminumerical Algorithms}
-      \field{volume}{2}
-      \field{year}{1997}
-    \endentry
-    \entry{KuhnWZ08}{article}{}{}
-      \name{author}{3}{}{%
-        {{hash=06b0d2204e3c0bd58a7482152b266209}{%
-           family={Kuhn},
-           familyi={K\bibinitperiod},
-           given={Fabian},
-           giveni={F\bibinitperiod}}}%
-        {{hash=5c162b9d03517a96680df0dc8d8263eb}{%
-           family={Wattenhofer},
-           familyi={W\bibinitperiod},
-           given={Roger},
-           giveni={R\bibinitperiod}}}%
-        {{hash=d1efea9c03e72d84bc380b609f609fbc}{%
-           family={Zollinger},
-           familyi={Z\bibinitperiod},
-           given={Aaron},
-           giveni={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{9a449fc748b83cdf7e498655a7b147aa}
-      \strng{fullhash}{9a449fc748b83cdf7e498655a7b147aa}
-      \strng{fullhashraw}{9a449fc748b83cdf7e498655a7b147aa}
-      \strng{bibnamehash}{9a449fc748b83cdf7e498655a7b147aa}
-      \strng{authorbibnamehash}{9a449fc748b83cdf7e498655a7b147aa}
-      \strng{authornamehash}{9a449fc748b83cdf7e498655a7b147aa}
-      \strng{authorfullhash}{9a449fc748b83cdf7e498655a7b147aa}
-      \strng{authorfullhashraw}{9a449fc748b83cdf7e498655a7b147aa}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{IEEE/ACM Trans. Netw.}
-      \field{number}{1}
-      \field{title}{An algorithmic approach to geographic routing in ad hoc and sensor networks}
-      \field{volume}{16}
-      \field{year}{2008}
-      \field{pages}{51\bibrangedash 62}
-      \range{pages}{12}
-    \endentry
-    \entry{PapaGeo07}{inproceedings}{}{}
-      \name{author}{5}{}{%
-        {{hash=13db487c58e2ddc160727faf7f4868b5}{%
-           family={Popa},
-           familyi={P\bibinitperiod},
-           given={L.},
-           giveni={L\bibinitperiod}}}%
-        {{hash=95ed9dc20d8417b22d0dbad634f0cbc5}{%
-           family={Rostamizadeh},
-           familyi={R\bibinitperiod},
-           given={A.},
-           giveni={A\bibinitperiod}}}%
-        {{hash=f49f7c7ed47f2c2858a260d2181ffbb7}{%
-           family={Karp},
-           familyi={K\bibinitperiod},
-           given={R.\bibnamedelimi M.},
-           giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
-        {{hash=229cabee93637df880714a75a7b8bda5}{%
-           family={Papadimitrou},
-           familyi={P\bibinitperiod},
-           given={C.},
-           giveni={C\bibinitperiod}}}%
-        {{hash=6c0e25b703ac672324ac72dba3eb4446}{%
-           family={Stoica},
-           familyi={S\bibinitperiod},
-           given={I.},
-           giveni={I\bibinitperiod}}}%
-      }
-      \strng{namehash}{a548a9c3296b4de2b87cc8a8582e3738}
-      \strng{fullhash}{4f8ee040753deff58ba0c540a96b786b}
-      \strng{fullhashraw}{4f8ee040753deff58ba0c540a96b786b}
-      \strng{bibnamehash}{a548a9c3296b4de2b87cc8a8582e3738}
-      \strng{authorbibnamehash}{a548a9c3296b4de2b87cc8a8582e3738}
-      \strng{authornamehash}{a548a9c3296b4de2b87cc8a8582e3738}
-      \strng{authorfullhash}{4f8ee040753deff58ba0c540a96b786b}
-      \strng{authorfullhashraw}{4f8ee040753deff58ba0c540a96b786b}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Mobihoc'07}
-      \field{title}{Balancing Traffic Load in Wireless Networks with Curveball Routing}
-      \field{year}{2007}
+      \field{title}{{Opus} -- codec overview and history}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://opus-codec.org/
+      \endverb
+      \verb{url}
+      \verb https://opus-codec.org/
+      \endverb
     \endentry
   \enddatalist
 \endrefsection
