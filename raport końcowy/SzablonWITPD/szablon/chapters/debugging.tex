@@ -117,7 +117,7 @@ przedstawiono w~\cref{tab:db_filtry}.
 \begin{tabular}{|l|p{4.2cm}|p{6.2cm}|}
 \hline
 \textbf{Protokół} & \textbf{Filtr diagnostyczny}         & \textbf{Cel analizy i monitoringu}                                         \\ \hline
-\textbf{TCP}      & \texttt{tcp.port == 50005}           & Weryfikacja narzutu nagłówków dla czatu tekstowego i systemu pytań. \\ \hline
+\textbf{TCP}      & \texttt{tcp.port == 50005}           & Weryfikacja narzutu nagłówków dla czatu tekstowego i systemu przesyłu wiadomości. \\ \hline
 \textbf{UDP}      & \texttt{udp \&\& ip.addr == 192.168.1.0/24} & Badanie ciągłości strumienia audio kodeka Opus \cite{OpusRFC} oraz poprawności działania algorytmu VAD. \\ \hline
 \end{tabular}
 \end{table}
@@ -160,8 +160,8 @@ ruchu sieciowego dla aplikacji VT-LAN, uzyskane przy użyciu profilera Visual St
 W celu zweryfikowania wydajności backendu sieciowego odpowiedzialnego za przesyłanie
 strumienia głosowego, przeprowadzono sesję testową w architekturze pętli zwrotnej
 (\textit{loopback interface}). Pozwoliło to na precyzyjny pomiar charakterystyki
-pakietów generowanych przez kodek Opus \cite{opus_codec} zintegrowany z biblioteką
-SDL3 \cite{sdl3_doc}. Rezultat przechwytywania ruchu przedstawiono na
+pakietów generowanych przez kodek Opus \cite{OpusRFC} zintegrowany z biblioteką
+SDL3 \cite{SDL3}. Rezultat przechwytywania ruchu przedstawiono na
 \cref{fig:db_wireshark_capture}.
 
 \begin{figure}[htbp]
@@ -265,7 +265,7 @@ W celu potwierdzenia, że aplikacja VT-LAN spełnia kryteria „lekkości" i nis
 narzutu na zasoby, przeprowadzono testy monitorujące bezpośrednio w systemie
 operacyjnym Windows 11. Pomiary alokacji pamięci RAM oraz obciążenia CPU dla
 uruchomionych instancji procesu \texttt{Audio Diagnostics.exe} (tryb
-\textit{Release}) zarejestrowano przy użyciu systemowego Menedżera Zadań.
+\textit{Release} dla aplikacji VT-LAN) zarejestrowano przy użyciu systemowego Menedżera Zadań.
 Wynik tej analizy przedstawia \cref{fig:db_task_manager}.
 
 \begin{figure}[htbp]

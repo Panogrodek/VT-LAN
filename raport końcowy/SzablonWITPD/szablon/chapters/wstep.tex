@@ -57,9 +57,11 @@ Podczas pracy nad aplikacją VT-LAN zespół korzystał z następujących techno
 	
 	\item \textbf{Microsoft Visual Studio 2022} - zintegrowane środowisko deweloperskie
 	(IDE) wraz z kompilatorem MSVC, wykorzystywane jako główne narzędzie do budowania
-	i debugowania projektu. Dostarcza zaawansowane narzędzia diagnostyczne, w tym
-	debugger z obsługą wielowątkowości oraz profilery wydajności, które były
-	pomocne przy optymalizacji krytycznych fragmentów kodu.
+	i debugowania projektu. Dostarcza zaawansowane narzędzia diagnostyczne \cite{msvc_profiler},
+	w tym debugger z obsługą wielowątkowości oraz zintegrowany pakiet \textit{Diagnostic Tools}
+	umożliwiający profilowanie zużycia CPU, wykonywanie migawek sterty (ang.~\textit{heap
+	snapshots}) i lokalizowanie wycieków pamięci w czasie rzeczywistym -- bez konieczności
+	modyfikacji kodu produkcyjnego.
 	
 	\item \textbf{Premake5} - system budowania projektów oparty na skryptach Lua.
 	Umożliwia generowanie plików rozwiązania (\texttt{.sln}) dla Visual Studio
@@ -76,6 +78,13 @@ Podczas pracy nad aplikacją VT-LAN zespół korzystał z następujących techno
 	dystrybucji projektu - użytkownicy mają możliwość wglądu w kod źródłowy aplikacji,
 	a także pobrania skompilowanej wersji wykonywalnej.
 	
+	\item \textbf{Wireshark} \cite{wireshark_doc} - analizator protokołów sieciowych
+	(ang.~\textit{packet sniffer}) wykorzystywany podczas prac diagnostycznych i kontroli
+	jakości (QA). Umożliwiał przechwytywanie i inspekcję ruchu sieciowego generowanego
+	przez aplikację, co pozwoliło zweryfikować poprawność działania protokołów UDP i TCP/GNS,
+	skuteczność szyfrowania pakietów audio oraz zachowanie mechanizmu detekcji aktywności
+	głosowej (VAD) -- szczegóły opisano w rozdziale~\ref{ch:profilowanie_debugging}.
+
 	\item \textbf{Biblioteki firm trzecich} - projekt korzysta z następujących bibliotek:
 	\begin{itemize}
 		\item \textbf{SDL3} \cite{SDL3} - wieloplatformowa biblioteka obsługi okna aplikacji,
@@ -140,7 +149,7 @@ w następujących obszarach:
 	\item \textbf{Wspomaganie implementacji} -- generowanie fragmentów kodu,
 	podpowiedzi dotyczących struktury rozwiązań oraz debugowanie błędów.
 	Fragmenty kodu powstałe przy udziale narzędzi AI zostały oznaczone
-	stosownymi komentarzami bezpośrednio w raporcie,
+	stosownymi komentarzami bezpośrednio w plikach źródłowych projektu,
 	
 	\item \textbf{Wyszukiwanie informacji o bibliotekach i technologiach} --
 	zbieranie informacji na temat dostępnych bibliotek, przyjętych standardów
