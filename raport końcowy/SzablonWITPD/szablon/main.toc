@@ -9,7 +9,7 @@
 \contentsline {section}{\numberline {1.3}Opłacalność projektu}{4}{section.1.3}%
 \contentsline {section}{\numberline {1.4}Użyteczność społeczna produktu}{4}{section.1.4}%
 \contentsline {section}{\numberline {1.5}Plan finansowy projektu}{5}{section.1.5}%
-\contentsline {section}{\numberline {1.6}Przegląd rozwiązań dostępnych na rynku}{5}{section.1.6}%
+\contentsline {section}{\numberline {1.6}Przegląd rozwiązań dostępnych na rynku}{6}{section.1.6}%
 \contentsline {chapter}{\numberline {2}Backend}{8}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Kodek Opus - podstawy teoretyczne}{8}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Biblioteka GameNetworkingSockets - podstawy teoretyczne}{9}{section.2.2}%
@@ -17,6 +17,26 @@
 \contentsline {section}{\numberline {2.4}Architektura aplikacji}{11}{section.2.4}%
 \contentsline {section}{\numberline {2.5}Przechwytywanie danych głosowych}{12}{section.2.5}%
 \contentsline {section}{\numberline {2.6}Odtwarzanie danych głosowych}{15}{section.2.6}%
-\contentsline {section}{\numberline {2.7}Przesyłanie danych tekstowych i plików binarnych}{17}{section.2.7}%
-\contentsline {section}{\numberline {2.8}Warstwa sieciowa}{18}{section.2.8}%
+\contentsline {section}{\numberline {2.7}Przesyłanie danych tekstowych i plików binarnych}{18}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Warstwa sieciowa}{19}{section.2.8}%
 \contentsline {section}{\numberline {2.9}Podsumowanie}{21}{section.2.9}%
+\contentsline {chapter}{\numberline {3}Profilowanie i Debugging}{23}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Zakres prac i środowisko diagnostyczne}{23}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Architektura procesu kontroli jakości (QA)}{23}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Stanowisko testowe i konfiguracja sprzętowa}{24}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Narzędzia profilujące i diagnostyczne}{24}{subsection.3.1.3}%
+\contentsline {subsubsection}{Visual Studio Diagnostic Tools (profiler MSVC)}{24}{subsubsection*.12}%
+\contentsline {subsubsection}{Analizator protokołów Wireshark}{24}{subsubsection*.13}%
+\contentsline {subsection}{\numberline {3.1.4}Metodyka badania algorytmu Voice Activity Detection (VAD)}{25}{subsection.3.1.4}%
+\contentsline {section}{\numberline {3.2}Empiryczne wyniki profilowania i testów}{25}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Analiza pakietów audio w środowisku sieciowym}{25}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Weryfikacja poprawności kryptograficznej warstwy transportowej}{27}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Weryfikacja działania mechanizmu VAD w stanach ciszy}{28}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Empiryczna weryfikacja zużycia zasobów systemowych}{29}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Analiza napotkanych usterek i diagnostyka problemów}{29}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Usterka regresu jakości audio przy zwiększonej liczbie użytkowników}{30}{subsection.3.3.1}%
+\contentsline {subsubsection}{Analiza potencjalnych przyczyn systemowych}{30}{subsubsection*.19}%
+\contentsline {subsection}{\numberline {3.3.2}Optymalizacja interfejsu użytkownika i bieżące naprawy kodu}{30}{subsection.3.3.2}%
+\contentsline {subsubsection}{Propozycje poprawek interfejsu użytkownika (UI)}{31}{subsubsection*.20}%
+\contentsline {subsubsection}{Drobne poprawki usprawniające}{31}{subsubsection*.21}%
+\contentsline {subsection}{\numberline {3.3.3}Wnioski i podsumowanie prac diagnostycznych}{31}{subsection.3.3.3}%

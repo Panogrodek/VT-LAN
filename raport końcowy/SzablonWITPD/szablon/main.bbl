@@ -402,6 +402,115 @@
       \verb https://opus-codec.org/
       \endverb
     \endentry
+    \entry{msvc_profiler}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=140864078aeca1c7c35b4beb33c53c34}{%
+           family={{Microsoft}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{fullhash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{fullhashraw}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{bibnamehash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{authorbibnamehash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{authornamehash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{authorfullhash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{authorfullhashraw}{140864078aeca1c7c35b4beb33c53c34}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Profiling in Visual Studio -- First look at profiling tools ({MSVC})}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://learn.microsoft.com/en-us/visualstudio/profiling/profiling-feature-tour
+      \endverb
+      \verb{url}
+      \verb https://learn.microsoft.com/en-us/visualstudio/profiling/profiling-feature-tour
+      \endverb
+    \endentry
+    \entry{wireshark_doc}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=7e4f04bfb7b7addc1eed0e63d69d5cc6}{%
+           family={{The Wireshark Team}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{7e4f04bfb7b7addc1eed0e63d69d5cc6}
+      \strng{fullhash}{7e4f04bfb7b7addc1eed0e63d69d5cc6}
+      \strng{fullhashraw}{7e4f04bfb7b7addc1eed0e63d69d5cc6}
+      \strng{bibnamehash}{7e4f04bfb7b7addc1eed0e63d69d5cc6}
+      \strng{authorbibnamehash}{7e4f04bfb7b7addc1eed0e63d69d5cc6}
+      \strng{authornamehash}{7e4f04bfb7b7addc1eed0e63d69d5cc6}
+      \strng{authorfullhash}{7e4f04bfb7b7addc1eed0e63d69d5cc6}
+      \strng{authorfullhashraw}{7e4f04bfb7b7addc1eed0e63d69d5cc6}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Wireshark} User's Guide -- Version 4.x}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://www.wireshark.org/docs/wsug_html_chunked/
+      \endverb
+      \verb{url}
+      \verb https://www.wireshark.org/docs/wsug_html_chunked/
+      \endverb
+    \endentry
+    \entry{opus_codec}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=1d3129e978e8e043af28c7f48e5ea297}{%
+           family={{Xiph.Org Foundation}},
+           familyi={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{1d3129e978e8e043af28c7f48e5ea297}
+      \strng{fullhash}{1d3129e978e8e043af28c7f48e5ea297}
+      \strng{fullhashraw}{1d3129e978e8e043af28c7f48e5ea297}
+      \strng{bibnamehash}{1d3129e978e8e043af28c7f48e5ea297}
+      \strng{authorbibnamehash}{1d3129e978e8e043af28c7f48e5ea297}
+      \strng{authornamehash}{1d3129e978e8e043af28c7f48e5ea297}
+      \strng{authorfullhash}{1d3129e978e8e043af28c7f48e5ea297}
+      \strng{authorfullhashraw}{1d3129e978e8e043af28c7f48e5ea297}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Opus Interactive Audio Codec} -- Standard RFC~6716 Documentation}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://opus-codec.org/docs/
+      \endverb
+      \verb{url}
+      \verb https://opus-codec.org/docs/
+      \endverb
+    \endentry
+    \entry{sdl3_doc}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=c1c110d949fa06d2faa477553ca698b2}{%
+           family={{SDL Community}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{fullhash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{fullhashraw}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{bibnamehash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{authorbibnamehash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{authornamehash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{authorfullhash}{c1c110d949fa06d2faa477553ca698b2}
+      \strng{authorfullhashraw}{c1c110d949fa06d2faa477553ca698b2}
+      \field{extraname}{3}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Simple DirectMedia Layer 3.0} -- Official Documentation}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://wiki.libsdl.org/SDL3/FrontPage
+      \endverb
+      \verb{url}
+      \verb https://wiki.libsdl.org/SDL3/FrontPage
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

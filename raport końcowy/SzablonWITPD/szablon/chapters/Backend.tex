@@ -266,7 +266,21 @@ kolejności).
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Przechwytywanie danych głosowych}
 \label{sec:voicecap}
-% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Przegląd "pipeline'u" transmisji głosowej}
+
+Poniższy schemat przedstawia kompletną ścieżkę przetwarzania dźwięku
+w aplikacji VT-LAN - od przechwycenia sygnału z mikrofonu po jego
+odtworzenie u odbiorcy. Kolejne podsekcje opisują szczegółowo
+poszczególne etapy tego procesu.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.90\textwidth]{figures/technical_dataflow.png}
+	\caption{"Pipeline" transmisji głosowej w VT-LAN:
+		nadawca, serwer i odbiorca (praca własna)}
+	\label{fig:voice_pipeline}
+\end{figure}
 
 \subsection*{Inicjalizacja urządzenia nagrywającego}
 
