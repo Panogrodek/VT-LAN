@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.24)  7 JUN 2026 16:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.24)  8 JUN 2026 19:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1011,16 +1011,35 @@ Package biblatex Info: ... and expl3
 
 (D:\miketex\tex/latex/biblatex\blx-case-expl3.sty
 Package: blx-case-expl3 2025/07/10 v3.21 expl3 case changing code for biblatex
-)) (acronyms.tex
+))
+(D:\miketex\tex/latex/tools\longtable.sty
+Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
+\LTleft=\skip92
+\LTright=\skip93
+\LTpre=\skip94
+\LTpost=\skip95
+\LTchunksize=\count486
+\LTcapwidth=\dimen278
+\LT@head=\box64
+\LT@firsthead=\box65
+\LT@foot=\box66
+\LT@lastfoot=\box67
+\LT@gbox=\box68
+\LT@cols=\count487
+\LT@rows=\count488
+\c@LT@tables=\count489
+\c@LT@chunks=\count490
+\LT@p@ftn=\toks45
+) (acronyms.tex
 (D:\miketex\tex/latex/acro\acro.sty
 (D:\miketex\tex/latex/l3packages/l3keys2e\l3keys2e.sty
 Package: l3keys2e 2025-10-09 LaTeX2e option processing using LaTeX3 keys
 )
 Package: acro 2022/04/01 v3.8 typeset acronyms and other abbreviations (CN)
-\l__acro_tmpa_int=\count486
-\l__acro_tmpb_int=\count487
-\l__acro_tmpc_int=\count488
-\l__acro_tmpd_int=\count489
+\l__acro_tmpa_int=\count491
+\l__acro_tmpb_int=\count492
+\l__acro_tmpc_int=\count493
+\l__acro_tmpd_int=\count494
 Loading module `base' ...
 Loading module `interface' ...
 Loading module `aux' ...
@@ -1029,16 +1048,16 @@ Loading module `acronyms' ...
 Loading module `formatting' ...
 Loading module `ppfixes' ...
 Loading module `tools' ...
-\l__acro_minimal_usage_int=\count490
-\l__acro_nest_int=\count491
-\g_acro_barrier_int=\count492
-\g_acro_barrier_total_int=\count493
+\l__acro_minimal_usage_int=\count495
+\l__acro_nest_int=\count496
+\g_acro_barrier_int=\count497
+\g_acro_barrier_total_int=\count498
 Loading module `commands' ...
-\l_acro_nest_level_int=\count494
+\l_acro_nest_level_int=\count499
 Loading module `templates' ...
 Loading module `list' ...
 Loading module `pages' ...
-\l__acro_pages_seq_threshold_int=\count495
+\l__acro_pages_seq_threshold_int=\count500
 Loading module `locale' ...
 
 (D:\miketex\tex/latex/translations\translations.sty
@@ -1051,89 +1070,89 @@ Loading module `definitions' ...
 Loading module `upgrade' ...
 )
 ==> First Aid for acro.sty applied!
-\c@g@acro@dry@int=\count496
-\c@g@acro@kiss@int=\count497
-\c@g@acro@sql@int=\count498
-\c@g@acro@api@int=\count499
+\c@g@acro@dry@int=\count501
+\c@g@acro@kiss@int=\count502
+\c@g@acro@sql@int=\count503
+\c@g@acro@api@int=\count504
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'polish'.
 LaTeX Font Info:    Trying to load font information for T1+ntxtlf on input line
- 63.
+ 65.
  (D:\miketex\tex/latex/newtx\t1ntxtlf.fd
 File: t1ntxtlf.fd 2021/05/24 v1.1 font definition file for T1/ntx/tlf
 )
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 12.0pt on input line 63.
+(Font)              scaled to size 12.0pt on input line 65.
  (main.aux
 Package babel Info: 'polish' activates 'polish' shorthands.
 (babel)             Reported on input line 12.
  (abstract.aux)
-(chapters/wstep.aux) (chapters/backend.aux) (chapters/debugging.aux))
+(chapters/wstep.aux) (chapters/backend.aux) (chapters/UI.aux)
+(chapters/debugging.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 63.
+LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 65.
 LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line
- 63.
-
-(D:\miketex\tex/latex/newtx\omlntxmi.fd
+ 65.
+ (D:\miketex\tex/latex/newtx\omlntxmi.fd
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 65.
 LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 
-63.
- (D:\miketex\tex/latex/newtx\untxexa.fd
+65.
+
+(D:\miketex\tex/latex/newtx\untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 65.
 LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line
- 63.
+ 65.
  (D:\miketex\tex/latex/newtx\lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 65.
 LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input lin
-e 63.
-
-(D:\miketex\tex/latex/newtx\lmxntxexx.fd
+e 65.
+ (D:\miketex\tex/latex/newtx\lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Info: Command `\dddot' is already robust on input line 63.
-LaTeX Info: Command `\ddddot' is already robust on input line 63.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Info: Command `\dddot' is already robust on input line 65.
+LaTeX Info: Command `\ddddot' is already robust on input line 65.
 
 (D:\miketex\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count500
-\scratchdimen=\dimen278
-\scratchbox=\box64
-\nofMPsegments=\count501
-\nofMParguments=\count502
-\everyMPshowfont=\toks45
-\MPscratchCnt=\count503
-\MPscratchDim=\dimen279
-\MPnumerator=\count504
-\makeMPintoPDFobject=\count505
-\everyMPtoPDFconversion=\toks46
+\scratchcounter=\count505
+\scratchdimen=\dimen279
+\scratchbox=\box69
+\nofMPsegments=\count506
+\nofMParguments=\count507
+\everyMPshowfont=\toks46
+\MPscratchCnt=\count508
+\MPscratchDim=\dimen280
+\MPnumerator=\count509
+\makeMPintoPDFobject=\count510
+\everyMPtoPDFconversion=\toks47
 ) (D:\miketex\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -1142,15 +1161,15 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 (D:\miketex\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-\c@mv@tabular=\count506
-\c@mv@boldtabular=\count507
-LaTeX Info: Redefining \microtypecontext on input line 63.
-Package microtype Info: Applying patch `item' on input line 63.
-Package microtype Info: Applying patch `toc' on input line 63.
-Package microtype Info: Applying patch `eqnum' on input line 63.
-Package microtype Info: Applying patch `footnote' on input line 63.
-Package microtype Info: Applying patch `verbatim' on input line 63.
-LaTeX Info: Redefining \microtypesetup on input line 63.
+\c@mv@tabular=\count511
+\c@mv@boldtabular=\count512
+LaTeX Info: Redefining \microtypecontext on input line 65.
+Package microtype Info: Applying patch `item' on input line 65.
+Package microtype Info: Applying patch `toc' on input line 65.
+Package microtype Info: Applying patch `eqnum' on input line 65.
+Package microtype Info: Applying patch `footnote' on input line 65.
+Package microtype Info: Applying patch `verbatim' on input line 65.
+LaTeX Info: Redefining \microtypesetup on input line 65.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -1203,16 +1222,21 @@ File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
+Package caption Info: longtable package is loaded.
+(D:\miketex\tex/latex/caption\ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count508
-Package hyperref Info: Link coloring ON on input line 63.
-(main.out) (main.out)
+\c@lstlisting=\count513
+Package hyperref Info: Link coloring ON on input line 65.
+ (main.out) (main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
 Package biblatex Info: Trying to load language 'polish'...
 Package biblatex Info: ... file 'polish.lbx' found.
- (D:\miketex\tex/latex/biblatex/lbx\polish.lbx
+
+(D:\miketex\tex/latex/biblatex/lbx\polish.lbx
 File: polish.lbx 2025/07/10 v3.21 biblatex localization (PK/MW)
 )
 Package biblatex Info: Trying to load language 'english'...
@@ -1229,8 +1253,8 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
  (main.bbl)
-Package biblatex Info: Reference section=0 on input line 63.
-Package biblatex Info: Reference segment=0 on input line 63.
+Package biblatex Info: Reference section=0 on input line 65.
+Package biblatex Info: Reference segment=0 on input line 65.
 
 (D:\miketex\tex/latex/translations/dicts\translations-basic-dictionary-polish.t
 rsl
@@ -1238,7 +1262,7 @@ File: translations-basic-dictionary-polish.trsl (polish translation file `trans
 lations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `polish'. on input line 63.
+or `polish'. on input line 65.
 
 (D:\miketex\tex/latex/translations/dicts\translations-basic-dictionary-english.
 trsl
@@ -1246,27 +1270,27 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 63.
+or `english'. on input line 65.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 63.
+(hyperref)                removing `\\' on input line 65.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 63.
+(hyperref)                removing `\\' on input line 65.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 63.
+(hyperref)                removing `\\' on input line 65.
 
-LaTeX Font Info:    Trying to load font information for T1+qhv on input line 66
+LaTeX Font Info:    Trying to load font information for T1+qhv on input line 68
 .
 (D:\miketex\tex/latex/tex-gyre\t1qhv.fd
 File: t1qhv.fd 2009/09/25 v1.2 font definition file for T1/qhv
 )
 LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
-(Font)              scaled to size 11.28003pt on input line 66.
+(Font)              scaled to size 11.28003pt on input line 68.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `qhv' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
@@ -1304,91 +1328,91 @@ Package microtype Info: Loading generic protrusion settings for font family
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
-(Font)              scaled to size 23.38725pt on input line 66.
+(Font)              scaled to size 23.38725pt on input line 68.
 LaTeX Font Info:    Font shape `T1/qhv/b/n' will be
-(Font)              scaled to size 23.38725pt on input line 66.
+(Font)              scaled to size 23.38725pt on input line 68.
 LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
-(Font)              scaled to size 16.24324pt on input line 66.
+(Font)              scaled to size 16.24324pt on input line 68.
 LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
-(Font)              scaled to size 13.53603pt on input line 66.
+(Font)              scaled to size 13.53603pt on input line 68.
 LaTeX Font Info:    Trying to load font information for OT1+minntx on input lin
-e 66.
+e 68.
 
 (D:\miketex\tex/latex/newtx\ot1minntx.fd
 File: ot1minntx.fd 2023/09/09 v1.1 font definition file for OT1/minntx
 )
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 14.4pt on input line 66.
+(Font)              scaled to size 14.4pt on input line 68.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `minntx' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 10.5pt on input line 66.
+(Font)              scaled to size 10.5pt on input line 68.
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 7.9pt on input line 66.
+(Font)              scaled to size 7.9pt on input line 68.
 LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 14.4pt on input line 66.
+(Font)              scaled to size 14.4pt on input line 68.
 LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 10.5pt on input line 66.
+(Font)              scaled to size 10.5pt on input line 68.
 LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 7.9pt on input line 66.
+(Font)              scaled to size 7.9pt on input line 68.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 14.4pt on input line 66.
+(Font)              scaled to size 14.4pt on input line 68.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 10.5pt on input line 66.
+(Font)              scaled to size 10.5pt on input line 68.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 7.9pt on input line 66.
+(Font)              scaled to size 7.9pt on input line 68.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 14.4pt on input line 66.
+(Font)              scaled to size 14.4pt on input line 68.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 10.5pt on input line 66.
+(Font)              scaled to size 10.5pt on input line 68.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 7.9pt on input line 66.
+(Font)              scaled to size 7.9pt on input line 68.
 LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 
-66.
+68.
 
 (D:\miketex\tex/latex/newtx\untxmia.fd
 File: untxmia.fd 2024/04/09 Fontinst v1.933 font definitions for U/ntxmia.
 )
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 14.4pt on input line 66.
+(Font)              scaled to size 14.4pt on input line 68.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 10.5pt on input line 66.
+(Font)              scaled to size 10.5pt on input line 68.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 7.9pt on input line 66.
+(Font)              scaled to size 7.9pt on input line 68.
 LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 
-66.
+68.
  (D:\miketex\tex/latex/newtx\untxsym.fd
 File: untxsym.fd 2023/08/16 Fontinst v1.933 font definitions for U/ntxsym.
 )
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 14.4pt on input line 66.
+(Font)              scaled to size 14.4pt on input line 68.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 10.5pt on input line 66.
+(Font)              scaled to size 10.5pt on input line 68.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 7.9pt on input line 66.
+(Font)              scaled to size 7.9pt on input line 68.
 LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 
-66.
+68.
 (D:\miketex\tex/latex/newtx\untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 14.4pt on input line 66.
+(Font)              scaled to size 14.4pt on input line 68.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 10.5pt on input line 66.
+(Font)              scaled to size 10.5pt on input line 68.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 7.9pt on input line 66.
+(Font)              scaled to size 7.9pt on input line 68.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 14.4pt on input line 66.
+(Font)              scaled to size 14.4pt on input line 68.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 10.5pt on input line 66.
+(Font)              scaled to size 10.5pt on input line 68.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 7.9pt on input line 66.
+(Font)              scaled to size 7.9pt on input line 68.
 LaTeX Font Info:    Font shape `T1/qhv/b/n' will be
-(Font)              scaled to size 13.53603pt on input line 66.
+(Font)              scaled to size 13.53603pt on input line 68.
 LaTeX Font Info:    Font shape `T1/qhv/b/n' will be
-(Font)              scaled to size 16.24324pt on input line 66.
+(Font)              scaled to size 16.24324pt on input line 68.
  [1
 
 
@@ -1407,9 +1431,9 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 
 {D:/miketex/fonts/enc/dvips/newtx/ntx-ec-tlf.enc}])
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 12.0pt on input line 68.
+(Font)              scaled to size 12.0pt on input line 70.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 24.88pt on input line 68.
+(Font)              scaled to size 24.88pt on input line 70.
  (main.toc
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
 (Font)              scaled to size 12.0pt on input line 7.
@@ -1459,10 +1483,6 @@ LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 (Font)              scaled to size 8.8pt on input line 7.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 (Font)              scaled to size 6.6pt on input line 7.
-)
-\tf@toc=\write5
-\openout5 = `main.toc'.
-
 
 [3
 
@@ -1473,7 +1493,11 @@ LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 
 
 
-]
+])
+\tf@toc=\write5
+\openout5 = `main.toc'.
+
+ [4]
 \openout2 = `chapters/wstep.aux'.
 
  (chapters/wstep.tex
@@ -1508,21 +1532,21 @@ LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
 (Font)              scaled to size 12.0pt on input line 90.
  [2{D:/miketex/fonts/enc/dvips/tex-gyre/q-ts1.enc}] [3] [4] [5] [6]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.95pt on input line 331.
+(Font)              scaled to size 10.95pt on input line 332.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 331.
+(Font)              scaled to size 10.95pt on input line 332.
 
-Overfull \hbox (3.4542pt too wide) in paragraph at lines 353--353
+Overfull \hbox (3.4542pt too wide) in paragraph at lines 354--354
 []|\T1/ntxtlf/b/n/12 (-20) TeamSpeak| 
  []
 
 
-Overfull \hbox (5.51604pt too wide) in paragraph at lines 353--353
+Overfull \hbox (5.51604pt too wide) in paragraph at lines 354--354
 []|\T1/ntxtlf/m/n/12 (-20) Ograniczony| 
  []
 
 
-Overfull \hbox (5.51604pt too wide) in paragraph at lines 353--353
+Overfull \hbox (5.51604pt too wide) in paragraph at lines 354--354
 []|\T1/ntxtlf/m/n/12 (-20) Ograniczony| 
  []
 
@@ -1571,12 +1595,12 @@ Overfull \hbox (0.91869pt too wide) in paragraph at lines 191--193
  []
 
 [11]
-<figures/dataflow.png, id=295, 402.50375pt x 151.56625pt>
+<figures/dataflow.png, id=394, 402.50375pt x 151.56625pt>
 File: figures/dataflow.png Graphic file (type png)
 <use figures/dataflow.png>
 Package pdftex.def Info: figures/dataflow.png  used on input line 237.
 (pdftex.def)             Requested size: 374.86777pt x 141.15866pt.
-<figures/technical_dataflow.png, id=297, 583.17876pt x 532.99126pt>
+<figures/technical_dataflow.png, id=396, 583.17876pt x 532.99126pt>
 File: figures/technical_dataflow.png Graphic file (type png)
 <use figures/technical_dataflow.png>
 Package pdftex.def Info: figures/technical_dataflow.png  used on input line 279
@@ -1589,7 +1613,7 @@ LaTeX Font Info:    Font shape `T1/ntxtt/b/n' in size <14.4> not available
 (Font)              Font shape `T1/txtt/bx/n' tried instead on input line 306.
  [13 <./figures/technical_dataflow.png>]
 [14{D:/miketex/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc}] [15]
-<figures/opus_quality.png, id=367, 797.46207pt x 590.62035pt>
+<figures/opus_quality.png, id=467, 797.46207pt x 590.62035pt>
 File: figures/opus_quality.png Graphic file (type png)
 <use figures/opus_quality.png>
 Package pdftex.def Info: figures/opus_quality.png  used on input line 436.
@@ -1628,17 +1652,223 @@ Overfull \hbox (8.37927pt too wide) in paragraph at lines 703--708
  []
 
 [20]
-<figures/gns_lanes.png, id=429, 623.32875pt x 278.03876pt>
+<figures/gns_lanes.png, id=528, 623.32875pt x 278.03876pt>
 File: figures/gns_lanes.png Graphic file (type png)
 <use figures/gns_lanes.png>
 Package pdftex.def Info: figures/gns_lanes.png  used on input line 721.
 (pdftex.def)             Requested size: 441.01775pt x 196.7216pt.
 ) [21 <./figures/gns_lanes.png>] [22]
+\openout2 = `chapters/UI.aux'.
+
+ (chapters/UI.tex
+Rozdzia\l  3.
+<figures/chapter3/ch3_fig01.png, id=542, 1204.5pt x 632.3625pt>
+File: figures/chapter3/ch3_fig01.png Graphic file (type png)
+<use figures/chapter3/ch3_fig01.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig01.png  used on input line 47.
+
+(pdftex.def)             Requested size: 418.9655pt x 219.96002pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [23
+
+
+
+
+]
+<figures/chapter3/ch3_fig02.png, id=549, 523.9575pt x 555.07375pt>
+File: figures/chapter3/ch3_fig02.png Graphic file (type png)
+<use figures/chapter3/ch3_fig02.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig02.png  used on input line 55.
+
+(pdftex.def)             Requested size: 343.9933pt x 364.42715pt.
+<figures/chapter3/ch3_fig03.png, id=552, 2055.68pt x 1175.39125pt>
+File: figures/chapter3/ch3_fig03.png Graphic file (type png)
+<use figures/chapter3/ch3_fig03.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig03.png  used on input line 63.
+
+(pdftex.def)             Requested size: 418.9655pt x 239.5399pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [24 <./figures/chapter3/ch3_fig01.png (PNG copy)> <./figures/chapter3/ch3_fig0
+2.png (PNG copy)>]
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 8.0pt on input line 70.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 8.0pt on input line 78.
+
+Underfull \hbox (badness 5460) in paragraph at lines 95--96
+[]|\T1/ntxtlf/m/n/8 (+20) Wideo, ka-len-darz, in-te-gra-cje
+ []
+
+<figures/chapter3/ch3_fig04.png, id=561, 984.3174pt x 419.8887pt>
+File: figures/chapter3/ch3_fig04.png Graphic file (type png)
+<use figures/chapter3/ch3_fig04.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig04.png  used on input line 113
+.
+(pdftex.def)             Requested size: 441.01775pt x 188.12807pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25 <./figures/chapter3/ch3_fig03.png>]
+<figures/chapter3/ch3_fig05.png, id=570, 1806.75pt x 1124.2pt>
+File: figures/chapter3/ch3_fig05.png Graphic file (type png)
+<use figures/chapter3/ch3_fig05.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig05.png  used on input line 120
+.
+(pdftex.def)             Requested size: 418.9655pt x 260.68764pt.
+<figures/chapter3/ch3_fig06.png, id=572, 1606.0pt x 1134.2375pt>
+File: figures/chapter3/ch3_fig06.png Graphic file (type png)
+<use figures/chapter3/ch3_fig06.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig06.png  used on input line 139
+.
+(pdftex.def)             Requested size: 441.01775pt x 311.45764pt.
+
+Underfull \vbox (badness 3229) has occurred while \output is active []
+
+ [26 <./figures/chapter3/ch3_fig04.png> <./figures/chapter3/ch3_fig05.png (PNG 
+copy)>]
+[27 <./figures/chapter3/ch3_fig06.png (PNG copy)>]
+<figures/chapter3/ui_etap1_diagnostyczny.png, id=587, 904.37875pt x 591.20876pt
+>
+File: figures/chapter3/ui_etap1_diagnostyczny.png Graphic file (type png)
+<use figures/chapter3/ui_etap1_diagnostyczny.png>
+Package pdftex.def Info: figures/chapter3/ui_etap1_diagnostyczny.png  used on i
+nput line 156.
+(pdftex.def)             Requested size: 418.9655pt x 273.88081pt.
+<figures/chapter3/ui_etap2_voice.png, id=588, 1008.76875pt x 628.3475pt>
+File: figures/chapter3/ui_etap2_voice.png Graphic file (type png)
+<use figures/chapter3/ui_etap2_voice.png>
+Package pdftex.def Info: figures/chapter3/ui_etap2_voice.png  used on input lin
+e 172.
+(pdftex.def)             Requested size: 418.9655pt x 260.97028pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [28 <./figures/chapter3/ui_etap1_diagnostyczny.png>]
+<figures/chapter3/ui_etap3_chat_obraz.png, id=595, 800.9925pt x 479.7925pt>
+File: figures/chapter3/ui_etap3_chat_obraz.png Graphic file (type png)
+<use figures/chapter3/ui_etap3_chat_obraz.png>
+Package pdftex.def Info: figures/chapter3/ui_etap3_chat_obraz.png  used on inpu
+t line 187.
+(pdftex.def)             Requested size: 418.9655pt x 250.96504pt.
+ [29 <./figures/chapter3/ui_etap2_voice.png> <./figures/chapter3/ui_etap3_chat_
+obraz.png>]
+<figures/chapter3/ui_etap4_pliki.png, id=605, 1927.2pt x 1084.05pt>
+File: figures/chapter3/ui_etap4_pliki.png Graphic file (type png)
+<use figures/chapter3/ui_etap4_pliki.png>
+Package pdftex.def Info: figures/chapter3/ui_etap4_pliki.png  used on input lin
+e 202.
+(pdftex.def)             Requested size: 418.9655pt x 235.66318pt.
+<figures/chapter3/ch3_fig07.png, id=606, 805.0075pt x 483.8075pt>
+File: figures/chapter3/ch3_fig07.png Graphic file (type png)
+<use figures/chapter3/ch3_fig07.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig07.png  used on input line 221
+.
+(pdftex.def)             Requested size: 388.09776pt x 233.24371pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [30 <./figures/chapter3/ui_etap4_pliki.png>]
+<figures/chapter3/ch3_fig08.png, id=613, 805.0075pt x 483.8075pt>
+File: figures/chapter3/ch3_fig08.png Graphic file (type png)
+<use figures/chapter3/ch3_fig08.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig08.png  used on input line 270
+.
+(pdftex.def)             Requested size: 388.09776pt x 233.24371pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [31 <./figures/chapter3/ch3_fig07.png>]
+<figures/chapter3/ch3_fig10.png, id=622, 805.0075pt x 483.8075pt>
+File: figures/chapter3/ch3_fig10.png Graphic file (type png)
+<use figures/chapter3/ch3_fig10.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig10.png  used on input line 285
+.
+(pdftex.def)             Requested size: 388.09776pt x 233.24371pt.
+ [32 <./figures/chapter3/ch3_fig08.png> <./figures/chapter3/ch3_fig10.png>]
+<figures/chapter3/ch3_fig11.png, id=631, 805.0075pt x 483.8075pt>
+File: figures/chapter3/ch3_fig11.png Graphic file (type png)
+<use figures/chapter3/ch3_fig11.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig11.png  used on input line 335
+.
+(pdftex.def)             Requested size: 388.09776pt x 233.24371pt.
+
+Underfull \hbox (badness 3396) in paragraph at lines 362--362
+[]|\T1/ntxtlf/m/n/10.95 (+20) Steruje d¹wi¦-kiem wy-bra-nego
+ []
+
+[33 <./figures/chapter3/ch3_fig11.png>]
+<figures/chapter3/ch3_fig12.png, id=640, 805.0075pt x 483.8075pt>
+File: figures/chapter3/ch3_fig12.png Graphic file (type png)
+<use figures/chapter3/ch3_fig12.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig12.png  used on input line 396
+.
+(pdftex.def)             Requested size: 388.09776pt x 233.24371pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [34]
+<figures/chapter3/ch3_fig13.png, id=646, 1927.2pt x 1043.9pt>
+File: figures/chapter3/ch3_fig13.png Graphic file (type png)
+<use figures/chapter3/ch3_fig13.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig13.png  used on input line 403
+.
+(pdftex.def)             Requested size: 388.09776pt x 210.20987pt.
+
+Underfull \hbox (badness 3302) in paragraph at lines 433--433
+[]|\T1/ntxtlf/m/n/10.95 (+20) Kopiuje tre±¢ za-pro-sze-nia do
+ []
+
+ignored error: Infinite glue shrinkage found in box being split [35 <./figures/
+chapter3/ch3_fig12.png> <./figures/chapter3/ch3_fig13.png>]
+<figures/chapter3/ch3_fig14.png, id=657, 805.0075pt x 483.8075pt>
+File: figures/chapter3/ch3_fig14.png Graphic file (type png)
+<use figures/chapter3/ch3_fig14.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig14.png  used on input line 457
+.
+(pdftex.def)             Requested size: 388.09776pt x 233.24371pt.
+<figures/chapter3/ch3_fig15.png, id=658, 805.0075pt x 483.8075pt>
+File: figures/chapter3/ch3_fig15.png Graphic file (type png)
+<use figures/chapter3/ch3_fig15.png>
+Package pdftex.def Info: figures/chapter3/ch3_fig15.png  used on input line 464
+.
+(pdftex.def)             Requested size: 388.09776pt x 233.24371pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [36 <./figures/chapter3/ch3_fig14.png>]
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
+(Font)              scaled to size 10.95pt on input line 486.
+
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
+[]|\T1/ntxtlf/m/n/10.95 (+20) Folder
+ []
+
+LaTeX Font Info:    Font shape `T1/ntxtt/m/n' will be
+(Font)              scaled to size 8.0pt on input line 547.
+
+Underfull \hbox (badness 3118) in paragraph at lines 549--549
+[]|\T1/ntxtlf/m/n/8 (+20) Dziaªanie wy-ª¡cz-nie w
+ []
+
+[37 <./figures/chapter3/ch3_fig15.png>]
+Underfull \hbox (badness 2181) in paragraph at lines 606--607
+[]|\T1/ntxtlf/m/n/10.95 (+20) Wybór urz¡-dze-nia wej-±cio-
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [38])
+[39]
 \openout2 = `chapters/debugging.aux'.
 
  (chapters/debugging.tex
-Rozdzia\l  3.
-[23
+Rozdzia\l  4.
+[40
 
 
 
@@ -1648,82 +1878,92 @@ Underfull \hbox (badness 10000) in paragraph at lines 121--121
 []|\T1/ntxtt/m/n/12 udp && ip.addr ==
  []
 
-[24]
-<figures/wireshark_mowa.png, id=473, 979.66pt x 880.28876pt>
+[41]
+<figures/wireshark_mowa.png, id=718, 979.66pt x 880.28876pt>
 File: figures/wireshark_mowa.png Graphic file (type png)
 <use figures/wireshark_mowa.png>
 Package pdftex.def Info: figures/wireshark_mowa.png  used on input line 169.
 (pdftex.def)             Requested size: 418.9655pt x 376.46167pt.
- [25] [26 <./figures/wireshark_mowa.png>]
-<figures/wireshark_przesyl.png, id=490, 1099.10625pt x 656.4525pt>
+ [42] [43 <./figures/wireshark_mowa.png>]
+<figures/wireshark_przesyl.png, id=733, 1099.10625pt x 656.4525pt>
 File: figures/wireshark_przesyl.png Graphic file (type png)
 <use figures/wireshark_przesyl.png>
 Package pdftex.def Info: figures/wireshark_przesyl.png  used on input line 202.
 
 (pdftex.def)             Requested size: 418.9655pt x 250.22581pt.
- [27 <./figures/wireshark_przesyl.png>]
-<figures/wireshark_cisza.png, id=501, 979.66pt x 880.28876pt>
+ [44 <./figures/wireshark_przesyl.png>]
+<figures/wireshark_cisza.png, id=744, 979.66pt x 880.28876pt>
 File: figures/wireshark_cisza.png Graphic file (type png)
 <use figures/wireshark_cisza.png>
 Package pdftex.def Info: figures/wireshark_cisza.png  used on input line 234.
 (pdftex.def)             Requested size: 418.9655pt x 376.46167pt.
- [28 <./figures/wireshark_cisza.png>]
-<figures/menedzerzadan.png, id=511, 939.51pt x 45.92157pt>
+ [45 <./figures/wireshark_cisza.png>]
+<figures/menedzerzadan.png, id=754, 939.51pt x 45.92157pt>
 File: figures/menedzerzadan.png Graphic file (type png)
 <use figures/menedzerzadan.png>
 Package pdftex.def Info: figures/menedzerzadan.png  used on input line 273.
 (pdftex.def)             Requested size: 418.9655pt x 20.47812pt.
- [29 <./figures/menedzerzadan.png>]
+ [46 <./figures/menedzerzadan.png>]
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/it' will be
 (Font)              scaled to size 12.0pt on input line 334.
 
-[30]) [31] [32]
+[47]) [48] [49]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/sc' will be
-(Font)              scaled to size 12.0pt on input line 93.
+(Font)              scaled to size 12.0pt on input line 99.
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/ntxtlf/m/sc/12'.
 (microtype)             Ignoring protrusion settings for this character.
 
-Overfull \hbox (11.89796pt too wide) in paragraph at lines 93--93
+Overfull \hbox (11.89796pt too wide) in paragraph at lines 99--99
 \T1/ntxtlf/m/it/12 (-20) UDP\T1/ntxtlf/m/n/12 (-20) . 2026. \T1/ntxtlf/m/sc/12 
 (-20) url\T1/ntxtlf/m/n/12 (-20) : [][]$\T1/ntxtt/m/n/12 https : / / github . c
 om / ValveSoftware / GameNetworkingSockets$[][]\T1/ntxtlf/m/n/12 (-20) . 
  []
 
-[33
+[50
 
 
 
-{D:/miketex/fonts/enc/dvips/newtx/ntx-ec-tlf-pc.enc}] [34] (main.aux
-(abstract.aux) (chapters/wstep.aux) (chapters/backend.aux)
+{D:/miketex/fonts/enc/dvips/newtx/ntx-ec-tlf-pc.enc}] [51] (main.lof
+[52
+
+])
+\tf@lof=\write6
+\openout6 = `main.lof'.
+
+ [53] (main.lot)
+\tf@lot=\write7
+\openout7 = `main.lot'.
+
+ [54
+
+] (main.lol)
+\tf@lol=\write8
+\openout8 = `main.lol'.
+
+ [55
+
+] (main.aux (abstract.aux)
+(chapters/wstep.aux) (chapters/backend.aux) (chapters/UI.aux)
 (chapters/debugging.aux))
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: D2FEBCF5AB4034AD01E2FB460A37F231;8745.
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                main
-(biblatex)                and rerun LaTeX afterwards.
-
+(rerunfilecheck)             Checksum: C41114B7D8ADE50B790B655A35A9E14A;13278.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36915 strings out of 467870
- 682369 string characters out of 5434709
- 1598591 words of memory out of 5000000
- 64888 multiletter control sequences out of 15000+600000
- 729311 words of font info for 257 fonts, out of 8000000 for 9000
+ 37491 strings out of 467870
+ 695351 string characters out of 5434709
+ 1610844 words of memory out of 5000000
+ 65313 multiletter control sequences out of 15000+600000
+ 740995 words of font info for 291 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,10n,120p,1199b,2500s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,10n,120p,1199b,3561s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <D:/miketex/fonts/type1/public/newtx/NewTXMI.pfb><D:/miketex/fonts/type1/publ
 ic/tex-gyre/qhvb.pfb><D:/miketex/fonts/type1/public/tex-gyre/qhvr.pfb><D:/miket
 ex/fonts/type1/public/tex-gyre/qtmr.pfb><D:/miketex/fonts/type1/public/txfonts/
@@ -1733,9 +1973,9 @@ ype1/public/txfonts/t1xtt.pfb><D:/miketex/fonts/type1/public/newtx/txexs.pfb><D
 wtx/txsys.pfb><D:/miketex/fonts/type1/public/newtx/ztmb.pfb><D:/miketex/fonts/t
 ype1/public/newtx/ztmbi.pfb><D:/miketex/fonts/type1/public/newtx/ztmr.pfb><D:/m
 iketex/fonts/type1/public/newtx/ztmri.pfb>
-Output written on main.pdf (37 pages, 775188 bytes).
+Output written on main.pdf (59 pages, 2866307 bytes).
 PDF statistics:
- 695 PDF objects out of 1000 (max. 8388607)
- 200 named destinations out of 1000 (max. 500000)
- 46889 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 1038 PDF objects out of 1200 (max. 8388607)
+ 269 named destinations out of 1000 (max. 500000)
+ 53787 words of extra memory for PDF output out of 61914 (max. 10000000)
 

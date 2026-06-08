@@ -51,6 +51,8 @@
 % To jest przykład zastosowania standardowego formatowania LNCS
 % \usepackage[backend=biber,style=lncs]{biblatex} % styl LNCS globalnie
 
+\usepackage{longtable}
+
 % Dodanie pliku z bibliografią
 % TU WSTAW NAZWĘ SWOJEGO PLIKU
 \addbibresource{bibliography.bib}
@@ -84,7 +86,11 @@
 
 \include{chapters/backend}
 
+\include{chapters/UI}
+
 \include{chapters/debugging}
+
+
 
 %% TU WYWOŁUJEMY BIBLIOGRAFIĘ
 %% ZRÓDŁO ZOSTAŁO USTAWIONE POLECENIEM \addbibresource
@@ -102,8 +108,8 @@
 %% odkomentuj potrzebne spisy 
 %% (zastanów się, czy są Ci one potrzebne)
  
-%\listoffigures
-%\listoftables
-%\lstlistoflistings
+\listoffigures
+\listoftables
+\lstlistoflistings
 
 \end{document}

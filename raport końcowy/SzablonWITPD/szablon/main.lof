@@ -1,0 +1,34 @@
+\acswitchoff 
+\babel@toc {polish}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {polish}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Schemat przepływu danych w architekturze VT-LAN (praca własna)}}{12}{figure.caption.3}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces "Pipeline" transmisji głosowej w VT-LAN: nadawca, serwer i odbiorca (praca własna)}}{13}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Porównanie jakości kodeka Opus z innymi kodekami w funkcji przepustowości (źródło: opus-codec.org)}}{16}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Podział ruchu sieciowego na priorytetowy strumień głosowy i standardowy strumień danych (praca własna)}}{21}{figure.caption.10}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Referencyjny układ Discorda: kanały, czat, uczestnicy i sterowanie głosem (źródło: \blx@tocontentsinit {0}\cite {DiscordEFF}).}}{24}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Referencyjny układ TeamSpeak: serwer, kanały i czat kanału (źródło: \blx@tocontentsinit {0}\cite {TeamSpeak}).}}{24}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Referencyjny układ Microsoft Teams: spotkanie, czat i udostępnianie treści (źródło: \blx@tocontentsinit {0}\cite {MSTeams}).}}{25}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Schemat blokowy finalnego interfejsu użytkownika. (praca własna)}}{26}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Przepływ pracy użytkownika w finalnej wersji aplikacji. (praca własna)}}{26}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Chronologiczna zmiana interfejsu VT-LAN w trakcie realizacji projektu. (praca własna)}}{27}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Etap 1 - panel diagnostyczny z ustawieniami sieci i wykresami transmisji. (praca własna)}}{28}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Etap 2 - lista klientów i panel sterowania połączeniami głosowymi. (praca własna)}}{29}{figure.caption.18}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Etap 3 - panel czatu z historią rozmowy i podglądem przesłanego obrazu. (praca własna)}}{29}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Etap 4 - okno wyboru pliku i obsługa załączników. (praca własna)}}{30}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Ekran startowy z wyborem sposobu dołączenia do sesji. (praca własna)}}{31}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Formularz tworzenia pokoju. (praca własna)}}{32}{figure.caption.22}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Formularz dołączania do pokoju. (praca własna)}}{32}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Główny widok pokoju z panelem uczestników, czatem i plikami. (praca własna)}}{33}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Okno zaproszenia w panelu hosta. (praca własna)}}{35}{figure.caption.25}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Wiadomość Gmail wygenerowana przez funkcję zaproszenia. (praca własna)}}{35}{figure.caption.26}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Panel czatu z podglądem obrazu i informacją o przesłanym pliku PDF. (praca własna)}}{36}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Pasek postępu podczas przesyłania dużego pliku. (praca własna)}}{37}{figure.caption.28}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Przechwytywanie pakietów UDP transmisji głosowej w programie Wireshark (praca własna)}}{43}{figure.caption.33}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Podgląd surowej, zaszyfrowanej zawartości pakietu UDP w programie Wireshark (praca własna)}}{44}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Przechwytywanie pakietów UDP w stanie ciszy (aktywny filtr VAD) (praca własna)}}{45}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Monitorowanie zużycia zasobów systemowych przez instancje aplikacji VT-LAN w Menedżerze Zadań Windows (praca własna)}}{46}{figure.caption.36}%

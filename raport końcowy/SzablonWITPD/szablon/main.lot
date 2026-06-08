@@ -1,0 +1,23 @@
+\acswitchoff 
+\babel@toc {polish}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {polish}{}\relax 
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {1.1}{\ignorespaces Porównanie komunikatorów dostępnych na rynku}}{7}{table.caption.2}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Porównanie kanałów transmisji w VT-LAN}}{12}{table.caption.4}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Wybrane parametry kodeka Opus \blx@tocontentsinit {0}\cite {OpusRFC}}}{16}{table.caption.6}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Struktura pakietu sieciowego wysyłającego segment pliku}}{19}{table.caption.8}%
+\contentsline {table}{\numberline {2.4}{\ignorespaces Obsługiwane stany połączenia GNS}}{20}{table.caption.9}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Dobór inspiracji projektowych.}}{25}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Elementy ekranu startowego.}}{31}{table.3.2}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Pola formularza dołączania do pokoju.}}{33}{table.3.3}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Elementy głównego widoku pokoju.}}{34}{table.3.4}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Elementy okna zaproszenia.}}{35}{table.3.5}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Funkcje panelu czatu i przesyłania plików.}}{37}{table.3.6}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Porównanie funkcjonalne VT-LAN z wybranymi komunikatorami.}}{38}{table.3.7}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces Elementy poza bieżącym zakresem i możliwe kierunki rozwoju.}}{38}{table.3.8}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Konfiguracja sprzętowo-programowa stanowiska testowego.}}{41}{table.caption.29}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Konfiguracja filtrów sieciowych w programie Wireshark.}}{42}{table.caption.32}%
