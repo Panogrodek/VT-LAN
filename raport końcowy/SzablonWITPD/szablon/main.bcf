@@ -2436,7 +2436,9 @@
     <bcf:citekey order="61" intorder="1">SDLMixer</bcf:citekey>
     <bcf:citekey order="62" intorder="1">SDL3</bcf:citekey>
     <bcf:citekey order="63" intorder="1">ImGui</bcf:citekey>
-    <bcf:citekey order="64" intorder="1">SDL3</bcf:citekey>
+    <bcf:citekey order="64" intorder="1">SDLMixer</bcf:citekey>
+    <bcf:citekey order="65" intorder="1">SDLMixer</bcf:citekey>
+    <bcf:citekey order="66" intorder="1">SDLMixer</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

@@ -1,5 +1,6 @@
 # Binaries
 **/bin/
+**/received_files/
 
 # Visual Studio files and folder
 .vs/

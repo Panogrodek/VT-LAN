@@ -35,16 +35,16 @@ Proces zapewnienia jakości oprogramowania podzielono na trzy główne stadia,
 ściśle powiązane z cyklem wytwórczym aplikacji:
 
 \begin{enumerate}
-    \item \textbf{Testy jednostkowe i modułowe} -- weryfikacja poprawności
-          pojedynczych funkcji, w szczególności mechanizmów kolejkowania pytań
-          tekstowych oraz poprawności inicjalizacji podsystemów audio biblioteki
-          SDL3 \cite{SDL3}.
-    \item \textbf{Testy integracyjne} -- realizowane po scaleniu modułu sieciowego
-          (obsługującego protokoły UDP/TCP) z warstwą kryptograficzną (szyfrowanie
-          strumienia GNS \cite{GNS}) oraz interfejsem użytkownika.
-    \item \textbf{Testy systemowe i obciążeniowe} -- badanie stabilności aplikacji
-          w warunkach ciągłej, wielogodzinnej pracy przy symulacji jednoczesnej
-          aktywności wielu użytkowników w obrębie jednej sieci lokalnej.
+	\item \textbf{Testy jednostkowe i modułowe} -- weryfikacja poprawności
+	pojedynczych funkcji, w szczególności mechanizmów kolejkowania pytań
+	tekstowych oraz poprawności inicjalizacji podsystemów audio biblioteki
+	SDL3 \cite{SDL3}.
+	\item \textbf{Testy integracyjne} -- realizowane po scaleniu modułu sieciowego
+	(obsługującego protokoły UDP/TCP) z warstwą kryptograficzną (szyfrowanie
+	strumienia GNS \cite{GNS}) oraz interfejsem użytkownika.
+	\item \textbf{Testy systemowe i obciążeniowe} -- badanie stabilności aplikacji
+	w warunkach ciągłej, wielogodzinnej pracy przy symulacji jednoczesnej
+	aktywności wielu użytkowników w obrębie jednej sieci lokalnej.
 \end{enumerate}
 
 \subsection{Stanowisko testowe i konfiguracja sprzętowa}
@@ -56,20 +56,20 @@ laboratoryjnym opartym na dedykowanym przełączniku sieciowym Gigabit Ethernet.
 Specyfikację techniczną maszyn testowych zestawiono w~\cref{tab:db_specyfikacja}.
 
 \begin{table}[htbp]
-\centering
-\caption{Konfiguracja sprzętowo-programowa stanowiska testowego.}
-\label{tab:db_specyfikacja}
-\begin{tabular}{|l|l|}
-\hline
-\textbf{Komponent systemu}          & \textbf{Parametry / Wersja}                          \\ \hline
-Procesor (CPU)                      & Intel Core i5-12400F                                 \\ \hline
-Pamięć operacyjna (RAM)             & 32\,GB DDR4                                          \\ \hline
-Karta sieciowa (NIC)                & Realtek PCIe Gigabit Ethernet (10/100/1000\,Mbps)    \\ \hline
-System operacyjny                   & Windows 11 Pro                                       \\ \hline
-Zintegrowane środowisko (IDE)       & Microsoft Visual Studio 2022 (v17.x)                 \\ \hline
-Kompilator i standard C++           & MSVC (Microsoft Visual C++ v143), standard C++20     \\ \hline
-Biblioteka multimedialna            & Simple DirectMedia Layer (SDL3) \cite{SDL3}          \\ \hline
-\end{tabular}
+	\centering
+	\caption{Konfiguracja sprzętowo-programowa stanowiska testowego.}
+	\label{tab:db_specyfikacja}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Komponent systemu}          & \textbf{Parametry / Wersja}                          \\ \hline
+		Procesor (CPU)                      & Intel Core i5-12400F                                 \\ \hline
+		Pamięć operacyjna (RAM)             & 32\,GB DDR4                                          \\ \hline
+		Karta sieciowa (NIC)                & Realtek PCIe Gigabit Ethernet (10/100/1000\,Mbps)    \\ \hline
+		System operacyjny                   & Windows 11 Pro                                       \\ \hline
+		Zintegrowane środowisko (IDE)       & Microsoft Visual Studio 2022 (v17.x)                 \\ \hline
+		Kompilator i standard C++           & MSVC (Microsoft Visual C++ v143), standard C++20     \\ \hline
+		Biblioteka multimedialna            & Simple DirectMedia Layer (SDL3) \cite{SDL3}          \\ \hline
+	\end{tabular}
 \end{table}
 
 \subsection{Narzędzia profilujące i diagnostyczne}
@@ -89,16 +89,16 @@ skompilowanych w trybie \textit{Release} z włączonym generowaniem symboli
 debugowania (\texttt{.pdb}). Do kluczowych funkcji należały:
 
 \begin{itemize}
-    \item \textbf{Narzędzie Memory Usage (Profiler Pamięci):} Wykonywanie
-          migawek sterty (ang.~\textit{heap snapshots}) w kluczowych momentach
-          działania aplikacji -- np. przed i po nawiązaniu połączenia głosowego.
-          Umożliwiło to porównywanie obiektów alokowanych na stercie i precyzyjne
-          lokalizowanie wycieków pamięci (ang.~\textit{memory leaks}).
-    \item \textbf{Narzędzie CPU Usage (Profiler Procesora):} Analiza próbek
-          stosu wywołań w celu wygenerowania drzewa funkcji (ang.~\textit{call tree}).
-          Pozwoliło wskazać funkcje generujące największy narzut obliczeniowy
-          (ang.~\textit{hot spots}) podczas kodowania dźwięku kodekiem Opus
-          \cite{OpusRFC}.
+	\item \textbf{Narzędzie Memory Usage (Profiler Pamięci):} Wykonywanie
+	migawek sterty (ang.~\textit{heap snapshots}) w kluczowych momentach
+	działania aplikacji -- np. przed i po nawiązaniu połączenia głosowego.
+	Umożliwiło to porównywanie obiektów alokowanych na stercie i precyzyjne
+	lokalizowanie wycieków pamięci (ang.~\textit{memory leaks}).
+	\item \textbf{Narzędzie CPU Usage (Profiler Procesora):} Analiza próbek
+	stosu wywołań w celu wygenerowania drzewa funkcji (ang.~\textit{call tree}).
+	Pozwoliło wskazać funkcje generujące największy narzut obliczeniowy
+	(ang.~\textit{hot spots}) podczas kodowania dźwięku kodekiem Opus
+	\cite{OpusRFC}.
 \end{itemize}
 
 \subsubsection{Analizator protokołów Wireshark}
@@ -111,15 +111,15 @@ dedykowanych reguł. Strukturę i cel monitorowania poszczególnych potoków dan
 przedstawiono w~\cref{tab:db_filtry}.
 
 \begin{table}[htbp]
-\centering
-\caption{Konfiguracja filtrów sieciowych w programie Wireshark.}
-\label{tab:db_filtry}
-\begin{tabular}{|l|p{4.2cm}|p{6.2cm}|}
-\hline
-\textbf{Protokół} & \textbf{Filtr diagnostyczny}         & \textbf{Cel analizy i monitoringu}                                         \\ \hline
-\textbf{TCP}      & \texttt{tcp.port == 50005}           & Weryfikacja narzutu nagłówków dla czatu tekstowego i systemu przesyłu wiadomości. \\ \hline
-\textbf{UDP}      & \texttt{udp \&\& ip.addr == 192.168.1.0/24} & Badanie ciągłości strumienia audio kodeka Opus \cite{OpusRFC} oraz poprawności działania algorytmu VAD. \\ \hline
-\end{tabular}
+	\centering
+	\caption{Konfiguracja filtrów sieciowych w programie Wireshark.}
+	\label{tab:db_filtry}
+	\begin{tabular}{|l|p{4.2cm}|p{6.2cm}|}
+		\hline
+		\textbf{Protokół} & \textbf{Filtr diagnostyczny}         & \textbf{Cel analizy i monitoringu}                                         \\ \hline
+		\textbf{UDP (reliable)} & \texttt{udp.port == 27020}      & Weryfikacja narzutu nagłówków dla czatu tekstowego i systemu RPC -- kanał niezawodny GNS (TCP-like). \\ \hline
+		\textbf{UDP (unreliable)} & \texttt{udp \&\& ip.addr == 192.168.1.0/24} & Badanie ciągłości strumienia audio kodeka Opus \cite{OpusRFC} oraz poprawności działania algorytmu VAD -- kanał bezgwarancyjny GNS. \\ \hline
+	\end{tabular}
 \end{table}
 
 \subsection{Metodyka badania algorytmu Voice Activity Detection (VAD)}
@@ -134,15 +134,15 @@ implementacji VAD po stronie backendu przedstawiono w sekcji~\ref{sec:voicecap}.
 Procedura testowa została sformalizowana jako eksperyment dwufazowy:
 
 \begin{enumerate}
-    \item \textbf{Faza ciszy (tło laboratoryjne):} Stanowisko testowe zostaje
-          wyciszone na okres $t = 10$\,s. Za pomocą wykresów \textit{I/O Graphs}
-          w Wireshark \cite{wireshark_doc} monitorowana jest liczba pakietów
-          przesyłanych w jednostce czasu. Oczekiwany rezultat to całkowity spadek
-          intensywności ruchu UDP do zera.
-    \item \textbf{Faza aktywnej mowy:} Użytkownik generuje ciągły sygnał mowy
-          przez $t = 30$\,s. Profiler sieciowy powinien zarejestrować natychmiastowe
-          otwarcie strumienia pakietów UDP o stałym, zoptymalizowanym rozmiarze ramki
-          kodeka Opus \cite{OpusRFC}.
+	\item \textbf{Faza ciszy (tło laboratoryjne):} Stanowisko testowe zostaje
+	wyciszone na okres $t = 10$\,s. Za pomocą wykresów \textit{I/O Graphs}
+	w Wireshark \cite{wireshark_doc} monitorowana jest liczba pakietów
+	przesyłanych w jednostce czasu. Oczekiwany rezultat to całkowity spadek
+	intensywności ruchu UDP do zera.
+	\item \textbf{Faza aktywnej mowy:} Użytkownik generuje ciągły sygnał mowy
+	przez $t = 30$\,s. Profiler sieciowy powinien zarejestrować natychmiastowe
+	otwarcie strumienia pakietów UDP o stałym, zoptymalizowanym rozmiarze ramki
+	kodeka Opus \cite{OpusRFC}.
 \end{enumerate}
 
 % ─────────────────────────────────────────────────────────────────────────────
@@ -165,27 +165,27 @@ SDL3 \cite{SDL3}. Rezultat przechwytywania ruchu przedstawiono na
 \cref{fig:db_wireshark_capture}.
 
 \begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.95\textwidth]{figures/wireshark_mowa.png}
-    \caption{Przechwytywanie pakietów UDP transmisji głosowej w programie Wireshark (praca własna)}
-    \label{fig:db_wireshark_capture}
+	\centering
+	\includegraphics[width=0.95\textwidth]{figures/wireshark_mowa.png}
+	\caption{Przechwytywanie pakietów UDP transmisji głosowej w programie Wireshark (praca własna)}
+	\label{fig:db_wireshark_capture}
 \end{figure}
 
 Analiza zarejestrowanego strumienia danych (\cref{fig:db_wireshark_capture})
 dostarcza istotnych informacji o poprawności implementacji technicznej:
 
 \begin{itemize}
-    \item \textbf{Wykorzystanie protokołu UDP} -- pakiety są poprawnie wysyłane
-          bezpołączeniowo, co minimalizuje opóźnienia (\textit{latency}) transmisji
-          audio w czasie rzeczywistym.
-    \item \textbf{Rozmiar danych (Payload)} -- czysta zawartość pola \textit{Data}
-          wynosi niezmiennie 119\,B. Świadczy to o bardzo wysokim stopniu kompresji
-          kodeka Opus \cite{OpusRFC} oraz niskim narzucie algorytmu szyfrującego
-          warstwę danych.
-    \item \textbf{Całkowita długość ramki (Length)} -- całkowity rozmiar pakietu
-          na warstwie sieciowej wynosi 151\,B. Niewielki rozmiar zapobiega
-          fragmentacji pakietów IP w sieci LAN, co bezpośrednio przekłada się
-          na redukcję fluktuacji opóźnień (\textit{jitter}).
+	\item \textbf{Wykorzystanie protokołu UDP} -- pakiety są poprawnie wysyłane
+	bezpołączeniowo, co minimalizuje opóźnienia (\textit{latency}) transmisji
+	audio w czasie rzeczywistym.
+	\item \textbf{Rozmiar danych (Payload)} -- czysta zawartość pola \textit{Data}
+	wynosi niezmiennie 119\,B. Świadczy to o bardzo wysokim stopniu kompresji
+	kodeka Opus \cite{OpusRFC} oraz niskim narzucie algorytmu szyfrującego
+	warstwę danych.
+	\item \textbf{Całkowita długość ramki (Length)} -- całkowity rozmiar pakietu
+	na warstwie sieciowej wynosi 151\,B. Niewielki rozmiar zapobiega
+	fragmentacji pakietów IP w sieci LAN, co bezpośrednio przekłada się
+	na redukcję fluktuacji opóźnień (\textit{jitter}).
 \end{itemize}
 
 \subsection{Weryfikacja poprawności kryptograficznej warstwy transportowej}
@@ -198,10 +198,10 @@ Wynik badania zawartości pakietu UDP o długości danych równej 1255\,B
 (\texttt{Len=1255}) przedstawia \cref{fig:db_wireshark_encryption}.
 
 \begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.95\textwidth]{figures/wireshark_przesyl.png}
-    \caption{Podgląd surowej, zaszyfrowanej zawartości pakietu UDP w programie Wireshark (praca własna)}
-    \label{fig:db_wireshark_encryption}
+	\centering
+	\includegraphics[width=0.95\textwidth]{figures/wireshark_przesyl.png}
+	\caption{Podgląd surowej, zaszyfrowanej zawartości pakietu UDP w programie Wireshark (praca własna)}
+	\label{fig:db_wireshark_encryption}
 \end{figure}
 
 Szczegółowa analiza heksadecymalna oraz tekstowa (ASCII) pola \textit{Data}
@@ -209,16 +209,16 @@ widoczna na \cref{fig:db_wireshark_encryption} dostarcza kluczowych dowodów
 inżynierskich:
 
 \begin{itemize}
-    \item \textbf{Pełna obfuskacja ciągu bajtów} -- podgląd tekstowy ASCII
-          nie wykazuje żadnych czytelnych struktur danych, stałych nagłówków
-          ani powtarzalnych sekwencji próbek dźwiękowych. Cały payload pakietu
-          stanowi jednolitą, zaszyfrowaną strukturę.
-    \item \textbf{Skuteczna izolacja informacji} -- test udowodnił poprawność
-          integracji backendu sieciowego z warstwą kryptograficzną (AES-GCM-256
-          biblioteki GNS \cite{GNS}). Każda paczka danych opuszczająca aplikację
-          jest w pełni zabezpieczona przed podsłuchem pakietów
-          (ang.~\textit{packet sniffing}), gwarantując poufność komunikacji
-          w sieci lokalnej nawet w przypadku celowego przechwycenia potoku danych.
+	\item \textbf{Pełna obfuskacja ciągu bajtów} -- podgląd tekstowy ASCII
+	nie wykazuje żadnych czytelnych struktur danych, stałych nagłówków
+	ani powtarzalnych sekwencji próbek dźwiękowych. Cały payload pakietu
+	stanowi jednolitą, zaszyfrowaną strukturę.
+	\item \textbf{Skuteczna izolacja informacji} -- test udowodnił poprawność
+	integracji backendu sieciowego z warstwą kryptograficzną (AES-GCM-256
+	biblioteki GNS \cite{GNS}). Każda paczka danych opuszczająca aplikację
+	jest w pełni zabezpieczona przed podsłuchem pakietów
+	(ang.~\textit{packet sniffing}), gwarantując poufność komunikacji
+	w sieci lokalnej nawet w przypadku celowego przechwycenia potoku danych.
 \end{itemize}
 
 \subsection{Weryfikacja działania mechanizmu VAD w stanach ciszy}
@@ -230,10 +230,10 @@ stanowiska testowego na czas 30\,s. Zarejestrowany ruch sieciowy w programie
 Wireshark \cite{wireshark_doc} przedstawiono na \cref{fig:db_wireshark_cisza}.
 
 \begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.95\textwidth]{figures/wireshark_cisza.png}
-    \caption{Przechwytywanie pakietów UDP w stanie ciszy (aktywny filtr VAD) (praca własna)}
-    \label{fig:db_wireshark_cisza}
+	\centering
+	\includegraphics[width=0.95\textwidth]{figures/wireshark_cisza.png}
+	\caption{Przechwytywanie pakietów UDP w stanie ciszy (aktywny filtr VAD) (praca własna)}
+	\label{fig:db_wireshark_cisza}
 \end{figure}
 
 Analiza porównawcza strumienia danych w stanie ciszy (\cref{fig:db_wireshark_cisza})
@@ -241,21 +241,21 @@ wykazuje drastyczną zmianę charakterystyki transmisji w stosunku do fazy aktyw
 mowy:
 
 \begin{itemize}
-    \item \textbf{Redukcja rozmiaru pakietu (Payload)} -- długość czystych danych
-          audio spadła z 119\,B do zaledwie 1\,B (\texttt{Len=1}). Oznacza to,
-          że kodek Opus \cite{OpusRFC} po stronie backendu całkowicie wstrzymał
-          próbkowanie i kompresję sygnału dźwiękowego, nie dopuszczając do
-          transmisji szumów otoczenia ani zakłóceń tła.
-    \item \textbf{Minimalizacja narzutu sieciowego (Length)} -- całkowity rozmiar
-          ramki sieciowej uległ redukcji ze 151\,B do zaledwie 33\,B. Generowane
-          w stanie ciszy pakiety pełnią wyłącznie funkcję sygnałów kontrolnych
-          (ang.~\textit{keep-alive}), utrzymujących stabilność sesji UDP.
-    \item \textbf{Oszczędność pasma sieci LAN} -- wysyłanie pakietów o rozmiarze
-          33\,B zamiast pełnowymiarowych ramek audio generuje znikome obciążenie
-          infrastruktury. Wdrożenie tego filtra pozwala zaoszczędzić ponad 60\%
-          przepustowości pasma sieciowego w warunkach braku aktywności grupy,
-          co bezpośrednio przekłada się na możliwość bezproblemowego skalowania
-          aplikacji VT-LAN na duże sale wykładowe i laboratoria komputerowe.
+	\item \textbf{Redukcja rozmiaru pakietu (Payload)} -- długość czystych danych
+	audio spadła z 119\,B do zaledwie 1\,B (\texttt{Len=1}). Oznacza to,
+	że kodek Opus \cite{OpusRFC} po stronie backendu całkowicie wstrzymał
+	próbkowanie i kompresję sygnału dźwiękowego, nie dopuszczając do
+	transmisji szumów otoczenia ani zakłóceń tła.
+	\item \textbf{Minimalizacja narzutu sieciowego (Length)} -- całkowity rozmiar
+	ramki sieciowej uległ redukcji ze 151\,B do zaledwie 33\,B. Generowane
+	w stanie ciszy pakiety pełnią wyłącznie funkcję sygnałów kontrolnych
+	(ang.~\textit{keep-alive}), utrzymujących stabilność sesji UDP.
+	\item \textbf{Oszczędność pasma sieci LAN} -- wysyłanie pakietów o rozmiarze
+	33\,B zamiast pełnowymiarowych ramek audio generuje znikome obciążenie
+	infrastruktury. Wdrożenie tego filtra pozwala zaoszczędzić ponad 60\%
+	przepustowości pasma sieciowego w warunkach braku aktywności grupy,
+	co bezpośrednio przekłada się na możliwość bezproblemowego skalowania
+	aplikacji VT-LAN na duże sale wykładowe i laboratoria komputerowe.
 \end{itemize}
 
 \subsection{Empiryczna weryfikacja zużycia zasobów systemowych}
@@ -264,38 +264,39 @@ mowy:
 W celu potwierdzenia, że aplikacja VT-LAN spełnia kryteria „lekkości" i niskiego
 narzutu na zasoby, przeprowadzono testy monitorujące bezpośrednio w systemie
 operacyjnym Windows 11. Pomiary alokacji pamięci RAM oraz obciążenia CPU dla
-uruchomionych instancji procesu \texttt{Audio Diagnostics.exe} (tryb
-\textit{Release} dla aplikacji VT-LAN) zarejestrowano przy użyciu systemowego Menedżera Zadań.
+uruchomionych instancji procesu \texttt{Audio Diagnostics.exe}
+(nazwa procesu dla aplikacji VT-LAN w trybie testowym) zarejestrowano
+przy użyciu systemowego Menedżera Zadań.
 Wynik tej analizy przedstawia \cref{fig:db_task_manager}.
 
 \begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.95\textwidth]{figures/menedzerzadan.png}
-    \caption{Monitorowanie zużycia zasobów systemowych przez instancje aplikacji
-             VT-LAN w Menedżerze Zadań Windows (praca własna)}
-    \label{fig:db_task_manager}
+	\centering
+	\includegraphics[width=0.95\textwidth]{figures/menedzerzadan.png}
+	\caption{Monitorowanie zużycia zasobów systemowych przez instancje aplikacji
+		VT-LAN w Menedżerze Zadań Windows (praca własna)}
+	\label{fig:db_task_manager}
 \end{figure}
 
 Analiza zebranych danych telemetrycznych (\cref{fig:db_task_manager}) pozwala
 na wyciągnięcie następujących wniosków inżynierskich:
 
 \begin{itemize}
-    \item \textbf{Minimalne obciążenie CPU} -- każda z uruchomionych instancji
-          generuje stałe obciążenie procesora na poziomie zaledwie 0,9\%--1,0\%.
-          Udowadnia to poprawność implementacji wielowątkowości oraz efektywne
-          zarządzanie pętlą zdarzeń biblioteki SDL3 \cite{SDL3}, która nie
-          wprowadza zjawiska aktywnego oczekiwania (ang.~\textit{busy waiting}).
-    \item \textbf{Niska alokacja RAM} -- zużycie pamięci nie przekracza 100\,MB
-          podczas aktywnej rozmowy. W porównaniu do komercyjnych, chmurowych
-          komunikatorów (takich jak MS Teams czy Discord, opartych na
-          pamięciożernych frameworkach webowych), aplikacja napisana natywnie
-          w C++ zużywa wielokrotnie mniej pamięci, co czyni ją idealnym
-          rozwiązaniem dla starszych stacji roboczych w laboratoriach komputerowych.
-    \item \textbf{Efektywność energetyczna} -- system operacyjny sklasyfikował
-          zużycie energii przez proces jako niskie dla hosta i bardzo niskie
-          dla klienta (\cref{fig:db_task_manager}). Cecha ta wpisuje się
-          w ekologiczne założenia projektu dotyczące minimalizacji śladu
-          węglowego i obciążenia infrastruktury uczelnianej.
+	\item \textbf{Minimalne obciążenie CPU} -- każda z uruchomionych instancji
+	generuje stałe obciążenie procesora na poziomie zaledwie 0,9\%--1,0\%.
+	Udowadnia to poprawność implementacji wielowątkowości oraz efektywne
+	zarządzanie pętlą zdarzeń biblioteki SDL3 \cite{SDL3}, która nie
+	wprowadza zjawiska aktywnego oczekiwania (ang.~\textit{busy waiting}).
+	\item \textbf{Niska alokacja RAM} -- zużycie pamięci nie przekracza 100\,MB
+	podczas aktywnej rozmowy. W porównaniu do komercyjnych, chmurowych
+	komunikatorów (takich jak MS Teams czy Discord, opartych na
+	pamięciożernych frameworkach webowych), aplikacja napisana natywnie
+	w C++ zużywa wielokrotnie mniej pamięci, co czyni ją idealnym
+	rozwiązaniem dla starszych stacji roboczych w laboratoriach komputerowych.
+	\item \textbf{Efektywność energetyczna} -- system operacyjny sklasyfikował
+	zużycie energii przez proces jako niskie dla hosta i bardzo niskie
+	dla klienta (\cref{fig:db_task_manager}). Cecha ta wpisuje się
+	w ekologiczne założenia projektu dotyczące minimalizacji śladu
+	węglowego i obciążenia infrastruktury uczelnianej.
 \end{itemize}
 
 % ─────────────────────────────────────────────────────────────────────────────
@@ -330,31 +331,31 @@ oraz warstwy sieciowej backendu pozwoliła sformułować dwie główne hipotezy
 techniczne:
 
 \begin{enumerate}
-    \item \textbf{Ograniczenie architektury do modelu punkt-punkt
-          (ang.~\textit{Point-to-Point}):}
-          Wstępna implementacja backendu sieciowego oraz managera sesji audio
-          została zaprojektowana z założeniem obsługi jednego strumienia
-          przychodzącego. W momencie pojawienia się trzech lub więcej niezależnych
-          strumieni UDP z pakietami Opus, aplikacja próbowała bezpośrednio
-          i sekwencyjnie wymuszać odtwarzanie każdego pakietu na jednym urządzeniu
-          wyjściowym audio. Brak komponentu miksera cyfrowego
-          (ang.~\textit{audio mixer}), który sumowałby matematycznie amplitudy
-          próbek dźwiękowych przed wysłaniem ich do karty dźwiękowej, doprowadził
-          do nakładania się fal, interferencji i w konsekwencji do trwałego
-          przesterowania sygnału. Rozwiązanie stanowi biblioteka SDL\_mixer
-          \cite{SDLMixer}, wdrożona w kolejnym etapie implementacji.
-
-    \item \textbf{Problem desynchronizacji wątków i przepełnienia bufora kołowego:}
-          Większa liczba użytkowników diametralnie zwiększyła częstotliwość
-          wywołań zwrotnych (ang.~\textit{audio callbacks}) w bibliotece SDL3
-          \cite{SDL3}. Ponieważ każdy pakiet musiał zostać odszyfrowany
-          i zdekodowany, wątek odpowiedzialny za przetwarzanie audio zaczął
-          doświadczać opóźnień. Brak odpowiednio wyskalowanego bufora
-          przeciwdziałającego fluktuacjom sieciowym (\textit{jitter buffer})
-          powodował, że aplikacja w warunkach braku danych
-          (ang.~\textit{audio underrun}) zaczynała odtwarzać losową,
-          niezainicjalizowaną zawartość pamięci operacyjnej RAM, co użytkownicy
-          słyszeli jako jednostajny szum.
+	\item \textbf{Ograniczenie architektury do modelu punkt-punkt
+		(ang.~\textit{Point-to-Point}):}
+	Wstępna implementacja backendu sieciowego oraz managera sesji audio
+	została zaprojektowana z założeniem obsługi jednego strumienia
+	przychodzącego. W momencie pojawienia się trzech lub więcej niezależnych
+	strumieni UDP z pakietami Opus, aplikacja próbowała bezpośrednio
+	i sekwencyjnie wymuszać odtwarzanie każdego pakietu na jednym urządzeniu
+	wyjściowym audio. Brak komponentu miksera cyfrowego
+	(ang.~\textit{audio mixer}), który sumowałby matematycznie amplitudy
+	próbek dźwiękowych przed wysłaniem ich do karty dźwiękowej, doprowadził
+	do nakładania się fal, interferencji i w konsekwencji do trwałego
+	przesterowania sygnału. Rozwiązanie stanowi biblioteka SDL\_mixer
+	\cite{SDLMixer}, wdrożona w kolejnym etapie implementacji.
+	
+	\item \textbf{Problem desynchronizacji wątków i przepełnienia bufora kołowego:}
+	Większa liczba użytkowników diametralnie zwiększyła częstotliwość
+	wywołań zwrotnych (ang.~\textit{audio callbacks}) w bibliotece SDL3
+	\cite{SDL3}. Ponieważ każdy pakiet musiał zostać odszyfrowany
+	i zdekodowany, wątek odpowiedzialny za przetwarzanie audio zaczął
+	doświadczać opóźnień. Brak odpowiednio wyskalowanego bufora
+	przeciwdziałającego fluktuacjom sieciowym (\textit{jitter buffer})
+	powodował, że aplikacja w warunkach braku danych
+	(ang.~\textit{audio underrun}) zaczynała odtwarzać losową,
+	niezainicjalizowaną zawartość pamięci operacyjnej RAM, co użytkownicy
+	słyszeli jako jednostajny szum.
 \end{enumerate}
 
 \subsection{Optymalizacja interfejsu użytkownika i bieżące naprawy kodu}
@@ -371,19 +372,19 @@ Podczas testowania gotowych widoków aplikacji VT-LAN zgłoszono i zaproponowano
 szereg poprawek mających na celu usprawnienie komfortu użytkowania (UX):
 
 \begin{itemize}
-    \item \textbf{Dynamiczne skalowanie elementów} -- wprowadzenie zmian
-          zapewniających poprawne wyświetlanie okna czatu oraz przesyłanych
-          grafik przy niestandardowych rozdzielczościach ekranów w laboratoriach
-          komputerowych.
-    \item \textbf{Czytelność paneli kontrolnych} -- modyfikacja kontrastu oraz
-          widoczności wskaźników stanu mikrofonu (włączony/wyciszony) oraz
-          przycisków zarządzania pokojem, co zminimalizowało ryzyko pomyłek
-          ze strony prowadzącego zajęcia.
-    \item \textbf{Optymalizacja odświeżania czatu tekstowego} -- zmiana sposobu
-          renderowania dynamicznych komponentów interfejsu zbudowanego na
-          bibliotece Dear ImGui \cite{ImGui}, co bezpośrednio przełożyło się
-          na zmniejszenie chwilowych skoków obciążenia procesora podczas
-          intensywnej aktywności studentów.
+	\item \textbf{Dynamiczne skalowanie elementów} -- wprowadzenie zmian
+	zapewniających poprawne wyświetlanie okna czatu oraz przesyłanych
+	grafik przy niestandardowych rozdzielczościach ekranów w laboratoriach
+	komputerowych.
+	\item \textbf{Czytelność paneli kontrolnych} -- modyfikacja kontrastu oraz
+	widoczności wskaźników stanu mikrofonu (włączony/wyciszony) oraz
+	przycisków zarządzania pokojem, co zminimalizowało ryzyko pomyłek
+	ze strony prowadzącego zajęcia.
+	\item \textbf{Optymalizacja odświeżania czatu tekstowego} -- zmiana sposobu
+	renderowania dynamicznych komponentów interfejsu zbudowanego na
+	bibliotece Dear ImGui \cite{ImGui}, co bezpośrednio przełożyło się
+	na zmniejszenie chwilowych skoków obciążenia procesora podczas
+	intensywnej aktywności studentów.
 \end{itemize}
 
 \subsubsection{Drobne poprawki usprawniające}
@@ -397,25 +398,185 @@ walidacji wprowadzanych przez użytkownika adresów IP oraz zabezpieczenie przed
 wyciekami zasobów przy nagłym rozłączeniu klienta. Działania te zwiększyły
 ogólną odporność aplikacji na błędy typu \textit{runtime}.
 
-\subsection{Wnioski i podsumowanie prac diagnostycznych}
-\label{subsec:db_wnioski}
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Testy skalowalności i weryfikacja końcowa}
+\label{sec:db_skalowalnosc}
+% ─────────────────────────────────────────────────────────────────────────────
 
-Wykryta usterka audio jednoznacznie wskazała granice skalowalności obecnej
-wersji prototypowej aplikacji VT-LAN. Jako rekomendację naprawczą wskazano
-konieczność refaktoryzacji kodu backendu sieciowego poprzez wprowadzenie
-dedykowanego wątku miksującego audio po stronie hosta lub implementację
-wielokanałowego bufora wyjściowego w bibliotece SDL3 \cite{SDL3}.
+Po wdrożeniu biblioteki SDL\_mixer \cite{SDLMixer} jako warstwy miksującej
+strumienie audio oraz refaktoryzacji mechanizmu buforowania po stronie
+odbiorczej, przeprowadzono pełen cykl testów weryfikacyjnych w celu
+potwierdzenia, że aplikacja VT-LAN poprawnie obsługuje docelową liczbę
+uczestników. Wszystkie opisane poniżej testy zakończyły się wynikiem
+pozytywnym.
 
-Podsumowując, przeprowadzone działania z zakresu profilowania, diagnostyki oraz
-kontroli jakości pozwoliły na rzetelną ocenę kondycji technicznej aplikacji VT-LAN:
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Test wytrzymałościowy -- 12 uczestników z transferem pliku}
+\label{subsec:db_test_12}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Scenariusz testowy zakładał uruchomienie 12 niezależnych instancji
+aplikacji VT-LAN na jednej maszynie lokalnej w architekturze pętli
+zwrotnej (\textit{localhost}). Jedna instancja pełniła rolę hosta,
+pozostałe jedenaście działały jako klienci. Zakres testu obejmował
+kanał niezawodny GNS (TCP-like) - weryfikowano poprawność jednoczesnego
+przesyłania wiadomości tekstowych i dużego pliku do wszystkich instancji
+klienckich.
+
+Transmisja głosowa nie była objęta tym testem z przyczyn architektonicznych
+wynikających z charakteru środowiska jednomaszynowego. Wszystkie instancje
+uruchomione na jednym urządzeniu współdzielą to samo fizyczne urządzenie
+wejściowe audio - mikrofon systemowy. W konsekwencji każda instancja
+przechwytywałaby i nadawała identyczny sygnał, co uniemożliwiłoby
+miarodajną weryfikację miksowania niezależnych strumieni głosowych
+ani zachowania mechanizmu VAD w warunkach równoczesnej aktywności
+wielu rozmówców. Test głosowy na architekturze \textit{localhost}
+pozwoliłby jedynie potwierdzić poprawność pętli zwrotnej jednej instancji,
+nie dostarczając żadnych danych o rzeczywistej skalowalności podsystemu audio.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{figures/12_instancji.png}
+	\caption{Test wytrzymałościowy aplikacji VT-LAN: 12 instancji uruchomionych
+		na jednej maszynie (host + 11 klientów localhost) podczas
+		jednoczesnego przesyłania wiadomości tekstowych i dużego pliku
+		(praca własna)}
+	\label{fig:db_test_wytrzymalosciowy}
+\end{figure}
+
+Wyniki testu (\cref{fig:db_test_wytrzymalosciowy}) potwierdziły poprawność
+działania kanału danych w scenariuszu obciążeniowym:
+
 \begin{itemize}
-    \item potwierdzono bardzo niskie zużycie zasobów systemowych: RAM w granicach
-          70\,MB, obciążenie CPU na poziomie ok. 1\%,
-    \item wykazano wysoką efektywność sieciową mechanizmu VAD -- ponad 60\% redukcji
-          pasma sieciowego w stanach ciszy,
-    \item udowodniono poprawność integracji warstwy kryptograficznej AES-GCM-256
-          przez pełną obfuskację zawartości pakietów UDP,
-    \item wykrycie anomalii obsługi więcej niż trzech strumieni audio pozwoliło
-          sformułować precyzyjne wytyczne architektoniczne dla dalszego rozwoju
-          i komercjalizacji systemu.
+	\item \textbf{Transfer pliku (kanał GNS reliable -- TCP-like)} --
+	plik został dostarczony do wszystkich jedenastu instancji
+	klienckich w nienaruszonym stanie. Mechanizm rate-limitingu
+	segmentów opisany w sekcji~\ref{sec:tcp} skutecznie zapobiegł
+	przepełnieniu buforów nadawczych GNS, a pasek postępu
+	po stronie klientów odzwierciedlał rzeczywisty stan transferu.
+	\item \textbf{Komunikacja tekstowa (kanał GNS reliable -- TCP-like)} --
+	wiadomości czatu dostarczane były do wszystkich instancji
+	w poprawnej kolejności bez utraty danych, niezależnie od
+	jednoczesnego transferu pliku.
+	\item \textbf{Stabilność sesji} -- przez cały czas trwania testu
+	żadna z instancji klienckich nie utraciła połączenia,
+	a mechanizm \texttt{ConnectionMessageFlag} poprawnie zarządzał
+	rozgłaszaniem do wszystkich 11 odbiorców.
+\end{itemize}
+
+Wybór liczby 12 instancji był podyktowany możliwościami sprzętowymi
+stanowiska testowego i pozwolił na wstępną weryfikację skalowalności
+mechanizmów sieciowych projektu. Sesja 12-osobowa nie stanowi docelowego
+limitu aplikacji - architektura GNS i system flag bitowych
+\texttt{ConnectionMessageFlag} nie wprowadzają sztywnego ograniczenia
+liczby uczestników.
+
+Dodatkowym argumentem przemawiającym za pomięciem osobnych testów
+wytrzymałościowych dla transmisji głosowej jest istotna różnica narzutu
+danych między kanałami. Pakiet głosowy kodeka Opus ma stały rozmiar
+rzędu 151\,B, podczas gdy transfer pliku generuje strumień segmentów
+o wielokrotnie większym łącznym wolumenie danych. Skoro mechanizmy
+sieciowe aplikacji poprawnie obsłużyły jednoczesne rozgłaszanie dużego
+pliku do 11 klientów - scenariusz znacznie bardziej obciążający szynę
+sieciową - transmisja głosowa, jako ruch lżejszy i buforowany przez
+mechanizm VAD w stanach ciszy, powinna skalować się między uczestnikami
+bez problemów.
+
+Wartościowym kierunkiem dalszych badań byłoby przeprowadzenie testów
+na rzeczywistej sieci LAN z większą liczbą fizycznych urządzeń,
+co umożliwiłoby jednoczesną weryfikację skalowalności kanału głosowego,
+zachowania mechanizmu VAD przy wielu równoczesnych nadawcach oraz
+stabilności miksowania w bibliotece SDL\_mixer \cite{SDLMixer}.
+Testy tego rodzaju wymagają jednak skoordynowanego zaangażowania
+odpowiednio licznego zespołu testowego i infrastruktury sieciowej
+wykraczającej poza ramy niniejszego projektu.
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Test komunikacji między różnymi urządzeniami w sieci LAN}
+\label{subsec:db_test_lan}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Uzupełnieniem testów skalowalności był test interoperacyjności,
+weryfikujący poprawność komunikacji pomiędzy dwoma fizycznie różnymi
+maszynami podłączonymi do tej samej sieci lokalnej. Celem było
+potwierdzenie, że aplikacja poprawnie obsługuje rzeczywiste adresy IP
+sieci LAN, inicjalizację połączenia GNS przez \texttt{ConnectByIPAddress}
+oraz pełen dwukierunkowy przepływ danych między różnymi konfiguracjami
+sprzętowymi.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{figures/urzadzenie_1.png}
+	\caption{Test komunikacji między dwoma różnymi urządzeniami
+		w sieci lokalnej: widok ekranu hosta (praca własna)}
+	\label{fig:db_test_dwa_urzadzenia}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{figures/urzadzenie 2.png}
+	\caption{Test komunikacji między dwoma różnymi urządzeniami
+		w sieci lokalnej: widok ekranu klienta (praca własna)}
+	\label{fig:db_test_dwa_urzadzenia}
+\end{figure}
+
+Test przeprowadzono na dwóch maszynach o różnych konfiguracjach
+sprzętowych, zestawionych bezpośrednio przez przełącznik sieciowy.
+Wyniki (\cref{fig:db_test_dwa_urzadzenia}) potwierdziły:
+
+\begin{itemize}
+	\item \textbf{Poprawność nawiązania połączenia} --
+	klient prawidłowo zlokalizował hosta po adresie IP i porcie,
+	a handshake GNS zakończył się sukcesem wywołując callback
+	\texttt{ConnectionStateConnected} po obu stronach sesji.
+	\item \textbf{Dwukierunkowa transmisja głosowa (UDP)} --
+	pakiety głosowe kodeka Opus przepływały prawidłowo w obu
+	kierunkach; oba urządzenia rejestrowały i odtwarzały dźwięk
+	bez zakłóceń, a mechanizm VAD redukował ruch w stanach ciszy
+	na obu stanowiskach niezależnie.
+	\item \textbf{Dwukierunkowa komunikacja tekstowa i transfer pliku
+		(GNS reliable -- TCP-like)} -- wiadomości czatu docierały do
+	obu uczestników w poprawnej kolejności i bez utraty danych,
+	a przesłane pliki zachowały integralność po złożeniu
+	segmentów przez \texttt{TryAssembleLocked}.
+	\item \textbf{Synchronizacja listy uczestników} -- po dołączeniu
+	klienta host i klient widzieli identyczną listę uczestników,
+	co potwierdza poprawność działania mechanizmu RPC
+	\texttt{NewPlayerSync} i \texttt{AddPlayerSync} opisanego
+	w sekcji~\ref{sec:tcp}.
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Wnioski i podsumowanie prac diagnostycznych}
+\label{sec:db_wnioski}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Wykryta usterka audio jednoznacznie wskazała granice skalowalności
+wczesnej wersji prototypowej aplikacji VT-LAN. Jako rekomendację naprawczą
+wskazano konieczność wprowadzenia warstwy miksującej audio - zostało to
+zrealizowane przez wdrożenie biblioteki SDL\_mixer \cite{SDLMixer},
+co potwierdziły późniejsze testy skalowalności.
+
+Przeprowadzone działania z zakresu profilowania, diagnostyki oraz kontroli
+jakości pozwoliły na rzetelną ocenę kondycji technicznej aplikacji VT-LAN:
+
+\begin{itemize}
+	\item potwierdzono bardzo niskie zużycie zasobów systemowych:
+	RAM w granicach 70\,MB, obciążenie CPU na poziomie ok.\ 1\%,
+	\item wykazano wysoką efektywność sieciową mechanizmu VAD --
+	ponad 60\% redukcji pasma sieciowego w stanach ciszy,
+	\item udowodniono poprawność integracji warstwy kryptograficznej
+	AES-GCM-256 przez pełną obfuskację zawartości pakietów UDP,
+	\item potwierdzono poprawność kanału niezawodnego (TCP-like) przy
+	12 równoczesnych instancjach localhost -- transfer pliku
+	i komunikacja tekstowa zakończyły się pomyślnie bez utraty danych,
+	\item potwierdzono poprawność dwukierunkowej komunikacji głosowej (UDP)
+	i tekstowej między dwoma różnymi urządzeniami w sieci LAN,
+	\item sesja 12-osobowa stanowi wstępny punkt odniesienia dla
+	skalowalności, nie zaś docelowy limit aplikacji -- architektura
+	GNS i system flag bitowych \texttt{ConnectionMessageFlag}
+	nie narzucają sztywnego ograniczenia liczby uczestników,
+	\item dalszy rozwój projektu powinien obejmować testy na rzeczywistej
+	sieci LAN z większą liczbą fizycznych urządzeń, umożliwiające
+	empiryczną weryfikację skalowalności transmisji głosowej
+	przy większej liczbie równoczesnych nadawców.
 \end{itemize}

@@ -16,19 +16,22 @@
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Przepływ pracy użytkownika w finalnej wersji aplikacji. (praca własna)}}{26}{figure.caption.15}%
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Chronologiczna zmiana interfejsu VT-LAN w trakcie realizacji projektu. (praca własna)}}{27}{figure.caption.16}%
 \contentsline {figure}{\numberline {3.7}{\ignorespaces Etap 1 - panel diagnostyczny z ustawieniami sieci i wykresami transmisji. (praca własna)}}{28}{figure.caption.17}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Etap 2 - lista klientów i panel sterowania połączeniami głosowymi. (praca własna)}}{29}{figure.caption.18}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Etap 2 - lista klientów i panel sterowania połączeniami głosowymi. (praca własna)}}{28}{figure.caption.18}%
 \contentsline {figure}{\numberline {3.9}{\ignorespaces Etap 3 - panel czatu z historią rozmowy i podglądem przesłanego obrazu. (praca własna)}}{29}{figure.caption.19}%
 \contentsline {figure}{\numberline {3.10}{\ignorespaces Etap 4 - okno wyboru pliku i obsługa załączników. (praca własna)}}{30}{figure.caption.20}%
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Ekran startowy z wyborem sposobu dołączenia do sesji. (praca własna)}}{31}{figure.caption.21}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Formularz tworzenia pokoju. (praca własna)}}{32}{figure.caption.22}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Ekran startowy z wyborem sposobu dołączenia do sesji. (praca własna)}}{30}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Formularz tworzenia pokoju. (praca własna)}}{31}{figure.caption.22}%
 \contentsline {figure}{\numberline {3.13}{\ignorespaces Formularz dołączania do pokoju. (praca własna)}}{32}{figure.caption.23}%
 \contentsline {figure}{\numberline {3.14}{\ignorespaces Główny widok pokoju z panelem uczestników, czatem i plikami. (praca własna)}}{33}{figure.caption.24}%
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Okno zaproszenia w panelu hosta. (praca własna)}}{35}{figure.caption.25}%
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Wiadomość Gmail wygenerowana przez funkcję zaproszenia. (praca własna)}}{35}{figure.caption.26}%
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Panel czatu z podglądem obrazu i informacją o przesłanym pliku PDF. (praca własna)}}{36}{figure.caption.27}%
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Pasek postępu podczas przesyłania dużego pliku. (praca własna)}}{37}{figure.caption.28}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Okno zaproszenia w panelu hosta. (praca własna)}}{34}{figure.caption.25}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Wiadomość Gmail wygenerowana przez funkcję zaproszenia. (praca własna)}}{34}{figure.caption.26}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Panel czatu z podglądem obrazu i informacją o przesłanym pliku PDF. (praca własna)}}{35}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Pasek postępu podczas przesyłania dużego pliku. (praca własna)}}{36}{figure.caption.28}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Przechwytywanie pakietów UDP transmisji głosowej w programie Wireshark (praca własna)}}{43}{figure.caption.33}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Podgląd surowej, zaszyfrowanej zawartości pakietu UDP w programie Wireshark (praca własna)}}{44}{figure.caption.34}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Przechwytywanie pakietów UDP w stanie ciszy (aktywny filtr VAD) (praca własna)}}{45}{figure.caption.35}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Monitorowanie zużycia zasobów systemowych przez instancje aplikacji VT-LAN w Menedżerze Zadań Windows (praca własna)}}{46}{figure.caption.36}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Przechwytywanie pakietów UDP transmisji głosowej w programie Wireshark (praca własna)}}{42}{figure.caption.33}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Podgląd surowej, zaszyfrowanej zawartości pakietu UDP w programie Wireshark (praca własna)}}{43}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Przechwytywanie pakietów UDP w stanie ciszy (aktywny filtr VAD) (praca własna)}}{44}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Monitorowanie zużycia zasobów systemowych przez instancje aplikacji VT-LAN w Menedżerze Zadań Windows (praca własna)}}{45}{figure.caption.36}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Test wytrzymałościowy aplikacji VT-LAN: 12 instancji uruchomionych na jednej maszynie (host + 11 klientów localhost) podczas jednoczesnego przesyłania wiadomości tekstowych i dużego pliku (praca własna)}}{48}{figure.caption.40}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Test komunikacji między dwoma różnymi urządzeniami w sieci lokalnej: widok ekranu hosta (praca własna)}}{49}{figure.caption.41}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Test komunikacji między dwoma różnymi urządzeniami w sieci lokalnej: widok ekranu klienta (praca własna)}}{50}{figure.caption.42}%
