@@ -19,46 +19,53 @@
 \contentsline {section}{\numberline {2.6}Odtwarzanie danych głosowych}{15}{section.2.6}%
 \contentsline {section}{\numberline {2.7}Przesyłanie danych tekstowych i plików binarnych}{18}{section.2.7}%
 \contentsline {section}{\numberline {2.8}Warstwa sieciowa}{19}{section.2.8}%
-\contentsline {section}{\numberline {2.9}Podsumowanie}{21}{section.2.9}%
-\contentsline {chapter}{\numberline {3}Interfejs użytkownika i funkcje końcowe}{23}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Założenia projektowe interfejsu}{23}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Inspiracje projektowe}{23}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Schemat działania i przepływ pracy}{25}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Ewolucja interfejsu w trakcie realizacji projektu}{26}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Etap 1 - panel diagnostyczny}{27}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Etap 2 - sterowanie połączeniami głosowymi}{28}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Etap 3 - czat tekstowy i podgląd obrazu}{29}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}Etap 4 - przesyłanie plików}{29}{subsection.3.4.4}%
-\contentsline {section}{\numberline {3.5}Finalna wersja interfejsu}{30}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Ekran startowy}{30}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Tworzenie pokoju}{31}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Dołączanie do pokoju}{31}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Główny widok pokoju}{32}{subsection.3.5.4}%
-\contentsline {section}{\numberline {3.6}Mechanizm zaproszeń}{33}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Funkcje czatu i przesyłania plików}{35}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Porównanie funkcjonalne z innymi komunikatorami}{36}{section.3.8}%
-\contentsline {section}{\numberline {3.9}Kierunki dalszego rozwoju}{37}{section.3.9}%
-\contentsline {section}{\numberline {3.10}Podsumowanie}{38}{section.3.10}%
-\contentsline {chapter}{\numberline {4}Profilowanie i Debugging}{39}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Zakres prac i środowisko diagnostyczne}{39}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Architektura procesu kontroli jakości (QA)}{39}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Stanowisko testowe i konfiguracja sprzętowa}{40}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Narzędzia profilujące i diagnostyczne}{40}{subsection.4.1.3}%
-\contentsline {subsubsection}{Visual Studio Diagnostic Tools (profiler MSVC)}{40}{subsubsection*.30}%
-\contentsline {subsubsection}{Analizator protokołów Wireshark}{40}{subsubsection*.31}%
-\contentsline {subsection}{\numberline {4.1.4}Metodyka badania algorytmu Voice Activity Detection (VAD)}{41}{subsection.4.1.4}%
-\contentsline {section}{\numberline {4.2}Empiryczne wyniki profilowania i testów}{41}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Analiza pakietów audio w środowisku sieciowym}{41}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Weryfikacja poprawności kryptograficznej warstwy transportowej}{43}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Weryfikacja działania mechanizmu VAD w stanach ciszy}{44}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Empiryczna weryfikacja zużycia zasobów systemowych}{45}{subsection.4.2.4}%
-\contentsline {section}{\numberline {4.3}Analiza napotkanych usterek i diagnostyka problemów}{45}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Usterka regresu jakości audio przy zwiększonej liczbie użytkowników}{46}{subsection.4.3.1}%
-\contentsline {subsubsection}{Analiza potencjalnych przyczyn systemowych}{46}{subsubsection*.37}%
-\contentsline {subsection}{\numberline {4.3.2}Optymalizacja interfejsu użytkownika i bieżące naprawy kodu}{46}{subsection.4.3.2}%
-\contentsline {subsubsection}{Propozycje poprawek interfejsu użytkownika (UI)}{47}{subsubsection*.38}%
-\contentsline {subsubsection}{Drobne poprawki usprawniające}{47}{subsubsection*.39}%
-\contentsline {section}{\numberline {4.4}Testy skalowalności i weryfikacja końcowa}{47}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Test wytrzymałościowy -- 12 uczestników z transferem pliku}{47}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Test komunikacji między różnymi urządzeniami w sieci LAN}{49}{subsection.4.4.2}%
-\contentsline {section}{\numberline {4.5}Wnioski i podsumowanie prac diagnostycznych}{50}{section.4.5}%
+\contentsline {section}{\numberline {2.9}Bezpieczeństwo systemu}{21}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Podsumowanie}{24}{section.2.10}%
+\contentsline {chapter}{\numberline {3}Interfejs użytkownika i funkcje końcowe}{25}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Założenia projektowe interfejsu}{25}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Inspiracje projektowe}{25}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Schemat działania i przepływ pracy}{27}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Ewolucja interfejsu w trakcie realizacji projektu}{28}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Etap 1 - panel diagnostyczny}{29}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Etap 2 - sterowanie połączeniami głosowymi}{30}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Etap 3 - czat tekstowy i podgląd obrazu}{31}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Etap 4 - przesyłanie plików}{31}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Finalna wersja interfejsu}{32}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Ekran startowy}{32}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Tworzenie pokoju}{33}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Dołączanie do pokoju}{33}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Główny widok pokoju}{34}{subsection.3.5.4}%
+\contentsline {section}{\numberline {3.6}Mechanizm zaproszeń}{35}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Funkcje czatu i przesyłania plików}{37}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Porównanie funkcjonalne z innymi komunikatorami}{38}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Kierunki dalszego rozwoju}{39}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Podsumowanie}{40}{section.3.10}%
+\contentsline {chapter}{\numberline {4}Profilowanie i Debugging}{41}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Zakres prac i środowisko diagnostyczne}{41}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Architektura procesu kontroli jakości (QA)}{41}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Stanowisko testowe i konfiguracja sprzętowa}{42}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Narzędzia profilujące i diagnostyczne}{42}{subsection.4.1.3}%
+\contentsline {subsubsection}{Visual Studio Diagnostic Tools (profiler MSVC)}{42}{subsubsection*.31}%
+\contentsline {subsubsection}{Analizator protokołów Wireshark}{42}{subsubsection*.32}%
+\contentsline {subsection}{\numberline {4.1.4}Metodyka badania algorytmu Voice Activity Detection (VAD)}{43}{subsection.4.1.4}%
+\contentsline {section}{\numberline {4.2}Empiryczne wyniki profilowania i testów}{43}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Analiza pakietów audio w środowisku sieciowym}{43}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Weryfikacja poprawności kryptograficznej warstwy transportowej}{45}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Weryfikacja działania mechanizmu VAD w stanach ciszy}{46}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Empiryczna weryfikacja zużycia zasobów systemowych}{47}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}Analiza napotkanych usterek i diagnostyka problemów}{47}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Usterka regresu jakości audio przy zwiększonej liczbie użytkowników}{48}{subsection.4.3.1}%
+\contentsline {subsubsection}{Analiza potencjalnych przyczyn systemowych}{48}{subsubsection*.38}%
+\contentsline {subsection}{\numberline {4.3.2}Optymalizacja interfejsu użytkownika i bieżące naprawy kodu}{48}{subsection.4.3.2}%
+\contentsline {subsubsection}{Propozycje poprawek interfejsu użytkownika (UI)}{49}{subsubsection*.39}%
+\contentsline {subsubsection}{Drobne poprawki usprawniające}{49}{subsubsection*.40}%
+\contentsline {section}{\numberline {4.4}Testy skalowalności i weryfikacja końcowa}{49}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Test wytrzymałościowy -- 12 uczestników z transferem pliku}{49}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Test komunikacji między różnymi urządzeniami w sieci LAN}{51}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.5}Wnioski i podsumowanie prac diagnostycznych}{52}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Zakończenie}{54}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Podsumowanie zrealizowanych prac}{54}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Podział prac w zespole}{55}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Elementy niezrealizowane}{55}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Instrukcja obsługi aplikacji}{56}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Dystrybucja i dalszy rozwój projektu}{60}{section.5.5}%

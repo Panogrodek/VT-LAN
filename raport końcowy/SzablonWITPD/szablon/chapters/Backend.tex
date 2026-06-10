@@ -725,6 +725,167 @@ duże pliki bez zauważalnego wzrostu opóźnienia audio.
 \end{figure}
 
 
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Bezpieczeństwo systemu}
+\label{sec:security}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Wbudowane szyfrowanie w GameNetworkingSockets}
+
+Jednym z kluczowych aspektów projektu VT-LAN jest zapewnienie bezpieczeństwa
+transmisji danych w sieci lokalnej. Biblioteka GameNetworkingSockets (GNS)
+dostarcza wbudowany mechanizm szyfrowania na poziomie transportu, który
+uruchamia się automatycznie dla każdego nawiązanego połączenia - bez
+konieczności ręcznej konfiguracji czy zarządzania certyfikatami po stronie
+aplikacji.
+
+Szyfrowanie realizowane jest przy użyciu algorytmu \textbf{AES-GCM-256}
+(ang. \textit{Advanced Encryption Standard} w trybie \textit{Galois/Counter Mode}
+z kluczem 256-bitowym). AES-GCM jest szyfrowaniem uwierzytelnionym
+(ang. \textit{Authenticated Encryption with Associated Data}, AEAD),
+co oznacza, że zapewnia jednocześnie:
+
+\begin{itemize}
+    \item \textbf{Poufność} - dane są nieczytelne dla osób niepowołanych
+    przechwytujących ruch sieciowy;
+    \item \textbf{Integralność} - każdy pakiet opatrzony jest znacznikiem
+    uwierzytelniającym (ang. \textit{authentication tag}); modyfikacja
+    treści pakietu jest natychmiast wykrywana i prowadzi do odrzucenia
+    pakietu;
+    \item \textbf{Ochronę przed atakami powtórzeniowymi}
+    (ang. \textit{replay attacks}) - każdy pakiet nosi unikalny licznik
+    sekwencji weryfikowany przez odbiorcę.
+\end{itemize}
+
+Wymiana kluczy sesji odbywa się przy użyciu protokołu
+\textbf{X25519 (Curve25519 Diffie-Hellman)}, który gwarantuje
+\textit{Perfect Forward Secrecy} (PFS) - skompromitowanie klucza
+długoterminowego nie pozwoli na odszyfrowanie wcześniej przechwyconych
+sesji. Uwierzytelnianie stron odbywa się z użyciem podpisów
+\textbf{Ed25519}.
+
+\subsection*{GNS a interfejs WinSock -- wybór z perspektywy bezpieczeństwa}
+
+W środowisku Windows naturalną, niskopoziomową alternatywą dla GNS jest
+interfejs \textbf{WinSock} (ang. \textit{Windows Sockets API}), stanowiący
+implementację standardu Berkeley Sockets. WinSock nie był jednak rozważany
+jako docelowe rozwiązanie dla VT-LAN z następujących powodów związanych
+z bezpieczeństwem:
+
+\begin{itemize}
+    \item \textbf{Brak wbudowanego szyfrowania} - WinSock jest interfejsem
+    transportowym operującym na surowych bajtach. Wszelkie zabezpieczenia
+    kryptograficzne muszą być implementowane przez programistę ponad
+    gniazdem: integracja biblioteki TLS (np. OpenSSL \cite{OpenSSL}
+    lub BoringSSL) dla protokołu TCP bądź DTLS dla protokołu UDP
+    jest procesem złożonym i podatnym na błędy konfiguracyjne.
+    W przypadku GNS szyfrowanie jest integralną częścią biblioteki
+    i włącza się domyślnie.
+
+    \item \textbf{Ryzyko przypadkowej transmisji niezaszyfrowanych danych}
+    - przy ręcznym każda ścieżka kodu
+    odczytująca lub zapisująca dane do gniazda musi jawnie korzystać
+    z zabezpieczonego kontekstu. Pominięcie szyfrowania w choćby jednym
+    miejscu skutkuje niezauważalnym przesyłem danych jawnym tekstem
+    (ang. \textit{cleartext}). GNS eliminuje tę klasę błędów, ponieważ
+    każda wiadomość - niezależnie od ścieżki wywołania - przechodzi
+    przez tę samą warstwę szyfrowania.
+
+    \item \textbf{Brak ochrony integralności pakietów UDP} - surowe gniazda
+    UDP oferują jedynie prosty checksum CRC, który nie chroni przed
+    celową modyfikacją danych przez atakującego w sieci lokalnej (atak
+    \textit{bit-flipping}). AES-GCM stosowany przez GNS wykrywa każdą
+    ingerencję w treść pakietu.
+
+    \item \textbf{Złożoność implementacji mechanizmów niezawodności}
+    - implementacja własnej niezawodności ponad UDP (retransmisje,
+    kontrola przepływu, obsługa fragmentacji) z jednoczesnym zachowaniem
+    bezpieczeństwa wymagałaby budowy stosu protokołów analogicznego do QUIC.
+    GNS dostarcza ten stos wraz z wbudowanym szyfrowaniem jako gotowy,
+    przetestowany komponent.
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \caption{Porównanie WinSock i GNS pod kątem bezpieczeństwa}
+    \begin{tabularx}{\textwidth}{|l|X|X|}
+        \hline
+        \textbf{Cecha} & \textbf{WinSock (raw)} & \textbf{GNS} \\
+        \hline
+        Wbudowane szyfrowanie & Brak & AES-GCM-256 \\
+        \hline
+        Wymiana kluczy & Brak & X25519 (PFS) \\
+        \hline
+        Uwierzytelnienie & Brak & Ed25519 \\
+        \hline
+        Ochrona integralności & CRC (nie kryptograficzny) & AEAD tag \\
+        \hline
+        Ochrona przed replay & Brak & Licznik sekwencji \\
+        \hline
+        Nakład implementacji & Wysoki (TLS/DTLS osobno) & Automatyczny \\
+        \hline
+    \end{tabularx}
+    \label{tab:winsock_vs_gns}
+\end{table}
+
+\subsection*{Izolacja danych w sieci lokalnej}
+
+Jednym z założeń projektowych VT-LAN jest gwarancja, że żadne dane
+użytkownika nie opuszczają sieci lokalnej. Aplikacja realizuje to poprzez:
+
+\begin{itemize}
+    \item \textbf{Brak połączeń do zewnętrznych serwerów} - architektura
+    \textit{listen server} nie wymaga żadnej zewnętrznej infrastruktury.
+    Serwer działa na urządzeniu jednego z uczestników w tej samej sieci LAN,
+    a cały ruch pozostaje w granicach segmentu sieciowego.
+
+    \item \textbf{Lokalny zapis danych} - dane personalizacyjne
+    (imię i nazwisko uczestnika) przechowywane są wyłącznie lokalnie
+    na urządzeniu użytkownika. Pliki odebrane zapisywane są w lokalnym
+    folderze \texttt{received\_files/}.
+
+    \item \textbf{Brak zewnętrznych zależności czasu wykonania} -
+    aplikacja nie nawiązuje połączeń z serwerami telemetrycznymi,
+    licencyjnymi ani aktualizacyjnymi podczas działania.
+\end{itemize}
+
+Podejście to ma szczególne znaczenie w środowiskach o zaostrzonych
+wymaganiach bezpieczeństwa - sieciach akademickich, korporacyjnych
+czy laboratoriach komputerowych - gdzie przesyłanie danych przez
+zewnętrzne serwery chmurowe może być niedozwolone lub niepożądane.
+
+\subsection*{Potencjalne wektory ataku w środowisku LAN i środki zaradcze}
+
+Mimo lokalnego charakteru aplikacji, sieć LAN nie jest środowiskiem
+wolnym od zagrożeń. Podczas projektowania VT-LAN zidentyfikowano
+następujące potencjalne wektory ataku:
+
+\begin{itemize}
+    \item \textbf{Podsłuch (sniffing)} - atakujący podłączony do tej samej
+    sieci może przechwytywać pakiety UDP przy użyciu narzędzi takich jak
+    Wireshark. Zagrożenie zneutralizowane przez szyfrowanie AES-GCM-256:
+    przechwycone pakiety zawierają wyłącznie zaszyfrowany szyfrogramy
+    nieczytelne bez klucza sesji. Zostało to zaobserwowane w sekcji \ref{subsec:db_kryptografia}.
+
+    \item \textbf{Atak man-in-the-middle (MITM)} - atakujący pośredniczący
+    między klientem a hostem mógłby próbować modyfikować ruch.
+    Wymiana kluczy X25519 z uwierzytelnieniem Ed25519 uniemożliwia
+    podstawienie własnego klucza bez wykrycia. Znaczniki AEAD
+    chronią przed modyfikacją treści pakietów.
+
+    \item \textbf{Wstrzyknięcie pakietów (packet injection)} -
+    próba wprowadzenia fałszywych pakietów UDP do sesji.
+    Mechanizm ochrony przed atakami powtórzeniowymi (licznik sekwencji)
+    oraz weryfikacja znacznika AEAD eliminują możliwość zaakceptowania
+    pakietu spoza sesji.
+
+    \item \textbf{Nieautoryzowany dostęp do pokoju} - opcjonalne hasło
+    pokoju weryfikowane przez RPC \texttt{PasswordCheck} uniemożliwia
+    dołączenie do sesji osobom nieznającym hasła. Serwer zamyka połączenie
+    z kodem przyczyny w przypadku błędnego hasła.
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
 \section{Podsumowanie}
 \label{sec:backend_summary}
 
