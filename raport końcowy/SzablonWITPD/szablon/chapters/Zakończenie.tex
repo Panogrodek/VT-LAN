@@ -19,7 +19,8 @@ W toku prac zespół zaimplementował i zintegrował następujące komponenty:
     klient-serwer w modelu \textit{listen server}, oparta na bibliotece
     GameNetworkingSockets (GNS). Obejmuje zarządzanie pokojami i sesjami
     użytkowników, mechanizm RPC do komunikacji sterującej oraz podział ruchu
-    na niezawodny kanał danych i bezgwarancyjny kanał głosowy.
+    na niezawodny kanał danych i bezgwarancyjny kanał głosowy
+    (rozdział~\ref{chapt:Backend}).
 
     \item \textbf{Transmisja głosowa} -- przechwytywanie audio przez SDL3,
     kompresja kodekiem Opus (32\,kbps VBR, tryb VoIP, ramki 20\,ms),
@@ -34,20 +35,21 @@ W toku prac zespół zaimplementował i zintegrował następujące komponenty:
     (\textit{drag and drop}).
 
     \item \textbf{Bezpieczeństwo transmisji} -- wbudowane szyfrowanie
-    AES-GCM-256 z wymianą kluczy X25519, zapewniające poufność, integralność
+    AES-256-GCM z wymianą kluczy X25519, zapewniające poufność, integralność
     i ochronę przed atakami powtórzeniowymi. Opcjonalne hasło pokoju
     ograniczające dostęp do sesji.
 
     \item \textbf{Interfejs użytkownika} -- aplikacja desktopowa
-    zrealizowana w Dear ImGui renderowanym przez SDL3/Vulkan. Widoki:
+    zrealizowana w Dear ImGui renderowanym przez SDL3. Widoki:
     ekran startowy, formularz tworzenia pokoju, formularz dołączania
     do pokoju, ekran zaproszenia oraz główny ekran pokoju rozmów
-    z listą uczestników, czatem i panelem audio.
+    z listą uczestników, czatem i panelem audio
+    (rozdział~\ref{ch:interfejs_uzytkownika}).
 
     \item \textbf{Diagnostyka i profilowanie} -- narzędzia monitorowania
     zużycia CPU i RAM, analiza ruchu sieciowego przy użyciu Wireshark,
     testy wydajnościowe modułu audio (latencja, jitter, utrata pakietów)
-    oraz czatu tekstowego.
+    oraz czatu tekstowego (rozdział~\ref{ch:profilowanie_debugging}).
 \end{itemize}
 
 Gotowe repozytorium projektu wraz z kodem źródłowym i wersjami wydaniowymi
@@ -323,9 +325,9 @@ w katalogu aplikacji.
 \subsection*{Wymagania systemowe i rozwiązywanie problemów}
 
 Wymagania systemowe oraz szczegółowe procedury rozwiązywania typowych
-problemów z uruchomieniem i połączeniem zawarte są w pliku
-\texttt{README.md} dostępnym w repozytorium projektu pod adresem
-\url{https://github.com/Panogrodek/VT-LAN}. Dokument ten jest na bieżąco
+problemów z uruchomieniem i połączeniem (m.in. konfiguracja reguł zapory
+systemowej dla ruchu UDP na porcie aplikacji) zawarte są w pliku
+\texttt{README.md} w repozytorium projektu. Dokument ten jest na bieżąco
 aktualizowany i stanowi podstawowe źródło informacji dla użytkowników
 aplikacji.
 
@@ -356,3 +358,12 @@ uruchomienie bez konieczności kompilacji, a także pełną instrukcję
 obsługi w pliku \texttt{README.md}. Licencja open source oznacza,
 że każdy zainteresowany użytkownik może pobrać, uruchomić i modyfikować
 aplikację zgodnie z własnymi potrzebami.
+
+Zrealizowany projekt potwierdza, że możliwe jest zbudowanie lekkiego,
+bezpiecznego komunikatora głosowo-tekstowego działającego wyłącznie
+w obrębie sieci lokalnej, bez udziału zewnętrznej infrastruktury.
+Przeprowadzone testy (rozdział~\ref{ch:profilowanie_debugging})
+potwierdziły spełnienie założeń dotyczących niskiego zużycia zasobów,
+skuteczności mechanizmu VAD oraz poufności transmisji, a otwarty model
+rozwoju stwarza warunki do dalszej rozbudowy aplikacji w kierunkach
+opisanych w sekcji~\ref{sec:dalsza_rozbudowa_ui}.

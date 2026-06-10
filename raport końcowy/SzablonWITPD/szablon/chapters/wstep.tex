@@ -15,7 +15,7 @@ potrzebę - jest to komunikator tekstowo-głosowy działający wyłącznie w obr
 (LAN), w którym pakiety danych nie są nigdy przekazywane poza jej granice. Kwestia
 bezpieczeństwa znalazła odzwierciedlenie również na poziomie doboru bibliotek - jako
 warstwę sieciową zastosowano GameNetworkingSockets (GNS), bibliotekę oferującą wbudowane
-szyfrowanie transmisji oparte na protokole AES-256-GCM oraz uwierzytelnianie połączeń.
+szyfrowanie transmisji oparte na algorytmie AES-256-GCM oraz uwierzytelnianie połączeń.
 Takie podejście zapewnia ochronę przesyłanych danych nie tylko poprzez ograniczenie ruchu
 do sieci lokalnej, lecz także przez szyfrowanie komunikacji na poziomie aplikacji.
 
@@ -32,20 +32,23 @@ VT-LAN. W raporcie omówiono poszczególne moduły składające się na całoś�
 szczególnym uwzględnieniem zastosowanych narzędzi, bibliotek oraz przyjętych decyzji
 projektowych wraz z ich uzasadnieniem.
 
+Pozostała część raportu zorganizowana jest następująco. W dalszych sekcjach
+niniejszego rozdziału przedstawiono zastosowane technologie, zakres wykorzystania
+narzędzi AI, analizę opłacalności i użyteczności społecznej projektu oraz przegląd
+rozwiązań dostępnych na rynku (sekcja~\ref{sec:przeglad_rynku}).
+Rozdział~\ref{chapt:Backend} opisuje warstwę backendową aplikacji: podstawy
+teoretyczne kodeka Opus i biblioteki GNS, architekturę klient-serwer, tor transmisji
+głosowej wraz z mechanizmem VAD, system RPC, przesyłanie plików oraz bezpieczeństwo
+transmisji. Rozdział~\ref{ch:interfejs_uzytkownika} przedstawia interfejs
+użytkownika - jego założenia projektowe, ewolucję w trakcie realizacji projektu
+oraz funkcje finalnej wersji aplikacji. Rozdział~\ref{ch:profilowanie_debugging}
+dokumentuje proces profilowania, diagnostyki i kontroli jakości, w tym testy
+skalowalności i weryfikację warstwy kryptograficznej.
+Rozdział~\ref{chapt:Zakonczenie} podsumowuje zrealizowane prace, przedstawia
+podział zadań w zespole oraz instrukcję obsługi aplikacji.
 
-
-%\subsection*{Struktura pracy}
-
-%Tutaj opisz krótko, po kolei, wszystkie rozdziały swojej pracy. Oto przykład:
-
-%\begin{quote}
-%Rozdział pierwszy zaczynamy (patrz \ref{chapt1:sec:intro}) od opisu wymagań stawianych algorytmom strumieniowym (główne wymaganie to wymaganie użycia %logarytmicznej pamięci względem rozmiaru strumienia), opisujemy pojęcie przesuwnego okna strumienia danych, omawiamy algorytm Bravermana,  ... .\par
-
-%W rozdziale drugim omawiamy ... \par
-%...
-%\end{quote}
-
-\subsection*{Zastosowane technologie}
+\section{Zastosowane technologie}
+\label{sec:technologie}
 Podczas pracy nad aplikacją VT-LAN zespół korzystał z następujących technologii:
 \begin{enumerate}
 	\item \textbf{Język C++} - główny i jedyny język wykorzystywany do implementacji
@@ -116,7 +119,7 @@ Podczas pracy nad aplikacją VT-LAN zespół korzystał z następujących techno
 		UDP. Oferuje mechanizmy detekcji opóźnień, kontrolę przepływu oraz opcjonalne
 		gwarancje dostarczenia pakietów, co czyni ją dobrze dopasowaną zarówno
 		do komunikacji klient-serwer, jak i peer-to-peer w sieci LAN. Szyfrowanie
-		realizowane jest przy użyciu algorytmu AES-GCM-256 per pakiet,
+		realizowane jest przy użyciu algorytmu AES-256-GCM per pakiet,
 		z wymianą kluczy opartą na Curve25519 \cite{GNS}. GNS korzysta wewnętrznie
 		z następujących bibliotek:
 		\begin{itemize}
@@ -217,7 +220,7 @@ roku \cite{DiscordPostpone}.
 Incydent ten uwidocznił fundamentalny problem centralnych komunikatorów:
 dane użytkowników znajdują się poza ich kontrolą. VT-LAN eliminuje ten problem
 u podstaw - ruch sieciowy nigdy nie opuszcza sieci lokalnej, a szyfrowanie
-na poziomie aplikacji (AES-GCM-256) dodatkowo chroni przesyłane treści.
+na poziomie aplikacji (AES-256-GCM) dodatkowo chroni przesyłane treści.
 Aplikacja jest szczególnie użyteczna w środowiskach wymagających poufności,
 takich jak sieci korporacyjne, laboratoria, instytucje edukacyjne czy
 domowe sieci prywatne.
@@ -280,7 +283,7 @@ architektury sieciowej i otwartości kodu.
 
 \subsection*{Discord}
 
-Discord \cite{DiscordEFF} to jedna z najpopularniejszych platform komunikacyjnych,
+Discord \cite{Discord} to jedna z najpopularniejszych platform komunikacyjnych,
 oferująca czat tekstowy, głosowy oraz wideo. Aplikacja jest
 bezpłatna w wersji podstawowej, z opcjonalną subskrypcją Discord Nitro.
 
@@ -325,11 +328,13 @@ VT-LAN zajmuje unikalną niszę wśród powyższych rozwiązań. Jest jedynym
 komunikatorem zaprojektowanym z myślą o działaniu wyłącznie w sieci LAN,
 łączącym czat tekstowy, transmisję głosową i przesyłanie plików w jednej
 lekkiej aplikacji open source, niewymagającej żadnej infrastruktury
-zewnętrznej ani kont użytkowników.
+zewnętrznej ani kont użytkowników. Zestawienie cech omawianych rozwiązań
+przedstawiono w tabeli~\ref{tab:rynek_porownanie}.
 
 \begin{table}[H]
 	\centering
 	\caption{Porównanie komunikatorów dostępnych na rynku}
+	\label{tab:rynek_porownanie}
 	\begin{tabularx}{\textwidth}{|l|X|X|X|X|X|}
 		\hline
 		\textbf{Cecha} & \textbf{Discord} & \textbf{TeamSpeak} & \textbf{Mumble}

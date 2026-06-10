@@ -21,7 +21,6 @@
 \newlabel{sec:architektura}{{2.4}{11}{Architektura aplikacji}{section.2.4}{}}
 \newlabel{sec:architektura@cref}{{[section][4][2]2.4}{[1][11][]11}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Schemat przepływu danych w architekturze VT-LAN (praca własna)}}{12}{figure.caption.3}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:dataflow}{{2.1}{12}{Schemat przepływu danych w architekturze VT-LAN (praca własna)}{figure.caption.3}{}}
 \newlabel{fig:dataflow@cref}{{[figure][1][2]2.1}{[1][12][]12}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Porównanie kanałów transmisji w VT-LAN}}{12}{table.caption.4}\protected@file@percent }
@@ -36,6 +35,8 @@
 \newlabel{lst:audioinit}{{2.2}{13}{Inicjalizacja urządzenia nagrywającego (praca własna)}{lstlisting.2.2}{}}
 \newlabel{lst:audioinit@cref}{{[listing][2][2]2.2}{[1][13][]13}{}{}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {2.2}{\ignorespaces Inicjalizacja urządzenia nagrywającego (praca własna)}}{13}{lstlisting.2.2}\protected@file@percent }
+\newlabel{eq:rms}{{2.1}{14}{}{equation.2.1}{}}
+\newlabel{eq:rms@cref}{{[equation][1][2]2.1}{[1][14][]14}{}{}{}}
 \newlabel{lst:vad}{{2.3}{14}{Implementacja VAD oparta na RMS (praca własna)}{lstlisting.2.3}{}}
 \newlabel{lst:vad@cref}{{[listing][3][2]2.3}{[1][14][]14}{}{}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {2.3}{\ignorespaces Implementacja VAD oparta na RMS (praca własna)}}{14}{lstlisting.2.3}\protected@file@percent }
@@ -48,8 +49,8 @@
 \@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces Wybrane parametry kodeka Opus \blx@tocontentsinit {0}\cite {OpusRFC}}}{16}{table.caption.6}\protected@file@percent }
 \newlabel{tab:opus}{{2.2}{16}{Wybrane parametry kodeka Opus \cite {OpusRFC}}{table.caption.6}{}}
 \newlabel{tab:opus@cref}{{[table][2][2]2.2}{[1][15][]16}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Porównanie jakości kodeka Opus z innymi kodekami w funkcji przepustowości (źródło: opus-codec.org)}}{16}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:opus_quality}{{2.3}{16}{Porównanie jakości kodeka Opus z innymi kodekami w funkcji przepustowości (źródło: opus-codec.org)}{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Porównanie jakości kodeka Opus z innymi kodekami w funkcji przepustowości (źródło:~\blx@tocontentsinit {0}\cite {OpusAbout})}}{16}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:opus_quality}{{2.3}{16}{Porównanie jakości kodeka Opus z innymi kodekami w funkcji przepustowości (źródło:~\cite {OpusAbout})}{figure.caption.7}{}}
 \newlabel{fig:opus_quality@cref}{{[figure][3][2]2.3}{[1][16][]16}{}{}{}}
 \newlabel{lst:plc}{{2.5}{17}{PLC - wywołanie dekodera Opus z pustym wejściem (praca własna)}{lstlisting.2.5}{}}
 \newlabel{lst:plc@cref}{{[listing][5][2]2.5}{[1][17][]17}{}{}{}}
@@ -66,25 +67,27 @@
 \@writefile{lot}{\contentsline {table}{\numberline {2.3}{\ignorespaces Struktura pakietu sieciowego wysyłającego segment pliku}}{19}{table.caption.8}\protected@file@percent }
 \newlabel{tab:chunk_packet}{{2.3}{19}{Struktura pakietu sieciowego wysyłającego segment pliku}{table.caption.8}{}}
 \newlabel{tab:chunk_packet@cref}{{[table][3][2]2.3}{[1][19][]19}{}{}{}}
+\newlabel{subsec:vtlan_uri}{{2.7}{19}{}{table.caption.8}{}}
+\newlabel{subsec:vtlan_uri@cref}{{[section][7][2]2.7}{[1][19][]19}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.8}Warstwa sieciowa}{19}{section.2.8}\protected@file@percent }
 \newlabel{sec:gns}{{2.8}{19}{Warstwa sieciowa}{section.2.8}{}}
 \newlabel{sec:gns@cref}{{[section][8][2]2.8}{[1][19][]19}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces Obsługiwane stany połączenia GNS}}{20}{table.caption.9}\protected@file@percent }
-\newlabel{tab:gns_states}{{2.4}{20}{Obsługiwane stany połączenia GNS}{table.caption.9}{}}
-\newlabel{tab:gns_states@cref}{{[table][4][2]2.4}{[1][20][]20}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces Obsługiwane stany połączenia GNS}}{21}{table.caption.9}\protected@file@percent }
+\newlabel{tab:gns_states}{{2.4}{21}{Obsługiwane stany połączenia GNS}{table.caption.9}{}}
+\newlabel{tab:gns_states@cref}{{[table][4][2]2.4}{[1][20][]21}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Podział ruchu sieciowego na priorytetowy strumień głosowy i standardowy strumień danych (praca własna)}}{21}{figure.caption.10}\protected@file@percent }
 \newlabel{fig:traffic}{{2.4}{21}{Podział ruchu sieciowego na priorytetowy strumień głosowy i standardowy strumień danych (praca własna)}{figure.caption.10}{}}
 \newlabel{fig:traffic@cref}{{[figure][4][2]2.4}{[1][21][]21}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.9}Bezpieczeństwo systemu}{21}{section.2.9}\protected@file@percent }
-\newlabel{sec:security}{{2.9}{21}{Bezpieczeństwo systemu}{section.2.9}{}}
-\newlabel{sec:security@cref}{{[section][9][2]2.9}{[1][21][]21}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.9}Bezpieczeństwo systemu}{22}{section.2.9}\protected@file@percent }
+\newlabel{sec:security}{{2.9}{22}{Bezpieczeństwo systemu}{section.2.9}{}}
+\newlabel{sec:security@cref}{{[section][9][2]2.9}{[1][21][]22}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2.5}{\ignorespaces Porównanie WinSock i GNS pod kątem bezpieczeństwa}}{23}{table.caption.11}\protected@file@percent }
 \newlabel{tab:winsock_vs_gns}{{2.5}{23}{Porównanie WinSock i GNS pod kątem bezpieczeństwa}{table.caption.11}{}}
-\newlabel{tab:winsock_vs_gns@cref}{{[table][5][2]2.5}{[1][22][]23}{}{}{}}
+\newlabel{tab:winsock_vs_gns@cref}{{[table][5][2]2.5}{[1][23][]23}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.10}Podsumowanie}{24}{section.2.10}\protected@file@percent }
 \newlabel{sec:backend_summary}{{2.10}{24}{Podsumowanie}{section.2.10}{}}
 \newlabel{sec:backend_summary@cref}{{[section][10][2]2.10}{[1][24][]24}{}{}{}}
-\@setckpt{chapters/backend}{
+\@setckpt{chapters/Backend}{
 \setcounter{page}{25}
 \setcounter{equation}{1}
 \setcounter{enumi}{2}
@@ -122,7 +125,7 @@
 \setcounter{section@level}{0}
 \setcounter{Item}{14}
 \setcounter{Hfootnote}{0}
-\setcounter{bookmark@seq@number}{18}
+\setcounter{bookmark@seq@number}{19}
 \setcounter{theorem}{0}
 \setcounter{lemma}{0}
 \setcounter{corollary}{0}
@@ -136,7 +139,7 @@
 \setcounter{citetotal}{0}
 \setcounter{multicitecount}{0}
 \setcounter{multicitetotal}{0}
-\setcounter{instcount}{35}
+\setcounter{instcount}{37}
 \setcounter{maxnames}{3}
 \setcounter{minnames}{1}
 \setcounter{maxitems}{3}

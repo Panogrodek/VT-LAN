@@ -226,14 +226,14 @@ Podejście to ma następujące konsekwencje:
 
 \subsection*{Diagram przepływu danych}
 
-Poniżej przedstawiono uproszczony schemat przepływu danych między uczestnikami
-sesji VT-LAN. Wyróżnione zostały dwie ścieżki transmisji: głosowa (UDP,
-bez gwarancji dostarczenia) oraz tekstowo-plikowa (GNS reliable, zachowanie
-kolejności).
+Na rysunku~\ref{fig:dataflow} przedstawiono uproszczony schemat przepływu
+danych między uczestnikami sesji VT-LAN. Wyróżnione zostały dwie ścieżki
+transmisji: głosowa (UDP, bez gwarancji dostarczenia) oraz tekstowo-plikowa
+(GNS reliable, zachowanie kolejności). Charakterystykę obu kanałów
+zestawiono w tabeli~\ref{tab:channels}.
 
 \begin{figure}[H]
     \centering
-    % Wstaw diagram przepływu danych klient-serwer
     \includegraphics[width=0.85\textwidth]{figures/dataflow.png}
     \caption{Schemat przepływu danych w architekturze VT-LAN (praca własna)}
     \label{fig:dataflow}
@@ -269,8 +269,8 @@ kolejności).
 
 \subsection*{Przegląd "pipeline'u" transmisji głosowej}
 
-Poniższy schemat przedstawia kompletną ścieżkę przetwarzania dźwięku
-w aplikacji VT-LAN - od przechwycenia sygnału z mikrofonu po jego
+Rysunek~\ref{fig:voice_pipeline} przedstawia kompletną ścieżkę przetwarzania
+dźwięku w aplikacji VT-LAN - od przechwycenia sygnału z mikrofonu po jego
 odtworzenie u odbiorcy. Kolejne podsekcje opisują szczegółowo
 poszczególne etapy tego procesu.
 
@@ -322,16 +322,17 @@ Przed zakodowaniem i wysłaniem ramki audio sprawdzane jest, czy zawiera
 ona faktyczną aktywność głosową. Mechanizm detekcji aktywności mowy (VAD,
 ang. \textit{Voice Activity Detection}) oparty jest na pomiarze RMS
 (ang. \textit{Root Mean Square}) - pierwiastka ze średniej kwadratów
-amplitud próbek w ramce:
+amplitud próbek w ramce - równanie~(\ref{eq:rms}):
 
 \begin{equation}
     \mathrm{RMS} = \sqrt{\frac{1}{N}\sum_{i=1}^{N} s_i^2}
+    \label{eq:rms}
 \end{equation}
 
 \noindent gdzie: 
 \begin{itemize}
 	\item $s_i$ - wartość $i$-tej próbki w ramce,
-	\item  $N$ - liczbę próbek.
+	\item $N$ - liczba próbek.
 \end{itemize}
 Jeśli RMS jest niższy niż wartość progowa
 (\texttt{m\_rmsThreshold}), ramka uznawana jest za ciszę.
@@ -389,7 +390,7 @@ opus_encoder_ctl(m_encoder, OPUS_SET_VBR(1));
 Zakodowane ramki trafiają do kolejki \texttt{m\_encodedFrames},
 a wątek wysyłający wywołuje \texttt{sender.SendVoicePacket} dla każdej
 z nich, oznaczając je numerem sekwencji (\texttt{uint16\_t}),
-identyfikatorem nadawcy (\texttt{uint8\_t}) i flaga nagłówkową
+identyfikatorem nadawcy (\texttt{uint8\_t}) i flagą nagłówkową
 \texttt{VoicePacket}. Pakiety głosowe wysyłane są z flagą
 \texttt{k\_nSteamNetworkingSend\_UnreliableNoNagle}, co zapewnia
 minimalny narzut i najniższe możliwe opóźnienie transmisji.
@@ -431,11 +432,9 @@ o jego wyborze w projekcie VT-LAN, zestawiono w tabeli~\ref{tab:opus}.
 
 \begin{figure}[H]
     \centering
-    % Wstaw wykres zależności jakości (MUSHRA/PESQ) od bitrate dla Opus
-    % Źródło: https://opus-codec.org/comparison/
     \includegraphics[width=0.80\textwidth]{figures/opus_quality.png}
     \caption{Porównanie jakości kodeka Opus z innymi kodekami
-             w funkcji przepustowości (źródło: opus-codec.org)}
+             w funkcji przepustowości (źródło:~\cite{OpusAbout})}
     \label{fig:opus_quality}
 \end{figure}
 
@@ -546,7 +545,7 @@ do pozostałych uczestników (\texttt{ForwardRPCRequest}).
 
 Przed przystąpieniem do sesji serwer może wymagać podania hasła.
 Weryfikacja odbywa się przez dedykowane RPC wywoływane tuż po
-nawiązaniu połączenia TCP-like. Jeśli hasło jest niepoprawne,
+nawiązaniu niezawodnego połączenia GNS. Jeśli hasło jest niepoprawne,
 serwer zamyka połączenie z kodem przyczyny (\texttt{m\_eEndReason}).
 Inicjalizacja nowego uczestnika przebiega następująco:
 
@@ -579,7 +578,8 @@ Transfer pliku podzielony jest na dwie fazy realizowane przez
     na iterację.
 \end{enumerate}
 
-Po stronie odbiorczej segmenty gromadzone są w mapie indeksowanej
+Strukturę pakietu przenoszącego pojedynczy segment pliku przedstawiono
+w tabeli~\ref{tab:chunk_packet}. Po stronie odbiorczej segmenty gromadzone są w mapie indeksowanej
 numerem segmentu. Gdy wszystkie fragmenty zostaną odebrane,
 \texttt{TryAssembleLocked} łączy je w całość i zapisuje plik
 w katalogu \texttt{received\_files/}, dodając sufiks w przypadku
@@ -606,28 +606,46 @@ konfliktu nazwy.
     \label{tab:chunk_packet}
 \end{table}
 
+\subsection*{Protokół \texttt{vtlan://} - inicjacja sesji z poziomu zaproszenia}
+\label{subsec:vtlan_uri}
+
+Aby uprościć proces dołączania do pokoju, aplikacja rejestruje w systemie
+operacyjnym własny schemat URI \texttt{vtlan://}. Rejestracja odbywa się
+przy pierwszym uruchomieniu programu poprzez wpis w rejestrze systemu
+Windows, wiążący schemat z plikiem wykonywalnym aplikacji. Link zaproszenia
+ma postać \texttt{vtlan://adres:port} z opcjonalnym parametrem
+\texttt{pwd=} przenoszącym hasło pokoju.
+
+Kliknięcie linku powoduje uruchomienie aplikacji z treścią linku przekazaną
+jako argument wiersza poleceń. Argument jest parsowany przy starcie -
+wyodrębniane są adres IP, numer portu oraz hasło, którymi automatycznie
+wypełniany jest formularz dołączania do pokoju. Dzięki temu zaproszony
+uczestnik nie musi ręcznie przepisywać danych połączenia. Generowanie
+zaproszenia e-mail realizowane jest przez wywołanie systemowe
+(\texttt{ShellExecute}) z linkiem \texttt{mailto:}, otwierającym domyślnego
+klienta poczty z przygotowaną treścią wiadomości. Warstwę prezentacji
+mechanizmu zaproszeń opisano w sekcji~\ref{sec:zaproszenia_ui}.
+
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Warstwa sieciowa}
 \label{sec:gns}
 % ─────────────────────────────────────────────────────────────────────────────
 
-\subsection*{GameNetworkingSockets}
+\subsection*{Tryby transmisji wykorzystywane w VT-LAN}
 
-GameNetworkingSockets (GNS) \cite{GNS} to biblioteka sieciowa
-rozwijana przez firmę Valve Corporation, pierwotnie wbudowana
-w platformę Steam i udostępniona jako projekt open source.
-GNS opiera się na protokole UDP, rozszerzając go o dodatkowe
-mechanizmy dostępne w zależności od trybu wysyłania:
+Podstawy teoretyczne biblioteki GNS \cite{GNS} omówiono
+w sekcji~\ref{sec:gns_theory}. W implementacji warstwy sieciowej VT-LAN
+wykorzystywane są dwa z opisanych tam trybów wysyłania:
 
 \begin{itemize}
     \item \textbf{Niezawodna kolejkowana transmisja} (analogiczna do TCP) -
     gwarancja dostarczenia i zachowanie kolejności pakietów przy minimalnym
     narzucie; używana dla wiadomości tekstowych, RPC i segmentów pliku.
-    \item \textbf{Transmisja bez gwarancji (unreliable)} -
-    flaga \texttt{k\_nSteamNetworkingSend\_UnreliableNoNagle} wyłącza
-    oczekiwanie na potwierdzenia; stosowana dla pakietów
-    głosowych, gdzie opóźnienie jest ważniejsze niż niezawodność.
+    \item \textbf{Transmisja bez gwarancji (unreliable)} - flaga
+    \texttt{UnreliableNoNagle} wyłącza oczekiwanie na potwierdzenia;
+    stosowana dla pakietów głosowych, gdzie opóźnienie jest ważniejsze
+    niż niezawodność.
 \end{itemize}
 
 \subsection*{Kanały i mechanizm \texttt{ConnectionMessageFlag}}
@@ -673,7 +691,8 @@ W VT-LAN zarejestrowany jest handler
 \texttt{NetworkingGNS::HandleConnectionHelper}, który deleguje
 callbacki i na podstawie
 wartości \texttt{m\_info.m\_eState}
-wywołuje jedną z metod:
+wywołuje jedną z metod. Mapowanie stanów połączenia na akcje aplikacji
+przedstawiono w tabeli~\ref{tab:gns_states}.
 
 \begin{table}[H]
     \centering
@@ -739,7 +758,7 @@ uruchamia się automatycznie dla każdego nawiązanego połączenia - bez
 konieczności ręcznej konfiguracji czy zarządzania certyfikatami po stronie
 aplikacji.
 
-Szyfrowanie realizowane jest przy użyciu algorytmu \textbf{AES-GCM-256}
+Szyfrowanie realizowane jest przy użyciu algorytmu \textbf{AES-256-GCM}
 (ang. \textit{Advanced Encryption Standard} w trybie \textit{Galois/Counter Mode}
 z kluczem 256-bitowym). AES-GCM jest szyfrowaniem uwierzytelnionym
 (ang. \textit{Authenticated Encryption with Associated Data}, AEAD),
@@ -783,7 +802,7 @@ z bezpieczeństwem:
     i włącza się domyślnie.
 
     \item \textbf{Ryzyko przypadkowej transmisji niezaszyfrowanych danych}
-    - przy ręcznym każda ścieżka kodu
+    - przy ręcznym zarządzaniu szyfrowaniem każda ścieżka kodu
     odczytująca lub zapisująca dane do gniazda musi jawnie korzystać
     z zabezpieczonego kontekstu. Pominięcie szyfrowania w choćby jednym
     miejscu skutkuje niezauważalnym przesyłem danych jawnym tekstem
@@ -812,7 +831,7 @@ z bezpieczeństwem:
         \hline
         \textbf{Cecha} & \textbf{WinSock (raw)} & \textbf{GNS} \\
         \hline
-        Wbudowane szyfrowanie & Brak & AES-GCM-256 \\
+        Wbudowane szyfrowanie & Brak & AES-256-GCM \\
         \hline
         Wymiana kluczy & Brak & X25519 (PFS) \\
         \hline
@@ -863,9 +882,10 @@ następujące potencjalne wektory ataku:
 \begin{itemize}
     \item \textbf{Podsłuch (sniffing)} - atakujący podłączony do tej samej
     sieci może przechwytywać pakiety UDP przy użyciu narzędzi takich jak
-    Wireshark. Zagrożenie zneutralizowane przez szyfrowanie AES-GCM-256:
-    przechwycone pakiety zawierają wyłącznie zaszyfrowany szyfrogramy
-    nieczytelne bez klucza sesji. Zostało to zaobserwowane w sekcji \ref{subsec:db_kryptografia}.
+    Wireshark. Zagrożenie zneutralizowane przez szyfrowanie AES-256-GCM:
+    przechwycone pakiety zawierają wyłącznie szyfrogram, nieczytelny
+    bez klucza sesji. Skuteczność tego zabezpieczenia potwierdzono
+    empirycznie w sekcji~\ref{subsec:db_kryptografia}.
 
     \item \textbf{Atak man-in-the-middle (MITM)} - atakujący pośredniczący
     między klientem a hostem mógłby próbować modyfikować ruch.
@@ -913,4 +933,4 @@ sieciowych.
 Fizyczny podział ruchu na bezgwarancyjne pakiety głosowe i niezawodne
 pakiety danych sprawia, że jednoczesna rozmowa i transfer pliku nie
 powodują wzajemnych zakłóceń. Całość komunikacji szyfrowana jest
-automatycznie przez bibliotekę GNS z użyciem algorytmu AES-GCM-256.
+automatycznie przez bibliotekę GNS z użyciem algorytmu AES-256-GCM.

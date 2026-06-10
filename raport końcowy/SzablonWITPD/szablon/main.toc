@@ -5,11 +5,12 @@
 \thispagestyle {empty}
 \contentsline {chapter}{\numberline {1}Wstęp}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Cel i struktura raportu}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Wykorzystanie AI}{3}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Opłacalność projektu}{4}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Użyteczność społeczna produktu}{4}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Plan finansowy projektu}{5}{section.1.5}%
-\contentsline {section}{\numberline {1.6}Przegląd rozwiązań dostępnych na rynku}{6}{section.1.6}%
+\contentsline {section}{\numberline {1.2}Zastosowane technologie}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Wykorzystanie AI}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Opłacalność projektu}{4}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Użyteczność społeczna produktu}{5}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Plan finansowy projektu}{5}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Przegląd rozwiązań dostępnych na rynku}{6}{section.1.7}%
 \contentsline {chapter}{\numberline {2}Backend}{8}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Kodek Opus - podstawy teoretyczne}{8}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Biblioteka GameNetworkingSockets - podstawy teoretyczne}{9}{section.2.2}%
@@ -19,7 +20,7 @@
 \contentsline {section}{\numberline {2.6}Odtwarzanie danych głosowych}{15}{section.2.6}%
 \contentsline {section}{\numberline {2.7}Przesyłanie danych tekstowych i plików binarnych}{18}{section.2.7}%
 \contentsline {section}{\numberline {2.8}Warstwa sieciowa}{19}{section.2.8}%
-\contentsline {section}{\numberline {2.9}Bezpieczeństwo systemu}{21}{section.2.9}%
+\contentsline {section}{\numberline {2.9}Bezpieczeństwo systemu}{22}{section.2.9}%
 \contentsline {section}{\numberline {2.10}Podsumowanie}{24}{section.2.10}%
 \contentsline {chapter}{\numberline {3}Interfejs użytkownika i funkcje końcowe}{25}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Założenia projektowe interfejsu}{25}{section.3.1}%

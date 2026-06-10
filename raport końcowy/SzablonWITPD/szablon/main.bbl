@@ -131,23 +131,25 @@
     \endentry
     \entry{ImGui}{online}{}{}
       \name{author}{1}{}{%
-        {{hash=3eca3eb35467f92594a5e4618e78e7fd}{%
-           family={Ocornut},
-           familyi={O\bibinitperiod}}}%
+        {{hash=278fbb27c5f41e27c29dbffddc757f15}{%
+           family={Cornut},
+           familyi={C\bibinitperiod},
+           given={Omar},
+           giveni={O\bibinitperiod}}}%
       }
-      \strng{namehash}{3eca3eb35467f92594a5e4618e78e7fd}
-      \strng{fullhash}{3eca3eb35467f92594a5e4618e78e7fd}
-      \strng{fullhashraw}{3eca3eb35467f92594a5e4618e78e7fd}
-      \strng{bibnamehash}{3eca3eb35467f92594a5e4618e78e7fd}
-      \strng{authorbibnamehash}{3eca3eb35467f92594a5e4618e78e7fd}
-      \strng{authornamehash}{3eca3eb35467f92594a5e4618e78e7fd}
-      \strng{authorfullhash}{3eca3eb35467f92594a5e4618e78e7fd}
-      \strng{authorfullhashraw}{3eca3eb35467f92594a5e4618e78e7fd}
+      \strng{namehash}{278fbb27c5f41e27c29dbffddc757f15}
+      \strng{fullhash}{278fbb27c5f41e27c29dbffddc757f15}
+      \strng{fullhashraw}{278fbb27c5f41e27c29dbffddc757f15}
+      \strng{bibnamehash}{278fbb27c5f41e27c29dbffddc757f15}
+      \strng{authorbibnamehash}{278fbb27c5f41e27c29dbffddc757f15}
+      \strng{authornamehash}{278fbb27c5f41e27c29dbffddc757f15}
+      \strng{authorfullhash}{278fbb27c5f41e27c29dbffddc757f15}
+      \strng{authorfullhashraw}{278fbb27c5f41e27c29dbffddc757f15}
       \field{sortinit}{5}
       \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Dear ImGui: Bloat-free Graphical User interface for C++ with minimal dependencies}
+      \field{title}{Dear {ImGui}: Bloat-free Graphical User interface for {C++} with minimal dependencies}
       \field{year}{2026}
       \verb{urlraw}
       \verb https://github.com/ocornut/imgui
@@ -375,6 +377,33 @@
       \verb https://alternativeto.net/news/2026/2/discord-is-now-delaying-its-global-age-verification-plans-after-huge-backlash
       \endverb
     \endentry
+    \entry{Discord}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=573b8ac5a07d2eb8245e514a65f232b7}{%
+           family={{Discord Inc.}},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{573b8ac5a07d2eb8245e514a65f232b7}
+      \strng{fullhash}{573b8ac5a07d2eb8245e514a65f232b7}
+      \strng{fullhashraw}{573b8ac5a07d2eb8245e514a65f232b7}
+      \strng{bibnamehash}{573b8ac5a07d2eb8245e514a65f232b7}
+      \strng{authorbibnamehash}{573b8ac5a07d2eb8245e514a65f232b7}
+      \strng{authornamehash}{573b8ac5a07d2eb8245e514a65f232b7}
+      \strng{authorfullhash}{573b8ac5a07d2eb8245e514a65f232b7}
+      \strng{authorfullhashraw}{573b8ac5a07d2eb8245e514a65f232b7}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Discord} -- Group Chat That's All Fun \& Games}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://discord.com
+      \endverb
+      \verb{url}
+      \verb https://discord.com
+      \endverb
+    \endentry
     \entry{TeamSpeak}{online}{}{}
       \name{author}{1}{}{%
         {{hash=067b86323f133901ed3ee69e94a6aec1}{%
@@ -470,8 +499,8 @@
       \strng{authornamehash}{b9a8b868588ad4bc6b36c29936e26423}
       \strng{authorfullhash}{b9a8b868588ad4bc6b36c29936e26423}
       \strng{authorfullhashraw}{b9a8b868588ad4bc6b36c29936e26423}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{{Microsoft Teams} -- Communication and Collaboration Platform}

@@ -215,6 +215,7 @@ inżynierskich:
 	stanowi jednolitą, zaszyfrowaną strukturę.
 	\item \textbf{Skuteczna izolacja informacji} -- test udowodnił poprawność
 	integracji backendu sieciowego z warstwą kryptograficzną (AES-GCM-256
+	integracji backendu sieciowego z warstwą kryptograficzną (AES-256-GCM
 	biblioteki GNS \cite{GNS}). Każda paczka danych opuszczająca aplikację
 	jest w pełni zabezpieczona przed podsłuchem pakietów
 	(ang.~\textit{packet sniffing}), gwarantując poufność komunikacji
@@ -471,7 +472,7 @@ limitu aplikacji - architektura GNS i system flag bitowych
 \texttt{ConnectionMessageFlag} nie wprowadzają sztywnego ograniczenia
 liczby uczestników.
 
-Dodatkowym argumentem przemawiającym za pomięciem osobnych testów
+Dodatkowym argumentem przemawiającym za pominięciem osobnych testów
 wytrzymałościowych dla transmisji głosowej jest istotna różnica narzutu
 danych między kanałami. Pakiet głosowy kodeka Opus ma stały rozmiar
 rzędu 151\,B, podczas gdy transfer pliku generuje strumień segmentów
@@ -508,20 +509,21 @@ sprzętowymi.
 	\includegraphics[width=1\textwidth]{figures/urzadzenie_1.png}
 	\caption{Test komunikacji między dwoma różnymi urządzeniami
 		w sieci lokalnej: widok ekranu hosta (praca własna)}
-	\label{fig:db_test_dwa_urzadzenia}
+	\label{fig:db_test_dwa_urzadzenia_host}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=1\textwidth]{figures/urzadzenie 2.png}
+	\includegraphics[width=1\textwidth]{figures/urzadzenie_2.png}
 	\caption{Test komunikacji między dwoma różnymi urządzeniami
 		w sieci lokalnej: widok ekranu klienta (praca własna)}
-	\label{fig:db_test_dwa_urzadzenia}
+	\label{fig:db_test_dwa_urzadzenia_klient}
 \end{figure}
 
 Test przeprowadzono na dwóch maszynach o różnych konfiguracjach
 sprzętowych, zestawionych bezpośrednio przez przełącznik sieciowy.
-Wyniki (\cref{fig:db_test_dwa_urzadzenia}) potwierdziły:
+Wyniki (\cref{fig:db_test_dwa_urzadzenia_host}
+i~\cref{fig:db_test_dwa_urzadzenia_klient}) potwierdziły:
 
 \begin{itemize}
 	\item \textbf{Poprawność nawiązania połączenia} --
@@ -561,11 +563,12 @@ jakości pozwoliły na rzetelną ocenę kondycji technicznej aplikacji VT-LAN:
 
 \begin{itemize}
 	\item potwierdzono bardzo niskie zużycie zasobów systemowych:
-	RAM w granicach 70\,MB, obciążenie CPU na poziomie ok.\ 1\%,
+	RAM nieprzekraczający 100\,MB na instancję (typowo ok.\ 70\,MB),
+	obciążenie CPU na poziomie ok.\ 1\%,
 	\item wykazano wysoką efektywność sieciową mechanizmu VAD --
 	ponad 60\% redukcji pasma sieciowego w stanach ciszy,
 	\item udowodniono poprawność integracji warstwy kryptograficznej
-	AES-GCM-256 przez pełną obfuskację zawartości pakietów UDP,
+	AES-256-GCM przez pełną obfuskację zawartości pakietów UDP,
 	\item potwierdzono poprawność kanału niezawodnego (TCP-like) przy
 	12 równoczesnych instancjach localhost -- transfer pliku
 	i komunikacja tekstowa zakończyły się pomyślnie bez utraty danych,

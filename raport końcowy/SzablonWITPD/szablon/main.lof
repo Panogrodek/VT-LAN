@@ -6,12 +6,12 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Schemat przepływu danych w architekturze VT-LAN (praca własna)}}{12}{figure.caption.3}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces "Pipeline" transmisji głosowej w VT-LAN: nadawca, serwer i odbiorca (praca własna)}}{13}{figure.caption.5}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Porównanie jakości kodeka Opus z innymi kodekami w funkcji przepustowości (źródło: opus-codec.org)}}{16}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Porównanie jakości kodeka Opus z innymi kodekami w funkcji przepustowości (źródło:~\blx@tocontentsinit {0}\cite {OpusAbout})}}{16}{figure.caption.7}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Podział ruchu sieciowego na priorytetowy strumień głosowy i standardowy strumień danych (praca własna)}}{21}{figure.caption.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Referencyjny układ Discorda: kanały, czat, uczestnicy i sterowanie głosem (źródło: \blx@tocontentsinit {0}\cite {DiscordEFF}).}}{26}{figure.caption.12}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Referencyjny układ TeamSpeak: serwer, kanały i czat kanału (źródło: \blx@tocontentsinit {0}\cite {TeamSpeak}).}}{26}{figure.caption.13}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Referencyjny układ Microsoft Teams: spotkanie, czat i udostępnianie treści (źródło: \blx@tocontentsinit {0}\cite {MSTeams}).}}{27}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Referencyjny układ Discorda: kanały, czat, uczestnicy i sterowanie głosem (opracowanie własne na podstawie~\blx@tocontentsinit {0}\cite {Discord}).}}{26}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Referencyjny układ TeamSpeak: serwer, kanały i czat kanału (opracowanie własne na podstawie~\blx@tocontentsinit {0}\cite {TeamSpeak}).}}{26}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Referencyjny układ Microsoft Teams: spotkanie, czat i udostępnianie treści (opracowanie własne na podstawie~\blx@tocontentsinit {0}\cite {MSTeams}).}}{27}{figure.caption.14}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Schemat blokowy finalnego interfejsu użytkownika. (praca własna)}}{28}{figure.caption.15}%
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Przepływ pracy użytkownika w finalnej wersji aplikacji. (praca własna)}}{28}{figure.caption.16}%
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Chronologiczna zmiana interfejsu VT-LAN w trakcie realizacji projektu. (praca własna)}}{29}{figure.caption.17}%

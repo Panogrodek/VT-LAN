@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.24)  10 JUN 2026 11:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.24)  10 JUN 2026 12:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1090,21 +1090,15 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 Package babel Info: 'polish' activates 'polish' shorthands.
 (babel)             Reported on input line 12.
  (abstract.aux)
-(chapters/wstep.aux) (chapters/backend.aux) (chapters/UI.aux)
-(chapters/debugging.aux
-
-LaTeX Warning: Label `fig:db_test_dwa_urzadzenia' multiply defined.
-
-
-LaTeX Warning: Label `fig:db_test_dwa_urzadzenia@cref' multiply defined.
-
-) (chapters/ZakoÅ„czenie.aux))
+(chapters/wstep.aux) (chapters/Backend.aux) (chapters/UI.aux)
+(chapters/debugging.aux) (chapters/ZakoÅ„czenie.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 63.
 LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line
  63.
- (D:\miketex\tex/latex/newtx\omlntxmi.fd
+
+(D:\miketex\tex/latex/newtx\omlntxmi.fd
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
 LaTeX Font Info:    ... okay on input line 63.
@@ -1121,8 +1115,7 @@ LaTeX Font Info:    ... okay on input line 63.
 LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 63.
 LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 
 63.
-
-(D:\miketex\tex/latex/newtx\untxexa.fd
+ (D:\miketex\tex/latex/newtx\untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
 LaTeX Font Info:    ... okay on input line 63.
@@ -1136,7 +1129,8 @@ LaTeX Font Info:    ... okay on input line 63.
 LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 63.
 LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input lin
 e 63.
- (D:\miketex\tex/latex/newtx\lmxntxexx.fd
+
+(D:\miketex\tex/latex/newtx\lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
 LaTeX Font Info:    ... okay on input line 63.
@@ -1509,58 +1503,59 @@ LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 
  (chapters/wstep.tex
 Rozdzia\l  1.
-LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 48.
 [1
 
 
 
 ]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 12.0pt on input line 61.
+(Font)              scaled to size 12.0pt on input line 64.
 LaTeX Font Info:    Trying to load font information for T1+ntxtt on input line 
-67.
+70.
  (D:\miketex\tex/latex/newtx\t1ntxtt.fd
 File: t1ntxtt.fd 2012/04/20 v3.1
 )
 LaTeX Font Info:    Font shape `T1/ntxtt/m/n' will be
-(Font)              scaled to size 12.0pt on input line 67.
+(Font)              scaled to size 12.0pt on input line 70.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `ntxtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Trying to load font information for TS1+ntxtlf on input lin
-e 90.
+e 93.
 
 (D:\miketex\tex/latex/newtx\ts1ntxtlf.fd
 File: ts1ntxtlf.fd 2015/01/18 v1.0 fd file for TS1/ntxtlf
 )
 LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
-(Font)              scaled to size 12.0pt on input line 90.
- [2{D:/miketex/fonts/enc/dvips/tex-gyre/q-ts1.enc}] [3] [4] [5] [6]
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.95pt on input line 332.
+(Font)              scaled to size 12.0pt on input line 93.
+ [2] [3{D:/miketex/fonts/enc/dvips/tex-gyre/q-ts1.enc}] [4]
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 332.
+(Font)              scaled to size 14.4pt on input line 245.
+ [5] [6]
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 10.95pt on input line 336.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 10.95pt on input line 336.
 
-Overfull \hbox (3.4542pt too wide) in paragraph at lines 354--354
+Overfull \hbox (3.4542pt too wide) in paragraph at lines 359--359
 []|\T1/ntxtlf/b/n/12 (-20) TeamSpeak| 
  []
 
 
-Overfull \hbox (5.51604pt too wide) in paragraph at lines 354--354
+Overfull \hbox (5.51604pt too wide) in paragraph at lines 359--359
 []|\T1/ntxtlf/m/n/12 (-20) Ograniczony| 
  []
 
 
-Overfull \hbox (5.51604pt too wide) in paragraph at lines 354--354
+Overfull \hbox (5.51604pt too wide) in paragraph at lines 359--359
 []|\T1/ntxtlf/m/n/12 (-20) Ograniczony| 
  []
 
 ) [7]
-\openout2 = `chapters/backend.aux'.
+\openout2 = `chapters/Backend.aux'.
 
- (chapters/backend.tex
+ (chapters/Backend.tex
 Rozdzia\l  2.
 [8
 
@@ -1602,12 +1597,12 @@ Overfull \hbox (0.91869pt too wide) in paragraph at lines 191--193
  []
 
 [11]
-<figures/dataflow.png, id=444, 402.50375pt x 151.56625pt>
+<figures/dataflow.png, id=458, 402.50375pt x 151.56625pt>
 File: figures/dataflow.png Graphic file (type png)
 <use figures/dataflow.png>
 Package pdftex.def Info: figures/dataflow.png  used on input line 237.
 (pdftex.def)             Requested size: 374.86777pt x 141.15866pt.
-<figures/technical_dataflow.png, id=446, 583.17876pt x 532.99126pt>
+<figures/technical_dataflow.png, id=461, 583.17876pt x 532.99126pt>
 File: figures/technical_dataflow.png Graphic file (type png)
 <use figures/technical_dataflow.png>
 Package pdftex.def Info: figures/technical_dataflow.png  used on input line 279
@@ -1620,60 +1615,49 @@ LaTeX Font Info:    Font shape `T1/ntxtt/b/n' in size <14.4> not available
 (Font)              Font shape `T1/txtt/bx/n' tried instead on input line 306.
  [13 <./figures/technical_dataflow.png>]
 [14{D:/miketex/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc}] [15]
-<figures/opus_quality.png, id=517, 797.46207pt x 590.62035pt>
+<figures/opus_quality.png, id=533, 797.46207pt x 590.62035pt>
 File: figures/opus_quality.png Graphic file (type png)
 <use figures/opus_quality.png>
-Package pdftex.def Info: figures/opus_quality.png  used on input line 436.
+Package pdftex.def Info: figures/opus_quality.png  used on input line 435.
 (pdftex.def)             Requested size: 352.81554pt x 261.30669pt.
  [16 <./figures/opus_quality.png>]
-Overfull \hbox (38.98402pt too wide) in paragraph at lines 506--511
+Overfull \hbox (38.98402pt too wide) in paragraph at lines 505--510
 \T1/ntxtlf/m/n/12 (-20) Poniewa» w mo-delu \T1/ntxtlf/m/it/12 (-20) li-sten se-
 rver \T1/ntxtlf/m/n/12 (-20) wszyst-kie pa-kiety prze-cho-dz¡ przez ho-sta, \T1
 /ntxtt/m/n/12 VoiceReceivingManager
  []
 
 [17]
-Overfull \hbox (8.5049pt too wide) in paragraph at lines 574--580
+Overfull \hbox (8.5049pt too wide) in paragraph at lines 573--579
 []\T1/ntxtlf/b/n/12 (-20) Wysyªanie seg-men-tów \T1/ntxtlf/m/n/12 (-20) - plik 
 dzie-lony jest na ka-waªki o sta-ªym roz-mia-rze (\T1/ntxtt/m/n/12 SEGMENT_SIZE
 \T1/ntxtlf/m/n/12 (-20) ).
  []
 
-[18]
-Overfull \hbox (59.73105pt too wide) in paragraph at lines 627--631
-[]\T1/ntxtlf/b/n/12 (-20) Transmisja bez gwa-ran-cji (unre-lia-ble) \T1/ntxtlf/
-m/n/12 (-20) - flaga \T1/ntxtt/m/n/12 k_nSteamNetworkingSend_UnreliableNoNagle
- []
-
-
-Overfull \hbox (2.3327pt too wide) in paragraph at lines 650--653
+[18] [19]
+Overfull \hbox (2.3327pt too wide) in paragraph at lines 668--671
 []\T1/ntxtt/m/n/12 AllCurrentReceivers \T1/ntxtlf/m/n/12 (-20) i \T1/ntxtt/m/n/
 12 MeFlag \T1/ntxtlf/m/n/12 (-20) s¡ ato-mo-wymi zmien-nymi \T1/ntxtt/m/n/12 st
 d::atomic<uint16_t>\T1/ntxtlf/m/n/12 (-20) ,
  []
 
-[19]
-Overfull \hbox (8.37927pt too wide) in paragraph at lines 703--708
+[20]
+Overfull \hbox (8.37927pt too wide) in paragraph at lines 722--727
 []\T1/ntxtlf/b/n/12 (-20) Pakiety gªo-sowe \T1/ntxtlf/m/n/12 (-20) wy-sy-ªane s
 ¡ z flag¡ \T1/ntxtt/m/n/12 k_nSteamNetworkingSend_UnreliableNoNagle
  []
 
-[20]
-<figures/gns_lanes.png, id=578, 623.32875pt x 278.03876pt>
+<figures/gns_lanes.png, id=600, 623.32875pt x 278.03876pt>
 File: figures/gns_lanes.png Graphic file (type png)
 <use figures/gns_lanes.png>
-Package pdftex.def Info: figures/gns_lanes.png  used on input line 721.
+Package pdftex.def Info: figures/gns_lanes.png  used on input line 740.
 (pdftex.def)             Requested size: 441.01775pt x 196.7216pt.
- [21 <./figures/gns_lanes.png>]
-Underfull \vbox (badness 1688) has occurred while \output is active []
-
- [22]
-[23]) [24]
+[21 <./figures/gns_lanes.png>] [22] [23]) [24]
 \openout2 = `chapters/UI.aux'.
 
  (chapters/UI.tex
 Rozdzia\l  3.
-<figures/chapter3/ch3_fig01.png, id=603, 1204.5pt x 632.3625pt>
+<figures/chapter3/ch3_fig01.png, id=625, 1204.5pt x 632.3625pt>
 File: figures/chapter3/ch3_fig01.png Graphic file (type png)
 <use figures/chapter3/ch3_fig01.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig01.png  used on input line 47.
@@ -1685,13 +1669,13 @@ Package pdftex.def Info: figures/chapter3/ch3_fig01.png  used on input line 47.
 
 
 ]
-<figures/chapter3/ch3_fig02.png, id=610, 523.9575pt x 555.07375pt>
+<figures/chapter3/ch3_fig02.png, id=632, 523.9575pt x 555.07375pt>
 File: figures/chapter3/ch3_fig02.png Graphic file (type png)
 <use figures/chapter3/ch3_fig02.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig02.png  used on input line 55.
 
 (pdftex.def)             Requested size: 343.9933pt x 364.42715pt.
-<figures/chapter3/ch3_fig03.png, id=613, 2055.68pt x 1175.39125pt>
+<figures/chapter3/ch3_fig03.png, id=635, 2055.68pt x 1175.39125pt>
 File: figures/chapter3/ch3_fig03.png Graphic file (type png)
 <use figures/chapter3/ch3_fig03.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig03.png  used on input line 63.
@@ -1708,27 +1692,27 @@ Underfull \hbox (badness 5460) in paragraph at lines 95--96
 []|\T1/ntxtlf/m/n/8 (+20) Wideo, ka-len-darz, in-te-gra-cje
  []
 
-<figures/chapter3/ch3_fig04.png, id=622, 984.3174pt x 419.8887pt>
+<figures/chapter3/ch3_fig04.png, id=644, 984.3174pt x 419.8887pt>
 File: figures/chapter3/ch3_fig04.png Graphic file (type png)
 <use figures/chapter3/ch3_fig04.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig04.png  used on input line 113
 .
 (pdftex.def)             Requested size: 441.01775pt x 188.12807pt.
 [27 <./figures/chapter3/ch3_fig03.png>]
-<figures/chapter3/ch3_fig05.png, id=632, 644.6484pt x 234.8775pt>
+<figures/chapter3/ch3_fig05.png, id=654, 644.6484pt x 234.8775pt>
 File: figures/chapter3/ch3_fig05.png Graphic file (type png)
 <use figures/chapter3/ch3_fig05.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig05.png  used on input line 120
 .
 (pdftex.def)             Requested size: 418.9655pt x 152.65422pt.
-<figures/chapter3/ch3_fig06.png, id=634, 1606.0pt x 1134.2375pt>
+<figures/chapter3/ch3_fig06.png, id=656, 1606.0pt x 1134.2375pt>
 File: figures/chapter3/ch3_fig06.png Graphic file (type png)
 <use figures/chapter3/ch3_fig06.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig06.png  used on input line 139
 .
 (pdftex.def)             Requested size: 441.01775pt x 311.45764pt.
  [28 <./figures/chapter3/ch3_fig04.png> <./figures/chapter3/ch3_fig05.png>]
-<figures/chapter3/ui_etap1_diagnostyczny.png, id=644, 904.37875pt x 591.20876pt
+<figures/chapter3/ui_etap1_diagnostyczny.png, id=666, 904.37875pt x 591.20876pt
 >
 File: figures/chapter3/ui_etap1_diagnostyczny.png Graphic file (type png)
 <use figures/chapter3/ui_etap1_diagnostyczny.png>
@@ -1736,7 +1720,7 @@ Package pdftex.def Info: figures/chapter3/ui_etap1_diagnostyczny.png  used on i
 nput line 155.
 (pdftex.def)             Requested size: 418.9655pt x 273.88081pt.
  [29 <./figures/chapter3/ch3_fig06.png (PNG copy)>]
-<figures/chapter3/ui_etap2_voice.png, id=650, 1008.76875pt x 628.3475pt>
+<figures/chapter3/ui_etap2_voice.png, id=672, 1008.76875pt x 628.3475pt>
 File: figures/chapter3/ui_etap2_voice.png Graphic file (type png)
 <use figures/chapter3/ui_etap2_voice.png>
 Package pdftex.def Info: figures/chapter3/ui_etap2_voice.png  used on input lin
@@ -1744,20 +1728,20 @@ e 171.
 (pdftex.def)             Requested size: 418.9655pt x 260.97028pt.
  [30 <./figures/chapter3/ui_etap1_diagnostyczny.png> <./figures/chapter3/ui_eta
 p2_voice.png>]
-<figures/chapter3/ui_etap3_chat_obraz.png, id=659, 800.9925pt x 479.7925pt>
+<figures/chapter3/ui_etap3_chat_obraz.png, id=681, 800.9925pt x 479.7925pt>
 File: figures/chapter3/ui_etap3_chat_obraz.png Graphic file (type png)
 <use figures/chapter3/ui_etap3_chat_obraz.png>
 Package pdftex.def Info: figures/chapter3/ui_etap3_chat_obraz.png  used on inpu
 t line 186.
 (pdftex.def)             Requested size: 418.9655pt x 250.96504pt.
-<figures/chapter3/ui_etap4_pliki.png, id=661, 1927.2pt x 1084.05pt>
+<figures/chapter3/ui_etap4_pliki.png, id=683, 1927.2pt x 1084.05pt>
 File: figures/chapter3/ui_etap4_pliki.png Graphic file (type png)
 <use figures/chapter3/ui_etap4_pliki.png>
 Package pdftex.def Info: figures/chapter3/ui_etap4_pliki.png  used on input lin
 e 201.
 (pdftex.def)             Requested size: 418.9655pt x 235.66318pt.
  [31 <./figures/chapter3/ui_etap3_chat_obraz.png>]
-<figures/chapter3/ch3_fig07.png, id=668, 805.0075pt x 483.8075pt>
+<figures/chapter3/ch3_fig07.png, id=690, 805.0075pt x 483.8075pt>
 File: figures/chapter3/ch3_fig07.png Graphic file (type png)
 <use figures/chapter3/ch3_fig07.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig07.png  used on input line 220
@@ -1765,20 +1749,20 @@ Package pdftex.def Info: figures/chapter3/ch3_fig07.png  used on input line 220
 (pdftex.def)             Requested size: 388.09776pt x 233.24371pt.
 
 [32 <./figures/chapter3/ui_etap4_pliki.png> <./figures/chapter3/ch3_fig07.png>]
-<figures/chapter3/ch3_fig08.png, id=677, 805.0075pt x 483.8075pt>
+<figures/chapter3/ch3_fig08.png, id=699, 805.0075pt x 483.8075pt>
 File: figures/chapter3/ch3_fig08.png Graphic file (type png)
 <use figures/chapter3/ch3_fig08.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig08.png  used on input line 269
 .
 (pdftex.def)             Requested size: 388.09776pt x 233.24371pt.
-<figures/chapter3/ch3_fig10.png, id=679, 805.0075pt x 483.8075pt>
+<figures/chapter3/ch3_fig10.png, id=701, 805.0075pt x 483.8075pt>
 File: figures/chapter3/ch3_fig10.png Graphic file (type png)
 <use figures/chapter3/ch3_fig10.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig10.png  used on input line 284
 .
 (pdftex.def)             Requested size: 388.09776pt x 233.24371pt.
 [33 <./figures/chapter3/ch3_fig08.png>]
-<figures/chapter3/ch3_fig11.png, id=688, 805.0075pt x 483.8075pt>
+<figures/chapter3/ch3_fig11.png, id=710, 805.0075pt x 483.8075pt>
 File: figures/chapter3/ch3_fig11.png Graphic file (type png)
 <use figures/chapter3/ch3_fig11.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig11.png  used on input line 334
@@ -1790,13 +1774,13 @@ Underfull \hbox (badness 3396) in paragraph at lines 361--361
  []
 
 [35 <./figures/chapter3/ch3_fig11.png>]
-<figures/chapter3/ch3_fig12.png, id=703, 805.0075pt x 483.8075pt>
+<figures/chapter3/ch3_fig12.png, id=725, 805.0075pt x 483.8075pt>
 File: figures/chapter3/ch3_fig12.png Graphic file (type png)
 <use figures/chapter3/ch3_fig12.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig12.png  used on input line 395
 .
 (pdftex.def)             Requested size: 388.09776pt x 233.24371pt.
-<figures/chapter3/ch3_fig13.png, id=704, 1927.2pt x 1043.9pt>
+<figures/chapter3/ch3_fig13.png, id=726, 1927.2pt x 1043.9pt>
 File: figures/chapter3/ch3_fig13.png Graphic file (type png)
 <use figures/chapter3/ch3_fig13.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig13.png  used on input line 402
@@ -1809,13 +1793,13 @@ Underfull \hbox (badness 3302) in paragraph at lines 432--432
 
 ignored error: Infinite glue shrinkage found in box being split [36 <./figures/
 chapter3/ch3_fig12.png> <./figures/chapter3/ch3_fig13.png>]
-<figures/chapter3/ch3_fig14.png, id=715, 805.0075pt x 483.8075pt>
+<figures/chapter3/ch3_fig14.png, id=737, 805.0075pt x 483.8075pt>
 File: figures/chapter3/ch3_fig14.png Graphic file (type png)
 <use figures/chapter3/ch3_fig14.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig14.png  used on input line 456
 .
 (pdftex.def)             Requested size: 388.09776pt x 233.24371pt.
-<figures/chapter3/ch3_fig15.png, id=716, 805.0075pt x 483.8075pt>
+<figures/chapter3/ch3_fig15.png, id=738, 805.0075pt x 483.8075pt>
 File: figures/chapter3/ch3_fig15.png Graphic file (type png)
 <use figures/chapter3/ch3_fig15.png>
 Package pdftex.def Info: figures/chapter3/ch3_fig15.png  used on input line 463
@@ -1857,26 +1841,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 121--121
  []
 
 [42]
-<figures/wireshark_mowa.png, id=776, 979.66pt x 880.28876pt>
+<figures/wireshark_mowa.png, id=798, 979.66pt x 880.28876pt>
 File: figures/wireshark_mowa.png Graphic file (type png)
 <use figures/wireshark_mowa.png>
 Package pdftex.def Info: figures/wireshark_mowa.png  used on input line 169.
 (pdftex.def)             Requested size: 418.9655pt x 376.46167pt.
  [43] [44 <./figures/wireshark_mowa.png>]
-<figures/wireshark_przesyl.png, id=791, 1099.10625pt x 656.4525pt>
+<figures/wireshark_przesyl.png, id=813, 1099.10625pt x 656.4525pt>
 File: figures/wireshark_przesyl.png Graphic file (type png)
 <use figures/wireshark_przesyl.png>
 Package pdftex.def Info: figures/wireshark_przesyl.png  used on input line 202.
 
 (pdftex.def)             Requested size: 418.9655pt x 250.22581pt.
  [45 <./figures/wireshark_przesyl.png>]
-<figures/wireshark_cisza.png, id=803, 979.66pt x 880.28876pt>
+<figures/wireshark_cisza.png, id=825, 979.66pt x 880.28876pt>
 File: figures/wireshark_cisza.png Graphic file (type png)
 <use figures/wireshark_cisza.png>
 Package pdftex.def Info: figures/wireshark_cisza.png  used on input line 234.
 (pdftex.def)             Requested size: 418.9655pt x 376.46167pt.
  [46 <./figures/wireshark_cisza.png>]
-<figures/menedzerzadan.png, id=812, 939.51pt x 45.92157pt>
+<figures/menedzerzadan.png, id=834, 939.51pt x 45.92157pt>
 File: figures/menedzerzadan.png Graphic file (type png)
 <use figures/menedzerzadan.png>
 Package pdftex.def Info: figures/menedzerzadan.png  used on input line 274.
@@ -1886,24 +1870,24 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/b/it' will be
 (Font)              scaled to size 12.0pt on input line 335.
 
 [48] [49]
-<figures/12_instancji.png, id=842, 1095.3422pt x 575.90157pt>
+<figures/12_instancji.png, id=864, 1095.3422pt x 575.90157pt>
 File: figures/12_instancji.png Graphic file (type png)
 <use figures/12_instancji.png>
 Package pdftex.def Info: figures/12_instancji.png  used on input line 439.
 (pdftex.def)             Requested size: 441.01775pt x 231.87679pt.
  [50 <./figures/12_instancji.png>]
-<figures/urzadzenie_1.png, id=851, 1445.4pt x 782.925pt>
+<figures/urzadzenie_1.png, id=873, 1445.4pt x 782.925pt>
 File: figures/urzadzenie_1.png Graphic file (type png)
 <use figures/urzadzenie_1.png>
 Package pdftex.def Info: figures/urzadzenie_1.png  used on input line 508.
 (pdftex.def)             Requested size: 441.01775pt x 238.88138pt.
-<figures/urzadzenie 2.png, id=852, 1156.32pt x 614.295pt>
-File: figures/urzadzenie 2.png Graphic file (type png)
-<use figures/urzadzenie 2.png>
-Package pdftex.def Info: figures/urzadzenie 2.png  used on input line 516.
+<figures/urzadzenie_2.png, id=874, 1156.32pt x 614.295pt>
+File: figures/urzadzenie_2.png Graphic file (type png)
+<use figures/urzadzenie_2.png>
+Package pdftex.def Info: figures/urzadzenie_2.png  used on input line 516.
 (pdftex.def)             Requested size: 441.01775pt x 234.28749pt.
  [51 <./figures/urzadzenie_1.png>]
-[52 <./figures/urzadzenie 2.png>]) [53]
+[52 <./figures/urzadzenie_2.png>]) [53]
 \openout2 = `chapters/ZakoÅ„czenie.aux'.
 
  (chapters/ZakoÅ„czenie.tex
@@ -1915,43 +1899,43 @@ Rozdzia\l  5.
 
 ] [55]
 LaTeX Font Info:    Font shape `T1/ntxtt/b/n' in size <12> not available
-(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 152.
-<figures/repo/start.png, id=884, 483.0045pt x 293.898pt>
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 154.
+<figures/repo/start.png, id=910, 483.0045pt x 293.898pt>
 File: figures/repo/start.png Graphic file (type png)
 <use figures/repo/start.png>
-Package pdftex.def Info: figures/repo/start.png  used on input line 167.
+Package pdftex.def Info: figures/repo/start.png  used on input line 169.
 (pdftex.def)             Requested size: 308.71107pt x 187.84293pt.
  [56]
-<figures/repo/host.png, id=895, 483.0045pt x 293.898pt>
+<figures/repo/host.png, id=921, 483.0045pt x 293.898pt>
 File: figures/repo/host.png Graphic file (type png)
 <use figures/repo/host.png>
-Package pdftex.def Info: figures/repo/host.png  used on input line 193.
+Package pdftex.def Info: figures/repo/host.png  used on input line 195.
 (pdftex.def)             Requested size: 308.71107pt x 187.84293pt.
  [57 <./figures/repo/start.png> <./figures/repo/host.png>]
-<figures/repo/client.png, id=905, 483.0045pt x 293.898pt>
+<figures/repo/client.png, id=931, 483.0045pt x 293.898pt>
 File: figures/repo/client.png Graphic file (type png)
 <use figures/repo/client.png>
-Package pdftex.def Info: figures/repo/client.png  used on input line 232.
+Package pdftex.def Info: figures/repo/client.png  used on input line 234.
 (pdftex.def)             Requested size: 308.71107pt x 187.84293pt.
-<figures/repo/invite.png, id=907, 483.0045pt x 293.898pt>
+<figures/repo/invite.png, id=933, 483.0045pt x 293.898pt>
 File: figures/repo/invite.png Graphic file (type png)
 <use figures/repo/invite.png>
-Package pdftex.def Info: figures/repo/invite.png  used on input line 267.
+Package pdftex.def Info: figures/repo/invite.png  used on input line 269.
 (pdftex.def)             Requested size: 308.71107pt x 187.84293pt.
 
 [58 <./figures/repo/client.png>]
-<figures/repo/chatroom.png, id=918, 483.0045pt x 293.898pt>
+<figures/repo/chatroom.png, id=944, 483.0045pt x 293.898pt>
 File: figures/repo/chatroom.png Graphic file (type png)
 <use figures/repo/chatroom.png>
-Package pdftex.def Info: figures/repo/chatroom.png  used on input line 294.
+Package pdftex.def Info: figures/repo/chatroom.png  used on input line 296.
 (pdftex.def)             Requested size: 396.91327pt x 241.51363pt.
  [59 <./figures/repo/invite.png> <./figures/repo/chatroom.png>]
-<figures/vtlan_github.png, id=929, 1445.4pt x 690.32906pt>
+<figures/vtlan_github.png, id=954, 1445.4pt x 690.32906pt>
 File: figures/vtlan_github.png Graphic file (type png)
 <use figures/vtlan_github.png>
-Package pdftex.def Info: figures/vtlan_github.png  used on input line 348.
+Package pdftex.def Info: figures/vtlan_github.png  used on input line 350.
 (pdftex.def)             Requested size: 418.9655pt x 200.09549pt.
-) [60 <./figures/vtlan_github.png>] [61]
+ [60 <./figures/vtlan_github.png>]) [61]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/sc' will be
 (Font)              scaled to size 12.0pt on input line 98.
 Package microtype Info: Character `029' is missing
@@ -1988,28 +1972,24 @@ om / ValveSoftware / GameNetworkingSockets$[][]\T1/ntxtlf/m/n/12 (-20) .
  [67
 
 ] (main.aux (abstract.aux)
-(chapters/wstep.aux) (chapters/backend.aux) (chapters/UI.aux)
+(chapters/wstep.aux) (chapters/Backend.aux) (chapters/UI.aux)
 (chapters/debugging.aux) (chapters/ZakoÅ„czenie.aux))
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
-
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 92734D11E1E8D98A54A1A8617F666B53;15843.
+(rerunfilecheck)             Checksum: E2BCB890A510567F8E3AE3AA7E66C1E0;16039.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 37690 strings out of 467870
- 700151 string characters out of 5434709
- 1616414 words of memory out of 5000000
- 65453 multiletter control sequences out of 15000+600000
- 741923 words of font info for 298 fonts, out of 8000000 for 9000
+ 37712 strings out of 467870
+ 700664 string characters out of 5434709
+ 1617187 words of memory out of 5000000
+ 65467 multiletter control sequences out of 15000+600000
+ 742193 words of font info for 301 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,10n,120p,1199b,3561s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <D:/miketex/fonts/type1/public/newtx/NewTXMI.pfb><D:/miketex/fonts/type1/publ
@@ -2021,9 +2001,9 @@ ype1/public/txfonts/t1xtt.pfb><D:/miketex/fonts/type1/public/newtx/txexs.pfb><D
 wtx/txsys.pfb><D:/miketex/fonts/type1/public/newtx/ztmb.pfb><D:/miketex/fonts/t
 ype1/public/newtx/ztmbi.pfb><D:/miketex/fonts/type1/public/newtx/ztmr.pfb><D:/m
 iketex/fonts/type1/public/newtx/ztmri.pfb>
-Output written on main.pdf (71 pages, 3490941 bytes).
+Output written on main.pdf (71 pages, 3499616 bytes).
 PDF statistics:
- 1216 PDF objects out of 1440 (max. 8388607)
- 309 named destinations out of 1000 (max. 500000)
- 54424 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 1247 PDF objects out of 1440 (max. 8388607)
+ 311 named destinations out of 1000 (max. 500000)
+ 54432 words of extra memory for PDF output out of 61914 (max. 10000000)
 
